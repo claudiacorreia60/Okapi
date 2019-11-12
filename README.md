@@ -3,9 +3,11 @@ Okapi - Your Intelligent Fashion Adviser
 
 ## Worflow de contribuições
 
-1 - Fork the repository (aka make a copy)
-2 - Clone the fork (aka download the copy)
-3 - Make a git branch
+1. Fork the repository (aka make a copy)
+
+2. Clone the fork (aka download the copy)
+
+3. Make a git branch
 
 If you type `git status` you will see the branch name that you’re on, called `master`. In most projects, `master` is a special place where the most stable, reviewed, up-to-date code is. So, you’ll need to make your own branch:
 
@@ -17,7 +19,7 @@ Then switch to that branch:
 
 But what exactly is a branch? As a developer is working, they may want to be able to switch back and forth between the stable `master` code and the changes they’ve made. Branches let you do that. A branch is kind of like a fork on your computer. When you have your own branch, it’s a place where you can make changes without affecting `master`.
 
-4 - Make some commits (aka do the work)
+4. Make some commits (aka do the work)
 
 `git status` will show you the files you changed.
 
@@ -31,8 +33,8 @@ But what exactly is a branch? As a developer is working, they may want to be abl
 
 [](https://miro.medium.com/max/1156/1*CheJwWanxM182iS3s1VOTg.png)
 
-5 - Open a Pull Request (aka PR)
+5. Open a Pull Request (aka PR)
 
 To create one, go to your fork of the project, click on the Pull Requests tab, and click the big green “New Pull Request” button.
 
-M
+More details: https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6
