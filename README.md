@@ -1,7 +1,7 @@
 # Okapi
 Okapi - Your Intelligent Fashion Adviser
 
-## Worflow de contribuições
+## Workflow de contribuições
 
 1. Fork the repository (aka make a copy)
 
