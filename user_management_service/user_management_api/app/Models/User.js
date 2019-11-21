@@ -22,17 +22,61 @@ class User extends Model {
   }
 
   /**
-   * A relationship on tokens is required for auth to
-   * work. Since features like `refreshTokens` or
-   * `rememberToken` will be saved inside the
-   * tokens table.
-   *
-   * @method tokens
-   *
-   * @return {Object}
+   * Configuration 
+   * 
+   * Maps the model to the table named 'user'
    */
-  tokens () {
-    return this.hasMany('App/Models/Token')
+  static get table () {
+    return 'user'
+  }
+
+  /**
+   * Configuration 
+   * 
+   * Indicates the primary key
+   */
+  static get primaryKey () {
+    return 'user_id'
+  }
+
+  /**
+   * Relationships 
+   * 
+   * N:N 
+   * A user is interested in many tags and 
+   * One tag can be interesting to many users
+   */
+  tags() {
+    return this.belongsToMany('App/Model/Tag',
+                              'user_id',
+                              'tag_id')
+               .pivotTable('interest')
+  }
+
+  /**
+   * Relationships 
+   * 
+   * 1:N 
+   * A user can like many items 
+   * A item can be liked by many users 
+   * 
+   * However, due to microservices' architecture, 
+   * the N:N relationship is 'split' in half, resulting
+   * in a 1:N relationship
+   */
+  likes() {
+    return this.hasMany('/App/Model/Like')
+  }
+
+  /**
+   * Relationships 
+   * 
+   * 1:1
+   * A user has one body measurement 
+   * A body measurement belongs to one user 
+   */
+  body_measurements() {
+    return this.hasOne('/App/Model/BodyMeasurement')
   }
 }
 
