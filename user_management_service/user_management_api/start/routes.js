@@ -20,4 +20,6 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.get('/users', 'UserController.list')
+Route.get('/users', 'UserController.index')
+Route.get('/users/:id', 'UserController.show')
+Route.post('/users', 'UserController.store')
