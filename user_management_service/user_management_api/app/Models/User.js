@@ -40,6 +40,28 @@ class User extends Model {
   }
 
   /**
+   * Configuration 
+   * 
+   * Disable createdAt attribute
+   */
+  static get createdAtColumn () {
+    return null
+  }
+
+  /**
+   * Configuration 
+   * 
+   * Disable updatedAt attribute
+   */
+  static get updatedAtColumn () {
+    return null
+  }
+
+  static get dates () {
+    return super.dates.concat(['data_nascimento'])
+  }
+
+  /**
    * Relationships 
    * 
    * N:N 
