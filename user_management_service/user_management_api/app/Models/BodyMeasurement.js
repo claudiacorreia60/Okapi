@@ -10,7 +10,7 @@ class BodyMeasurement extends Model {
    * Maps the model to the table named 'bodymeasurement'
    */
   static get table () {
-    return 'BodyMeasurement'
+    return 'body_measurement'
   }
 
   /**

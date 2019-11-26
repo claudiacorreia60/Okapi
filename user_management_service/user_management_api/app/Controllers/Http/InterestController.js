@@ -1,0 +1,20 @@
+'use strict'
+
+class InterestController {
+    /**
+     * Update interest weight
+     */
+    async updateWeight({request, response, params: {id}}) {
+
+    }
+
+    /**
+     * Create user interests
+     */
+    async createInterests({request, response, params: {user_id}}) {
+        
+    }
+
+}
+
+module.exports = TagController

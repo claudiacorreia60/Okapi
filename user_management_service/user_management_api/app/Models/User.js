@@ -69,7 +69,7 @@ class User extends Model {
    * One tag can be interesting to many users
    */
   tags() {
-    return this.belongsToMany('App/Model/Tag',
+    return this.belongsToMany('App/Models/Tag',
                               'user_id',
                               'tag_id')
                .pivotTable('interest')

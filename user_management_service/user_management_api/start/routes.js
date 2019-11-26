@@ -20,6 +20,16 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
+/**
+ * User routes
+ */
 Route.get('/users', 'UserController.index')
 Route.get('/users/:id', 'UserController.show')
 Route.post('/users', 'UserController.store')
+
+/**
+ * Body Measurement routes
+ */
+Route.get('/bodymeasurement', 'BodyMeasurementController.index')
+Route.get('/bodymeasurement/:user_id', 'BodyMeasurementController.showByUser')
+Route.post('/bodymeasurement', 'BodyMeasurementController.store')

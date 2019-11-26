@@ -10,7 +10,7 @@ class Tag extends Model {
    * Maps the model to the table named 'tag'
    */
   static get table () {
-    return 'tags'
+    return 'tag'
   }
 
   /**

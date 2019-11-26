@@ -4,7 +4,8 @@ const User = use('App/Models/User')
 
 class UserController {
     async index ({ request, response}) {
-        let users = await User.all()
+        let users = await User.query().with('tags').fetch()
+
 
         return response.json(users)
     }
@@ -14,11 +15,11 @@ class UserController {
         
         const new_user = new User();
 
-        new_user.nome = data.nome 
+        new_user.name = data.name 
         new_user.username = data.username
-        new_user.sexo = data.sexo 
-        new_user.data_nascimento = data.data_nascimento
-        new_user.fotografia = data.fotografia
+        new_user.gender = data.gender 
+        new_user.birthday = data.birthday
+        new_user.photo = data.photo
         
         await new_user.save() 
 
@@ -31,7 +32,9 @@ class UserController {
     }
 
     async show ({request, response, params: {id}}) {
+        
         const user = await User.find(id)
+
         if (user) {
             response.status(200).json(user)
         } else {
@@ -40,8 +43,12 @@ class UserController {
 
     }
 
-    async update({request, response}) {
+    async update({request, response, params: {id}}) {
 
+    }
+
+    async delete({request, response, params: {id}}) {
+        
     }
 }
 
