@@ -54,7 +54,7 @@
             <b-col>
               <router-link
                 class="grey-text"
-                to="/password_recovery">Forgot your passowrd?</router-link>
+                to="/password_recovery">Forgot your password?</router-link>
             </b-col>
           </b-row>
 
