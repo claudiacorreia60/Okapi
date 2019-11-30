@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 -- Table `okapi_users`.`tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_users`.`tag` (
-  `tag_id` INT NOT NULL,
+  `tag_id` INT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`tag_id`))
 ENGINE = InnoDB;
@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 -- Table `okapi_users`.`interest`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_users`.`interest` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
   `weight` DECIMAL NOT NULL,
@@ -81,7 +81,7 @@ ENGINE = InnoDB;
 -- Table `okapi_users`.`body_measurement`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_users`.`body_measurement` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NULL,
   `chest` INT NULL,
   `waist` INT NULL,

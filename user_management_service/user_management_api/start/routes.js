@@ -30,6 +30,16 @@ Route.post('/users', 'UserController.store')
 /**
  * Body Measurement routes
  */
-Route.get('/bodymeasurement', 'BodyMeasurementController.index')
+
 Route.get('/bodymeasurement/:user_id', 'BodyMeasurementController.showByUser')
-Route.post('/bodymeasurement', 'BodyMeasurementController.store')
+Route.post('/bodymeasurement/store/:user_id', 'BodyMeasurementController.store')
+Route.post('/bodymeasurement/update/:user_id', 'BodyMeasurementController.updateByUser')
+Route.delete('/bodymeasurement/:user_id', 'BodyMeasurementController.deleteMeasurment')
+
+/**
+ * Like routes
+ */
+
+Route.get('/likes/:user_id', 'LikeController.showByUser')
+Route.post('/likes/:user_id/:item_id','LikeController.likeItem')
+Route.delete('/likes/:user_id/:item_id', 'LikeController.dislikeItem')

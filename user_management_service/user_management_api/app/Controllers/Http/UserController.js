@@ -27,8 +27,6 @@ class UserController {
             message: "Successfully inserted new user.",
             data: new_user
         })
-
-
     }
 
     async show ({request, response, params: {id}}) {

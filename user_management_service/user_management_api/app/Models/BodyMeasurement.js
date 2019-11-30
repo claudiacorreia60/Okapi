@@ -22,6 +22,22 @@ class BodyMeasurement extends Model {
     return 'id'
   }
 
+/**
+   * 
+   * Disable createdAt attribute
+   */
+  static get createdAtColumn () {
+    return null
+  }
+
+  /**
+   *
+   * Disable updatedAt attribute
+   */
+  static get updatedAtColumn () {
+    return null
+  }
+
   /**
    * Relationships 
    * 

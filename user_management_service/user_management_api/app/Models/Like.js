@@ -23,6 +23,22 @@ class Like extends Model {
   }
 
   /**
+   * 
+   * Disable createdAt attribute
+   */
+  static get createdAtColumn () {
+    return null
+  }
+
+  /**
+   *
+   * Disable updatedAt attribute
+   */
+  static get updatedAtColumn () {
+    return null
+  }
+
+  /**
    * Relationships 
    * 
    * 1:N 
