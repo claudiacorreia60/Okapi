@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS `okapi_users`.`like` (
   CONSTRAINT `fk_like_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `okapi_users`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE  CASCADE)
 ENGINE = InnoDB;
 
 
@@ -72,8 +72,8 @@ CREATE TABLE IF NOT EXISTS `okapi_users`.`interest` (
   CONSTRAINT `fk_tag_2`
     FOREIGN KEY (`tag_id`)
     REFERENCES `okapi_users`.`tag` (`tag_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS `okapi_users`.`body_measurement` (
   CONSTRAINT `fk_body_measurement_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `okapi_users`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
