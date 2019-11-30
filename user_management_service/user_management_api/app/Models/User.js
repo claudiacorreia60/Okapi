@@ -58,7 +58,7 @@ class User extends Model {
   }
 
   static get dates () {
-    return super.dates.concat(['data_nascimento'])
+    return super.dates.concat(['birthday'])
   }
 
   /**
@@ -87,7 +87,7 @@ class User extends Model {
    * in a 1:N relationship
    */
   likes() {
-    return this.hasMany('/App/Model/Like')
+    return this.hasMany('App/Models/Like')
   }
 
   /**
@@ -98,7 +98,7 @@ class User extends Model {
    * A body measurement belongs to one user 
    */
   body_measurements() {
-    return this.hasOne('/App/Model/BodyMeasurement')
+    return this.hasOne('App/Models/BodyMeasurement')
   }
 }
 

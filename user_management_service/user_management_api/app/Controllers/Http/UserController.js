@@ -42,11 +42,44 @@ class UserController {
     }
 
     async update({request, response, params: {id}}) {
+        var user = await User.find(id)
 
+        if (user){
+            const data = request.post()
+
+            user.merge(data)
+
+            await user.save()
+
+
+            response.json({
+                message: "Successfully updated user information."
+            })
+
+        } else {
+            response.status(404).json({
+                message: "User not found."
+            })
+        }
     }
 
     async delete({request, response, params: {id}}) {
-        
+        var user = await User.find(id)
+
+        if (user) {
+            
+            await user.delete()
+
+            response.status(404).json({
+                message: "Successfully deleted user."
+            })
+
+        } else {
+            response.status(404).json({
+                message: "User not found."
+            })
+        }
+    
     }
 }
 
