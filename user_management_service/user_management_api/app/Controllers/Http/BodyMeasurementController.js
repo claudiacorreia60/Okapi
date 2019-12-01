@@ -14,11 +14,9 @@ class BodyMeasurementController {
 
         if (user) {
             
-            const measurements = await BodyMeasurement.query().where({
-                'user_id' : user_id
-            }).fetch();
+            const measurements = await user.body_measurements().fetch();
 
-            if (measurements.rows.length == 0){
+            if (measurements == null){
                 const data = request.post()
 
                 const measurements = new BodyMeasurement();
@@ -83,11 +81,9 @@ class BodyMeasurementController {
 
         if (user) {
             
-            const measurements = await BodyMeasurement.query().where({
-                'user_id' : user_id
-            }).fetch();
+            const measurements = await user.body_measurements().fetch();
 
-            if (measurements.rows.length == 0){
+            if (measurements == null){
 
                 response.status(404).json({
                     message : "Body measurements not found."
@@ -97,14 +93,9 @@ class BodyMeasurementController {
             else {
                 const data = request.post()
 
-                await BodyMeasurement.query().where({
-                    'user_id' : user_id
-                }).update({ 
-                    chest: data.chest, 
-                    waist: data.waist,
-                    hips : data.hips,
-                    foot_size : data.foot_size
-                })
+                measurements.merge(data)
+
+                await measurements.save()
 
                 response.json({
                     message: "Successfully updated body measurements."
@@ -126,13 +117,11 @@ class BodyMeasurementController {
         const user = await User.find(user_id);
 
         if (user) {
-            const measurements = await BodyMeasurement.query().where({
-                'user_id': user_id
-            }).fetch()
+            const measurements = await user.body_measurements().fetch()
             
-            if(measurements.rows.length == 1) {
+            if(measurements) {
     
-                await measurements.rows[0].delete()
+                await measurements.delete()
     
                 return response.json({
                     message: "Successufully removed body measurements."

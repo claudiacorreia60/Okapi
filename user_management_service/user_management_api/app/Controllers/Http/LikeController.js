@@ -13,9 +13,7 @@ class LikeController {
         const user = await User.find(user_id);
         
         if (user) {
-            const likes = await Like.query().where({
-                'user_id': user_id
-              }).fetch()
+            const likes = await user.likes().fetch()
     
             return response.json({
                 data : likes
