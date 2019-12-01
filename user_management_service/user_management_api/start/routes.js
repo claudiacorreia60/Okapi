@@ -23,11 +23,15 @@ Route.get('/', () => {
 /**
  * User routes
  */
-Route.get('/users', 'UserController.index')
-Route.get('/users/:id', 'UserController.show')
-Route.put('/users/:id', 'UserController.update')
-Route.delete('/users/:id', 'UserController.delete')
-Route.post('/users', 'UserController.store')
+Route.group(()=> {
+  Route.get('/', 'UserController.index')
+  Route.get('/:id', 'UserController.show')
+  Route.put('/:id', 'UserController.update')
+  Route.delete('/:id', 'UserController.delete')
+  Route.post('/', 'UserController.store')
+}).prefix('users')
+  // .middleware('auth') // Needs to be authenticated
+
 
 /**
  * Body Measurement routes
