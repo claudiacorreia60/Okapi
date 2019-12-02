@@ -15,38 +15,38 @@ CREATE SCHEMA IF NOT EXISTS `okapi_catalog` DEFAULT CHARACTER SET utf8 ;
 USE `okapi_catalog` ;
 
 -- -----------------------------------------------------
--- Table `okapi_catalog`.`cor`
+-- Table `okapi_catalog`.`color`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`cor` (
-  `cor_id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `okapi_catalog`.`color` (
+  `color_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
   `rgb_red` INT(3) NULL,
   `rgb_green` INT(3) NULL,
   `rgb_blue` INT(3) NULL,
   `hexadecimal` VARCHAR(7) NULL,
-  PRIMARY KEY (`cor_id`))
+  PRIMARY KEY (`color_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `okapi_catalog`.`marca`
+-- Table `okapi_catalog`.`brand`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`marca` (
-  `marca_id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `site` VARCHAR(250) NOT NULL,
-  PRIMARY KEY (`marca_id`))
+CREATE TABLE IF NOT EXISTS `okapi_catalog`.`brand` (
+  `brand_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `website` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`brand_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `okapi_catalog`.`tipo`
+-- Table `okapi_catalog`.`type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`tipo` (
-  `tipo_id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `parte_corpo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`tipo_id`))
+CREATE TABLE IF NOT EXISTS `okapi_catalog`.`type` (
+  `type_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `body_part` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`type_id`))
 ENGINE = InnoDB;
 
 
@@ -55,33 +55,33 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
   `item_id` INT NOT NULL AUTO_INCREMENT,
-  `marca_id` INT NOT NULL,
-  `cor_id` INT NULL,
-  `tipo_id` INT NOT NULL,
-  `preco` FLOAT NULL,
-  `sexo` CHAR(1) NULL,
-  `descricao` VARCHAR(500) NULL,
+  `brand_id` INT NOT NULL,
+  `color_id` INT NULL,
+  `type_id` INT NOT NULL,
+  `price` FLOAT NULL,
+  `gender` CHAR(1) NULL,
+  `description` VARCHAR(500) NULL,
   `url` VARCHAR(45) NOT NULL,
-  `referencia` VARCHAR(45) NOT NULL,
-  `fotografia` VARCHAR(45) NULL,
-  `catalogo` TINYINT NOT NULL,
+  `reference` VARCHAR(45) NOT NULL,
+  `photo` VARCHAR(45) NULL,
+  `catalog` TINYINT NOT NULL,
   PRIMARY KEY (`item_id`),
-  INDEX `fk_item_1_idx` (`marca_id` ASC),
-  INDEX `fk_item_2_idx` (`cor_id` ASC),
-  INDEX `fk_item_3_idx` (`tipo_id` ASC),
+  INDEX `fk_item_1_idx` (`brand_id` ASC),
+  INDEX `fk_item_2_idx` (`color_id` ASC),
+  INDEX `fk_item_3_idx` (`type_id` ASC),
   CONSTRAINT `fk_item_1`
-    FOREIGN KEY (`marca_id`)
-    REFERENCES `okapi_catalog`.`marca` (`marca_id`)
+    FOREIGN KEY (`brand_id`)
+    REFERENCES `okapi_catalog`.`brand` (`brand_id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `fk_item_2`
-    FOREIGN KEY (`cor_id`)
-    REFERENCES `okapi_catalog`.`cor` (`cor_id`)
+    FOREIGN KEY (`color_id`)
+    REFERENCES `okapi_catalog`.`color` (`color_id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `fk_item_3`
-    FOREIGN KEY (`tipo_id`)
-    REFERENCES `okapi_catalog`.`tipo` (`tipo_id`)
+    FOREIGN KEY (`type_id`)
+    REFERENCES `okapi_catalog`.`type` (`type_id`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
@@ -92,7 +92,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_catalog`.`material` (
   `material_id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`material_id`))
 ENGINE = InnoDB;
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item_material` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `item_id` INT NOT NULL,
   `material_id` INT NOT NULL,
-  `fator` DECIMAL NOT NULL,
+  `weight` DECIMAL NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_item_material_1_idx` (`item_id` ASC),
   INDEX `fk_item_material_2_idx` (`material_id` ASC),
@@ -126,26 +126,26 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item_tag` (
   `tag_id` INT NOT NULL AUTO_INCREMENT,
-  `descricao` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`tag_id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `okapi_catalog`.`caracteristica`
+-- Table `okapi_catalog`.`feature`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`caracteristica` (
+CREATE TABLE IF NOT EXISTS `okapi_catalog`.`feature` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `item_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_caracteristica_1_idx` (`item_id` ASC),
-  CONSTRAINT `fk_caracteristica_1`
+  INDEX `fk_feature_1_idx` (`item_id` ASC),
+  CONSTRAINT `fk_feature_1`
     FOREIGN KEY (`item_id`)
     REFERENCES `okapi_catalog`.`item` (`item_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_caracteristica_2`
+  CONSTRAINT `fk_feature_2`
     FOREIGN KEY (`tag_id`)
     REFERENCES `okapi_catalog`.`item_tag` (`tag_id`)
     ON DELETE NO ACTION
