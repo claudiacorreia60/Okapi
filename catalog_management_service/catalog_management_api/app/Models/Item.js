@@ -19,6 +19,26 @@ class Item extends Model {
     static get updatedAtColumn () {
         return null
     }
+
+    brand() {
+        return this.hasOne('App/Models/Brand')
+    }
+
+    color() {
+        return this.hasOne('App/Models/Color')
+    }
+
+    type() {
+        return this.hasOne('App/Models/Type')
+    }
+
+    materials() {
+        return this.belongsToMany('App/Models/Material')
+    }
+
+    tags() {
+        return this.belongsToMany('App/Models/Tag')
+    }
 }
 
 module.exports = Item
