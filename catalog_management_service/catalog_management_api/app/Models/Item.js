@@ -21,23 +21,30 @@ class Item extends Model {
     }
 
     brand() {
-        return this.hasOne('App/Models/Brand')
+        return this.belongsTo('App/Models/Brand')
     }
 
     color() {
-        return this.hasOne('App/Models/Color')
+        return this.belongsTo('App/Models/Color')
     }
 
     type() {
-        return this.hasOne('App/Models/Type')
+        return this.belongsTo('App/Models/Type')
     }
 
     materials() {
-        return this.belongsToMany('App/Models/Material')
+        return this.belongsToMany('App/Models/Material', 
+                                  'item_id',
+                                  'material_id')
+                    .pivotTable('item_material')
+                    .withPivot(['weight'])
     }
 
     tags() {
-        return this.belongsToMany('App/Models/Tag')
+        return this.belongsToMany('App/Models/Tag', 
+                                  'item_id',
+                                  'tag_id')
+                    .pivotTable('feature')
     }
 }
 

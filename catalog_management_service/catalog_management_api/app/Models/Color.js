@@ -21,8 +21,8 @@ class Color extends Model {
     }
 
     itens() {
-        return this.belongsTo('App/Models/Item')
+        return this.hasMany('App/Models/Item')
     }
 }
 
-module.exports = Item
+module.exports = Color

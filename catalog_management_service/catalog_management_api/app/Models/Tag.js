@@ -28,4 +28,4 @@ class Tag extends Model {
     }
 }
 
-module.exports = Item
+module.exports = Tag

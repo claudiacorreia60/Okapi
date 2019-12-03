@@ -25,4 +25,4 @@ class Brand extends Model {
     }
 }
 
-module.exports = Item
+module.exports = Brand

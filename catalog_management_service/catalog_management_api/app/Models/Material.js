@@ -20,12 +20,13 @@ class Material extends Model {
         return null
     }
 
-    itens() {
+    items() {
         return this.belongsToMany('App/Models/Item',
                                   'material_id',
                                   'item_id')
                    .pivotTable('item_material')
+                   .withPivot(['weight'])
     }
 }
 
-module.exports = Item
+module.exports = Material
