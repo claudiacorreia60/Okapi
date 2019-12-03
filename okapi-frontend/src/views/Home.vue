@@ -17,7 +17,7 @@
     <b-container fluid>
       <b-row align-v="center" id="actions" class="text-center">
         <b-col sm="12" md="4" id="women" align-self="center">
-            <router-link class="router ml-auto mr-auto mt-5" to="/createOutfit">
+            <router-link class="router ml-auto mr-auto mt-5" to="/women">
               <h1 class="category">WOMEN</h1>
             </router-link>
         </b-col>
@@ -75,7 +75,7 @@
       </b-row>
       <b-row align-v="center" align-h="center" class="text-center">
         <router-link class="about-r" to="/contacts">
-        Constacts
+        Contacts
         </router-link>
         </b-row>
     </b-container>
