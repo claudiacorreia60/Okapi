@@ -17,4 +17,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.grey-text {
+  color: #a1a1a1;
+  font-size: 13px;
+  margin-top: 20px;
+}
 </style>

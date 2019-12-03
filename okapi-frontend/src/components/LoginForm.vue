@@ -115,14 +115,9 @@ button {
   font-size: 16px;
 }
 
-.grey-text {
-  color: rgb(184, 184, 184);
-  font-size: 13px;
-}
-
 .details {
   text-align: center;
-  color: rgb(184, 184, 184);
+  color: #a1a1a1;
   font-size: 11px;
   margin-bottom: 30px
 }
@@ -158,7 +153,7 @@ button {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: rgb(184, 184, 184);
+  color: #a1a1a1;
   font-size: 13px;
 }
 </style>
