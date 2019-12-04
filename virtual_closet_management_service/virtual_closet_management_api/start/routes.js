@@ -22,18 +22,18 @@ Route.get('/', () => {
 
 Route.group(() => {
   Route.get('/:user_id', 'ClosetController.indexByUser')
-  Route.put('/', 'ClosetController.addToCloset')
+  Route.post('/', 'ClosetController.addToCloset')
   Route.delete('/', 'ClosetController.removeFromCloset')
 }).prefix('closet')
 
 Route.group(() => {
   Route.get('/:user_id', 'SavedController.indexByUser')
-  Route.put('/', 'SavedController.addToSaved')
+  Route.post('/', 'SavedController.addToSaved')
   Route.delete('/', 'SavedController.removeFromSaved')
 }).prefix('saved')
 
 Route.group(() => {
   Route.get('/:user_id', 'OutfitController.indexByUser')
-  Route.put('/', 'OutfitController.addOutfit')
+  Route.post('/', 'OutfitController.addOutfit')
   Route.delete('/', 'OutfitController.removeOutfit')
 }).prefix('outfit')
