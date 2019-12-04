@@ -30,7 +30,7 @@ Route.group(()=> {
   Route.delete('/:id', 'UserController.delete')
   Route.post('/', 'UserController.store')
 }).prefix('users')
-  // .middleware('auth') // Needs to be authenticated
+  //.middleware('tokenVerify') // Needs to be authenticated
 
 
 /**
