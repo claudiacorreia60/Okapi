@@ -5,11 +5,11 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema okapi_users
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema okapi_users
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `okapi_users` DEFAULT CHARACTER SET utf8 ;
 USE `okapi_users` ;
@@ -92,6 +92,66 @@ CREATE TABLE IF NOT EXISTS `okapi_users`.`body_measurement` (
   CONSTRAINT `fk_body_measurement_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `okapi_users`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `okapi_users`.`virtual_closet`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `okapi_users`.`virtual_closet` (
+  `user_id` INT NOT NULL,
+  `item_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `item_id`),
+  CONSTRAINT `fk_virtual_closet_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `okapi_users`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `okapi_users`.`saved`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `okapi_users`.`saved` (
+  `user_id` INT NOT NULL,
+  `item_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `item_id`),
+  CONSTRAINT `fk_saved_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `okapi_users`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `okapi_users`.`outfit`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `okapi_users`.`outfit` (
+  `outfit_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`outfit_id`),
+  INDEX `fk_outfit_1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_outfit_1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `okapi_users`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `okapi_users`.`outfit_item`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `okapi_users`.`outfit_item` (
+  `outfit_id` INT NOT NULL,
+  `item_id` INT NOT NULL,
+  PRIMARY KEY (`outfit_id`, `item_id`),
+  CONSTRAINT `fk_outfit_item_1`
+    FOREIGN KEY (`outfit_id`)
+    REFERENCES `okapi_users`.`outfit` (`outfit_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
