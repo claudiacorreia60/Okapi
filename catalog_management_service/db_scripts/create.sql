@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
   `description` VARCHAR(500) NULL,
   `url` VARCHAR(45) NOT NULL,
   `reference` VARCHAR(45) NOT NULL,
-  `photo` VARCHAR(45) NULL,
+  `photo` VARCHAR(250) NULL,
   `catalog` TINYINT NOT NULL,
   PRIMARY KEY (`item_id`),
   INDEX `fk_item_1_idx` (`brand_id` ASC),

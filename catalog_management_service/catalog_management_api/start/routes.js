@@ -16,10 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
-
 Route.group(() => {
-  Route.get('/', 'ItemController.index')
-}).prefix('items')
+  Route.get('/man', 'ItemController.indexMan')
+  Route.get('/woman', 'ItemController.indexWoman')
+  Route.get('/:id', 'ItemController.show')
+}).prefix('catalog')
