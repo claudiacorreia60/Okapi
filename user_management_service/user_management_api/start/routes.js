@@ -38,14 +38,13 @@ Route.group(()=> {
  */
 
 Route.get('/bodymeasurement/:user_id', 'BodyMeasurementController.showByUser')
-Route.post('/bodymeasurement/store/:user_id', 'BodyMeasurementController.store')
-Route.post('/bodymeasurement/update/:user_id', 'BodyMeasurementController.updateByUser')
-Route.delete('/bodymeasurement/:user_id', 'BodyMeasurementController.deleteMeasurment')
+Route.post('/bodymeasurement/:user_id', 'BodyMeasurementController.store')
+Route.put('/bodymeasurement/:user_id', 'BodyMeasurementController.updateByUser')
+Route.delete('/bodymeasurement/:user_id', 'BodyMeasurementController.deleteMeasurement')
 
 /**
  * Like routes
  */
-
 Route.get('/likes/:user_id', 'LikeController.showByUser')
 Route.post('/likes/:user_id/:item_id','LikeController.likeItem')
 Route.delete('/likes/:user_id/:item_id', 'LikeController.dislikeItem')

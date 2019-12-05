@@ -113,7 +113,7 @@ class BodyMeasurementController {
     /**
      * Deletes user body measurements
      */
-    async deleteMeasurment({request, response, params: {user_id}}) {
+    async deleteMeasurement({request, response, params: {user_id}}) {
         const user = await User.find(user_id);
 
         if (user) {

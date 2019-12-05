@@ -54,11 +54,13 @@ class LikeController {
                 new_like.user_id = user_id;
                 new_like.item_id = item_id;
 
+
                 await new_like.save();
+
             
                 response.json({
                     message: "Successfully inserted new like.",
-                    data: new_like
+                    data: {user_id, item_id} // ? save() changes new_like 
                 })
             }
         }
