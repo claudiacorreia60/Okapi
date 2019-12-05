@@ -41,3 +41,10 @@ Route.group(() => {
 }).prefix('likes')
   .middleware(['tokenVerify', 'userVerify'])
 
+/* Catalog routes */
+Route.group(() => {
+  Route.get('/man', 'Catalog/ItemController.indexMan')
+  Route.get('/woman', 'Catalog/ItemController.indexWoman')
+  Route.get('/:item_id', 'Catalog/ItemController.show')
+}).prefix('catalog')
+  .middleware('tokenVerify')
