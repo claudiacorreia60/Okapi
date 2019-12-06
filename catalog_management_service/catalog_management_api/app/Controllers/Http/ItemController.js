@@ -68,11 +68,8 @@ class ItemController {
                                 .where('item_id', id)
                                 .where('catalog',1)
                                 .fetch()
-
         if (item ) {
-            return response.json({
-                data: item
-            })
+            return response.json(item.rows[0])
         } else {
             return response.status(404).json({
                 message: 'Item not found!'
