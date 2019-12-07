@@ -23,4 +23,18 @@ hooks.after.providersBooted(() => {
         message: 'Unauthorized.'    
     })
   })
+
+  /* Handles error thrown when user does not exist */
+  Exception.handle('UserNotFound', async (error, { response}) => {
+    return response.status(404).json({
+        message: 'User not found.'    
+    })
+  })
+
+  /* Handles error thrown when item does not exist */
+  Exception.handle('ItemNotFound', async (error, { response}) => {
+    return response.status(404).json({
+        message: 'Item not found.'    
+    })
+  })
 })

@@ -19,12 +19,12 @@ const Route = use('Route')
 /* User routes */
 Route.group(() => {
   Route.get('/', 'User/UserController.index')
-  Route.get('/:user_id', 'User/UserController.show').middleware('userVerify')
+  Route.get('/:user_id', 'User/UserController.show')//.middleware('userVerify')
   Route.post('/', 'User/UserController.store')
-  Route.put('/:user_id', 'User/UserController.update').middleware('userVerify')
+  Route.put('/:user_id', 'User/UserController.update')//.middleware('userVerify')
   Route.delete('/:user_id', 'User/UserController.delete')
 }).prefix('users')
-  .middleware('tokenVerify')
+  //.middleware('tokenVerify')
 
 Route.group(() => {
   Route.get('/:user_id', 'User/BodyMeasurementController.showByUser')
@@ -32,14 +32,14 @@ Route.group(() => {
   Route.put('/:user_id', 'User/BodyMeasurementController.updateByUser')
   Route.delete('/:user_id', 'User/BodyMeasurementController.delete')
 }).prefix('bodymeasurement')
-  .middleware(['tokenVerify', 'userVerify'])
+  //.middleware(['tokenVerify', 'userVerify'])
 
 Route.group(() => {
   Route.get('/:user_id', 'User/LikeController.showByUser')
   Route.post('/:user_id/:item_id','User/LikeController.likeItem')
   Route.delete('/:user_id/:item_id', 'User/LikeController.dislikeItem')
 }).prefix('likes')
-  .middleware(['tokenVerify', 'userVerify'])
+  //.middleware(['tokenVerify', 'userVerify'])
 
 /* Catalog routes */
 Route.group(() => {
@@ -48,3 +48,26 @@ Route.group(() => {
   Route.get('/:item_id', 'Catalog/ItemController.show')
 }).prefix('catalog')
   .middleware('tokenVerify')
+
+/* Virtual closet routes */ 
+
+Route.group(() => {
+  Route.get('/:user_id', 'VirtualCloset/ClosetController.indexByUser')
+  Route.post('/:user_id/:item_id', 'VirtualCloset/ClosetController.addToCloset').middleware(['itemExists'])
+  Route.delete('/:user_id/:item_id', 'VirtualCloset/ClosetController.removeFromCloset').middleware(['itemExists'])
+}).prefix('closet')
+  .middleware(['tokenVerify', 'userExists'])
+
+Route.group(() => {
+  Route.get('/:user_id', 'VirtualCloset/SavedController.indexByUser')
+  Route.post('/:user_id/:item_id', 'VirtualCloset/SavedController.addToSaved')
+  Route.delete('/:user_id/:item_id', 'VirtualCloset/SavedController.removeFromSaved')
+}).prefix('saved')
+  //.middleware(['tokenVerify', 'userExists'])
+
+Route.group(() => {
+  Route.get('/:user_id', 'VirtualCloset/OutfitController.indexByUser')
+  Route.post('/:user_id', 'VirtualCloset/OutfitController.addOutfit')
+  Route.delete('/:user_id/:outfit_id', 'VirtualCloset/OutfitController.removeOutfit')
+}).prefix('outfit')
+  //.middleware(['tokenVerify', 'userExists'])

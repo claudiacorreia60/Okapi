@@ -3,9 +3,9 @@
 const axios = require('axios')
 const Env = use('Env')
 
-class LikeController {
-    async showByUser ({request, response, params: {user_id}}){
-        return axios.get(`${Env.get('USER_MS')}/likes/${user_id}`)
+class ClosetController {
+    indexByUser ({request, response, params: {user_id}}){
+        return axios.get(`${Env.get('VIRTUAL_CLOSET_MS')}/closet/${user_id}`)
                     .then(res => {
 
                         var promises = []
@@ -23,9 +23,11 @@ class LikeController {
                                     return response.json(data_final)
                                })
 
+                        return response.json(res.data)
+
                     })
                     .catch(err => {
-                        
+
                         let status = err.response.status
                         let data = err.response.data
 
@@ -34,8 +36,9 @@ class LikeController {
                     })
     }
 
-    likeItem ({request, response, params: {user_id, item_id}}){
-        return axios.post(`${Env.get('USER_MS')}/likes/${user_id}/${item_id}`, request.post())
+    addToCloset ({request, response, params: {user_id, item_id}}){
+
+        return axios.post(`${Env.get('VIRTUAL_CLOSET_MS')}/closet/${user_id}/${item_id}`)
                     .then(res => {
 
                         return response.json(res.data)
@@ -51,8 +54,9 @@ class LikeController {
                     })
     }
 
-    dislikeItem ({request, response, params: {user_id, item_id}}){
-        return axios.delete(`${Env.get('USER_MS')}/likes/${user_id}/${item_id}`)
+    removeFromCloset ({request, response, params: {user_id, item_id}}){
+
+        return axios.delete(`${Env.get('VIRTUAL_CLOSET_MS')}/closet/${user_id}/${item_id}`)
                     .then(res => {
 
                         return response.json(res.data)
@@ -67,8 +71,6 @@ class LikeController {
                                        .json(data)
                     })
     }
-
-
 }
 
-module.exports = LikeController
+module.exports = ClosetController

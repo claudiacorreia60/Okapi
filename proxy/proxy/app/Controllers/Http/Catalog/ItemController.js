@@ -5,7 +5,9 @@ const Env = use('Env')
 
 class ItemController {
     indexMan ({request, response}){
-        return axios.get(`${Env.get('CATALOG_MS')}/catalog/man`)
+        const params = request.get()
+
+        return axios.get(`${Env.get('CATALOG_MS')}/catalog/man`, {params})
                     .then(res => {
 
                         return response.json(res.data)
@@ -22,7 +24,9 @@ class ItemController {
     }
 
     indexWoman ({request, response}){
-        return axios.get(`${Env.get('CATALOG_MS')}/catalog/woman`)
+        const params = request.get()
+        
+        return axios.get(`${Env.get('CATALOG_MS')}/catalog/woman`, {params})
                     .then(res => {
 
                         return response.json(res.data)
