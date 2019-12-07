@@ -38,6 +38,7 @@ class AuthController {
     }
   }
 
+  //check if request has token and automatically log in?
   async login({
     request,
     auth,
@@ -64,24 +65,18 @@ class AuthController {
     auth,
     response
   }) {
-    const jwt = require('jsonwebtoken')
-    const Env = use('Env')
+    const access_token = JSON.parse(request.header('access_token'))
+    const refresh_token = access_token.refreshToken
 
-    const refreshToken = request.header('refresh_token')
-    const encrypted_token = request.header('authorization').slice(7)
-
-    jwt.verify(encrypted_token, Env.get('APP_KEY'), {
-      algorithms: ['HS256'],
-      ignoreExpiration: true
-    })
-
-    let new_token = await auth.generateForRefreshToken(refreshToken)
     try {
+      let new_token = await auth.generateForRefreshToken(refresh_token)
 
+      return response.json({
+        "access_token": new_token
+      })
     } catch {
-      return response.send('Missing or invalid jwt token')
+      return response.send('Missing or invalid refresh token')
     }
-    console.log(new_token)
   }
 }
 

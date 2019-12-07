@@ -19,5 +19,3 @@ const Route = use('Route')
 Route.post('/auth/register', 'AuthController.register')
 Route.post('/auth/login', 'AuthController.login')
 Route.post('/auth/refresh', 'AuthController.refresh')
-
-Route.get('/', 'TestController.test').middleware('auth')
