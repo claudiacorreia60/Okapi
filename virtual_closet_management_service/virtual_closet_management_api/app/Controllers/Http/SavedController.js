@@ -13,9 +13,7 @@ class SavedController {
         })
     }
 
-    async addToSaved({request, response}) {
-        const user_id = request.get().user 
-        const item_id = request.get().item 
+    async addToSaved({request, response, params: {user_id, item_id}}) {
 
         var saved = new Saved() 
         saved['user_id'] = user_id
@@ -35,18 +33,24 @@ class SavedController {
 
     }
 
-    async removeFromSaved({request, response}) {
-        const user_id = request.get().user 
-        const item_id = request.get().item 
+    async removeFromSaved({request, response, params: {user_id, item_id}}) {
 
-        await Saved.query()
+        var removed = await Saved.query()
                     .where('user_id', user_id)
                     .where('item_id', item_id)
                     .delete()
 
-        return response.json({
-            message: 'Item successfully removed from saved.'
-        })
+        if (removed > 0) {
+            return response.json({
+                message: 'Item successfully removed from saved.'
+            })
+        } else {
+            return response.json({
+                message: 'Item not found.'
+            })
+        }
+
+
     }
 }
 

@@ -13,9 +13,7 @@ class ClosetController {
         })
     }
 
-    async addToCloset({request, response}) {
-        const user_id = request.get().user 
-        const item_id = request.get().item 
+    async addToCloset({request, response, params: {user_id, item_id}}) {
 
         var closet = new Closet() 
         closet['user_id'] = user_id
@@ -35,18 +33,22 @@ class ClosetController {
 
     }
 
-    async removeFromCloset({request, response}) {
-        const user_id = request.get().user 
-        const item_id = request.get().item 
+    async removeFromCloset({request, response, params: {user_id, item_id}}) {
 
-        await Closet.query()
+        var removed = await Closet.query()
                     .where('user_id', user_id)
                     .where('item_id', item_id)
                     .delete()
 
-        return response.json({
-            message: 'Item successfully removed from closet.'
-        })
+        if (removed > 0) {
+            return response.json({
+                message: 'Outfit successfully removed from closet.'
+            })
+        } else {
+            return response.json({
+                message: 'Item not found.'
+            })
+        } 
     }
 }
 

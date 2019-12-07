@@ -10,13 +10,10 @@ class OutfitController {
                                    .where('user_id', user_id)
                                    .fetch()
 
-        return response.json({
-            data: outfit
-        })
+        return response.json(outfit)
     }
 
-    async addOutfit({request, response}) {
-        const user_id = request.get().user 
+    async addOutfit({request, response, params: {user_id}}) {
 
         var outfit = new Outfit() 
         outfit['user_id'] = user_id
@@ -59,19 +56,24 @@ class OutfitController {
 
     }
 
-    async removeFromCloset({request, response}) {
-        const outfit_id = request.get().item 
+    async removeOutfit({request, response, params: {user_id, outfit_id}}) {
 
         // TODO: Check with token user can only delete their stuff
 
-        await Closet.query()
-                    //.where('user_id', user_id) // this should come from token
+        var removed = await Outfit.query()
+                    .where('user_id', user_id) // this should come from token
                     .where('outfit_id', outfit_id)
                     .delete()
 
-        return response.json({
-            message: 'Outfit successfully removed.'
-        })
+        if (removed > 0) {
+            return response.json({
+                message: 'Outfit successfully removed from saved.'
+            })
+        } else {
+            return response.json({
+                message: 'Outfit not found.'
+            })
+        } 
     }
 }
 
