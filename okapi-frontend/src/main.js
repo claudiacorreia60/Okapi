@@ -6,9 +6,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import Unicon from 'vue-unicons';
 import {
   uniSearch,
-  uniFacebook,
+  uniFacebookF,
   uniInstagram,
   uniTwitter,
+  uniGlobe,
+  uniUser,
+  uniTimes,
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -20,7 +23,7 @@ Vue.config.productionTip = false;
 // Use BooststrapVue
 Vue.use(BootstrapVue);
 
-Unicon.add([uniSearch, uniFacebook, uniInstagram, uniTwitter]);
+Unicon.add([uniSearch, uniFacebookF, uniInstagram, uniTwitter, uniGlobe, uniUser, uniTimes]);
 Vue.use(Unicon);
 
 new Vue({

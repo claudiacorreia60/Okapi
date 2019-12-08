@@ -1,0 +1,48 @@
+<template>
+  <b-container>
+    <b-row class="mt-5">
+      <b-col>
+        <b-form-input
+          v-model="search"
+          placeholder="Search for inspiration"
+          class="search-bar">
+        </b-form-input>
+      </b-col>
+    </b-row>
+  </b-container>
+</template>
+
+<script>
+export default {
+  name: 'SearchPanel',
+  data() {
+    return {
+      search: '',
+    };
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.search-bar {
+  background: url('../assets/search.svg') no-repeat scroll 10px 11px;
+  background-size: 30px;
+  padding-left:60px;
+  border: none;
+  font-size: 30px;
+  border-bottom: solid 2px #2B1E02;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0rem;
+}
+.search-bar:focus {
+  box-shadow: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999999;
+  font-size: 30px;
+}
+</style>

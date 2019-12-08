@@ -4,7 +4,13 @@
       <div class="login">
         <!-- Logo -->
         <div class="logo">
-          <img alt="Okapi small logo" src="../assets/small-logo.png">
+          <router-link to="/">
+            <img
+              alt="Okapi small logo"
+              src="../assets/small-logo.svg"
+              class="small-logo-image"
+              title="go to home page">
+          </router-link>
         </div>
 
         <!-- Title -->
@@ -53,14 +59,14 @@
             <!-- Forgot password -->
             <b-col>
               <router-link
-                class="grey-text"
+                class="forgot-password"
                 to="/password_recovery">Forgot your password?</router-link>
             </b-col>
           </b-row>
 
           <!-- Buttons -->
           <div>
-            <b-button type="submit">Sign in</b-button>
+            <b-button class="signin-button" type="submit">Sign in</b-button>
           </div>
         </b-form>
 
@@ -79,6 +85,7 @@
 
 <script>
 export default {
+  name: 'LoginForm',
   data() {
     return {
       form: {
@@ -97,27 +104,58 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.small-logo-image {
+  width: 170px;
+  height: 170px;
+}
+
 h4 {
   text-align: center;
-  color: #6D3C1D;
+  color: #2B1E02;
   margin-bottom: 3px;
 }
 
-button {
+.forgot-password {
+  color: #999999;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.forgot-password:hover {
+  color: #3a3a3a;
+  text-decoration: none;
+}
+
+.grey-text {
+  color: #999999;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+.signin-button {
   margin-top: 20px;
   margin-bottom: 60px;
-  background-color: #6D3C1D;
+  background-color: #2B1E02;
   width: 100%;
 }
 
+.signin-button:hover {
+  background-color: #6D3C1D;
+}
+
 .signup {
-  color: #6D3C1D;
+  color: #2B1E02;
   font-size: 16px;
+}
+
+.signup:hover {
+  color: #6D3C1D;
+  text-decoration: none;
 }
 
 .details {
   text-align: center;
-  color: #a1a1a1;
+  color: #999999;
   font-size: 11px;
   margin-bottom: 30px
 }
@@ -153,7 +191,7 @@ button {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #a1a1a1;
+  color: #999999;
   font-size: 13px;
 }
 </style>
