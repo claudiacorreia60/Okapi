@@ -2,6 +2,7 @@
 
 const User = use('App/Models/User');
 const Database = use('Database')
+const Validator = use('Validator')
 
 class AuthController {
   async register({
@@ -9,49 +10,66 @@ class AuthController {
     auth,
     response
   }) {
-    const email = request.input("email")
-    const password = request.input("password")
-    const username = request.input("username")
-    const name = request.input("name")
-
-    if (await User.findBy('email', email) == null) {
-      let user = new User()
-      user.email = email
-      user.password = password
-      user.username = username
-      user.name = name
-
-      await user.save()
-      let accessToken = await auth.withRefreshToken().generate(user, {
-        email: user.email,
-        username: user.username,
-        name: user.name
-      })
-
-      return response.json({
-        "access_token": accessToken
-      })
-    } else {
-      return response.json({
-        message: 'Email already in use.'
-      })
+    const rules = {
+      email: 'required|email|unique:users,email',
+      password: 'required',
+      username: 'required|unique:users,username',
+      name: 'required'
     }
+    const validation = await Validator.validate(request.all(), rules)
+
+    if (validation.fails()) {
+      return response.send('Bad format: \n' + JSON.stringify(validation.messages()))
+    }
+
+    let user = new User()
+    user.email = request.input("email")
+    user.password = request.input("password")
+    user.username = request.input("username")
+    user.name = request.input("name")
+
+    await user.save()
+
+    let accessToken = await auth.withRefreshToken().generate(user, {
+      email: user.email,
+      username: user.username,
+      name: user.name,
+      user_id: user.id
+    })
+
+    return response.json({
+      "access_token": accessToken
+    })
   }
 
-  //check if request has token and automatically log in?
+
+
   async login({
     request,
     auth,
     response
   }) {
+    const rules = {
+      email: 'required|email',
+      password: 'required'
+    }
+    const validation = await Validator.validate(request.all(), rules)
+
+    if (validation.fails()) {
+      return response.send('Bad format: \n' + JSON.stringify(validation.messages()))
+    }
+
     const email = request.input("email")
     const password = request.input("password");
+
     if (await auth.attempt(email, password)) {
       let user = await User.findBy('email', email)
+
       let accessToken = await auth.withRefreshToken().generate(user, {
         email: user.email,
         username: user.username,
-        name: user.name
+        name: user.name,
+        user_id: user.id
       })
 
       return response.json({
@@ -70,7 +88,6 @@ class AuthController {
 
     try {
       let new_token = await auth.generateForRefreshToken(refresh_token)
-
       return response.json({
         "access_token": new_token
       })
