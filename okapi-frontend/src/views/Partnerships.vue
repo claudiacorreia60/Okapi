@@ -1,25 +1,20 @@
 <template>
-  <div class="home">
-    <HomeContent/>
+  <div class="partnerships">
+    <PartnershipsContent/>
     <PageFooter/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import PartnershipsContent from '@/components/PartnershipsContent.vue';
 import PageFooter from '@/components/PageFooter.vue';
-import HomeContent from '@/components/HomeContent.vue';
 
 export default {
-  name: 'Home',
+  name: 'Partnerships',
   components: {
+    PartnershipsContent,
     PageFooter,
-    HomeContent,
-  },
-  data() {
-    return {
-      loggedIn: false,
-    };
   },
 };
 </script>
