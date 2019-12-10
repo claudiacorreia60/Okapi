@@ -37,7 +37,7 @@
           </router-link>
         </b-nav-item>
         <b-nav-item title="go to sign in page">
-          <router-link to="/login" class="nav-right ml-2">
+          <router-link to="/signin" class="nav-right ml-2">
             <unicon name="user" fill="#2B1E02"></unicon>
             <span class="ml-2">My Account</span>
           </router-link>
