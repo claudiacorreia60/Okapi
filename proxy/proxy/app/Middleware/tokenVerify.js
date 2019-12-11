@@ -5,12 +5,15 @@ const Env = use('Env')
 
 class ConvertEmptyStringsToNull {
   async handle ({ request }, next) {
-    const encrypted_token = request.request.headers.authorization.slice(7)
+    const access_token = JSON.parse(request.header('access_token'))
+    const encrypted_token = access_token.token
+
     const token = jwt.verify(encrypted_token, Env.get('APP_KEY'), {
                                                         algorithms: ['HS256'],
                                                         complete: true
                                                     })
-                                                    
+                       
+                                          
     await next()
   }
 }
