@@ -12,6 +12,8 @@ import {
   uniGlobe,
   uniUser,
   uniTimes,
+  uniThumbsUp,
+  uniThumbsDown,
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -23,7 +25,17 @@ Vue.config.productionTip = false;
 // Use BooststrapVue
 Vue.use(BootstrapVue);
 
-Unicon.add([uniSearch, uniFacebookF, uniInstagram, uniTwitter, uniGlobe, uniUser, uniTimes]);
+Unicon.add([
+  uniSearch,
+  uniFacebookF,
+  uniInstagram,
+  uniTwitter,
+  uniGlobe,
+  uniUser,
+  uniTimes,
+  uniThumbsUp,
+  uniThumbsDown,
+]);
 Vue.use(Unicon);
 
 new Vue({
