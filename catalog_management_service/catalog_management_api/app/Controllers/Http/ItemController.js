@@ -26,9 +26,7 @@ class ItemController {
                                 .forPage(page)
                                 .fetch()
         
-        return response.json({
-            data: items
-        })
+        return response.json( items )
     }
 
     async indexWoman({request, response}) {
@@ -54,9 +52,7 @@ class ItemController {
                                 .forPage(page)
                                 .fetch()
         
-        return response.json({
-            data: items
-        })
+        return response.json( items)
     }
 
     async show({request, response, params: {id}}) {
@@ -72,7 +68,8 @@ class ItemController {
             return response.json(item.rows[0])
         } else {
             return response.status(404).json({
-                message: 'Item not found!'
+                message: 'Item not found!',
+                id
             })
         }
     }
