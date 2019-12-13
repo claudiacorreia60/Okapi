@@ -8,9 +8,7 @@ class ClosetController {
                                    .where('user_id', user_id)
                                    .fetch()
 
-        return response.json({
-            data: closet
-        })
+        return response.json( closet )
     }
 
     async addToCloset({request, response, params: {user_id, item_id}}) {
@@ -34,7 +32,7 @@ class ClosetController {
     }
 
     async removeFromCloset({request, response, params: {user_id, item_id}}) {
-
+        
         var removed = await Closet.query()
                     .where('user_id', user_id)
                     .where('item_id', item_id)
@@ -42,11 +40,12 @@ class ClosetController {
 
         if (removed > 0) {
             return response.json({
-                message: 'Outfit successfully removed from closet.'
+                message: 'Item successfully removed from closet.'
             })
         } else {
-            return response.json({
-                message: 'Item not found.'
+            return response.status(404).json({
+                message: 'Item not found.',
+                item_id
             })
         } 
     }
