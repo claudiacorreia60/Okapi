@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 
 class Outfit(BaseModel):
@@ -7,8 +8,18 @@ class Outfit(BaseModel):
     feet_id: int
     score: float
 
+class Item(BaseModel):
+    item_id: int
+    body_part: str
+    item_img_url: str
+
 class ClothList(BaseModel):
-    upper_in: list
-    upper_out: list
-    bottom: list
-    feet: list
+    upper_in: List[Item]
+    upper_out: List[Item]
+    bottom: List[Item]
+    feet: List[Item]
+
+class User(BaseModel):
+    user_id: int
+    user_likes: ClothList
+

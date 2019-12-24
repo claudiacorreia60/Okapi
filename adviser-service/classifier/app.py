@@ -5,6 +5,6 @@ from starlette.responses import HTMLResponse
 app = FastAPI()
 app.include_router(outfit_classifier_router.router)
  
-@app.get('/check', status_code=200)
-async def home():
+@app.get('/livecheck', status_code=200)
+async def live_check():
     return "Classifier is running..."
