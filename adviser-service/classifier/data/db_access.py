@@ -46,3 +46,10 @@ class Database:
                 update={'$push':{'user_likes.feet' : {'$each': [ json.loads(like.json()) for like in new_likes.feet] }}})
         
         return 'Inserted'
+
+    def get_user_likes(self, user_id:int):
+        return self.db.get_collection('users-likes').find_one(filter={'user_id':user_id}, projection= {'_id':0, 'user_likes':1})
+
+    
+    def get_catalogue_items(self):
+        return self.db.get_collection('catalogue')
