@@ -28,3 +28,8 @@ async def add_like(user_id: int, new_like: Item):
 @router.post('/rm_like')
 async def rm_like(user_id: int, item_id: int, body_part: str):
     return JSONResponse( db.rm_like(user_id, item_id, body_part))
+
+
+@router.get('/test_route')
+async def test(user_id: int):
+    return JSONResponse( outfit_sugestor.build_search_space(user_id=user_id))

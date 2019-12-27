@@ -11,7 +11,8 @@ class Outfit(BaseModel):
 class Item(BaseModel):
     item_id: int
     body_part: str
-    item_img_url: str
+    gender: str
+    img_url: str
 
 class ClothList(BaseModel):
     upper_in: List[Item]
@@ -21,5 +22,6 @@ class ClothList(BaseModel):
 
 class User(BaseModel):
     user_id: int
-    user_likes: ClothList
+    gender: str
+    likes: ClothList
 

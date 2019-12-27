@@ -13,6 +13,8 @@ class Database:
         self.client = MongoClient("mongodb+srv://admin:27remb3jZ5FKY31f@okapi-adviser-cluster-vcqku.gcp.mongodb.net/test?retryWrites=true&w=majority")
         self.db = self.client.get_database(name='adviser-db')
 
+    # Métodos na coleção de utilizadores
+
     def add_like(self, user_id: int, new_like: Item):
         users_likes = self.db.get_collection(name='users-likes')
         
@@ -47,9 +49,13 @@ class Database:
         
         return 'Inserted'
 
-    def get_user_likes(self, user_id:int):
-        return self.db.get_collection('users-likes').find_one(filter={'user_id':user_id}, projection= {'_id':0, 'user_likes':1})
-
+    def get_user(self, user_id:int):
+        return self.db.get_collection('users-likes').find_one(filter={'user_id':user_id}, projection= {'_id':0})
     
-    def get_catalogue_items(self):
-        return self.db.get_collection('catalogue')
+    # Métodos na coleção do catálogo
+    
+    def get_item(self, item_id: int):
+        return self.db.get_collection('catalogue').find_one(filter={'item_id':item_id}, projection={'_id':0})
+    
+    def get_items(self, gender: str):
+        return self.db.get_collection('catalogue').find(filter={'gender':gender})
