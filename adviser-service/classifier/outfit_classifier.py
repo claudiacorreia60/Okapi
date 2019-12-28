@@ -3,7 +3,8 @@ import random
 import requests
 from data.definitions import Outfit, ClothList
 from data.db_access import Database
-
+import json
+import os
 
 class OutfitSugestor:
 
@@ -11,80 +12,115 @@ class OutfitSugestor:
         # TODO 
         # Carregar o modelo de classificação previamente treinado 
         # self.trained_model = load_model ...
+        
+        
         self.db = Database()
 
 
 
     def sugest_outfit(self, user_id: int):
-        # TODO
-        # Utilizar as funções abaixo para sugerir o outfit
 
-        space = self.build_search_space(user_id)
-        outfits = self.build_outfits(space, 10)
-        for outfit in outfits:
-            self.classify_outfit(outfit)
+        search_space = self.build_search_space(user_id)
+        outfits = self.build_outfits(search_space, 4)
+        scores = self.evaluate_outfits(outfits)
+        best_outfit = self.choose_best_outfit(outfits, scores)
 
-        return self.get_user_likes(user_id)
-        #return self.download_image(user_id)
+        # Fazer download das imagens para visualizar o outfit
+        """ self.download_image(best_outfit['upper_in']['img_url'], 'upper_in')
+        self.download_image(best_outfit['upper_out']['img_url'], 'upper_out')
+        self.download_image(best_outfit['bottom']['img_url'], 'bottom')
+        self.download_image(best_outfit['feet']['img_url'], 'feet') """ 
+        
+        return best_outfit
 
     def classify_outfit(self, outfit: Outfit) -> float:
         # TODO
         # Fazer previsão com o modelo
-        # img1 = outfit.upper_in_img
-        # img2 = outfit.upper_out_img
-        # ...
-        # self.trained_model.predict(img1, img2, ...)
         # Retorna a classificação do outfit
+    
+        print(outfit['upper_in']['img_url'])
 
-        return 0.95
+        self.download_image(outfit['upper_in']['img_url'], 'upper_in')
+        self.download_image(outfit['upper_out']['img_url'], 'upper_out')
+        self.download_image(outfit['bottom']['img_url'], 'bottom')
+        self.download_image(outfit['feet']['img_url'], 'feet')
+
+        # score = self.trained_model.predict('upper_in', 'upper_out, ...)
+        score = round(random.random(),2)
+        outfit['score'] = score
+
+        os.remove('upper_in')
+        os.remove('upper_out')
+        os.remove('bottom')
+        os.remove('feet')
+
+        return score
 
     def build_search_space(self, user_id: int) -> ClothList:
         # TODO
-        # Fazer merge de alguns dos likes do utilizador
-        # com outras peças catálogo [mais tarde, procurar peças semelhantes aos gostos do utilizador]
-        # Formar um novo ClothList  (listas com os ids das peças) e retornar o espaço de procura
+        # Procurar peças semelhantes aos gostos do utilizador
+        #  e retornar essas peças ao invés do atual        
+
+        likes_num = 1
+        catalogue_num = 1
+        search_space = {"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}
 
         user = self.db.get_user(user_id=user_id)
-        gender = user['gender']
         
-        likes_upper_in = [ item['item_id'] for item in user['likes']['upper_in']]
-
-        #items_gender = self.db.get_items(gender = gender)
-
-
-        # rand_likes = random.sample(likes, 2)
-        # rand_items = random.sample(items_gender, 2)
-
-        #search_space = 
+        likes_upper_in = user['likes']['upper_in']
+        likes_upper_out = user['likes']['upper_out']
+        likes_bottom = user['likes']['bottom']
+        likes_feet = user['likes']['feet']
         
-        return likes_upper_in
+        catalogue_upper_in = list(self.db.get_items(gender=user['gender'], body_part='upper_in'))
+        catalogue_upper_out = list(self.db.get_items(gender=user['gender'], body_part='upper_out'))
+        catalogue_bottom = list(self.db.get_items(gender=user['gender'], body_part='bottom'))
+        catalogue_feet = list(self.db.get_items(gender=user['gender'], body_part='feet'))
 
+        search_space['upper_in'].extend(random.sample(likes_upper_in, likes_num))
+        search_space['upper_out'].extend(random.sample(likes_upper_out, likes_num))
+        search_space['bottom'].extend(random.sample(likes_bottom, likes_num))
+        search_space['feet'].extend(random.sample(likes_feet, likes_num))
+        
+        search_space['upper_in'].extend(random.sample(catalogue_upper_in, catalogue_num))
+        search_space['upper_out'].extend(random.sample(catalogue_upper_out, catalogue_num))
+        search_space['bottom'].extend(random.sample(catalogue_bottom, catalogue_num))
+        search_space['feet'].extend(random.sample(catalogue_feet, catalogue_num))
+        
+        return search_space
 
     def build_outfits(self, search_space:ClothList, outfit_num: int = 10) -> list:
-        # TODO
-        # Contruir outfits (definitions.Outfit)
-        # Retornar uma lista de Outfit 
-        pass
+        outfits = []
+        i = 0
+        while i < outfit_num:
+            upper_in = random.choice(search_space['upper_in'])
+            upper_out = random.choice(search_space['upper_out'])
+            bottom = random.choice(search_space['bottom'])
+            feet = random.choice(search_space['feet'])
+            score = 0.0
+            
+            outfit = { 'upper_in': upper_in, 'upper_out': upper_out, 'bottom': bottom,  'feet': feet, 'score': score }
+            outfits.append(outfit)
+            i += 1
+
+        return outfits
         
-    def evaluate_outfits (self, outfit: Outfit) -> float:
-        # TODO
-        # Para cada outfit, fazer download das imagens e calcular o score
-        # Utiliar o método classify_outfit
-        # Retornar uma lista com os scores
-        pass
+    def evaluate_outfits (self, outfits: list) -> list:
+        scores = []
 
-    def choose_best_outfit (self, outfits:list, outfits_scores:list) -> Outfit:
-        # TODO
-        # Escolher o outfit com o score mais alto e retorná-lo
-        pass
+        for outfit in outfits:
+            score = self.classify_outfit(outfit)
+            scores.append(score)
 
-    def download_image(self, item_id: int, img_name: str):
-        # TODO
-        # Ir buscar o url da imagem a partir do item_id
-        # Fazer download da imagem do url
-        # Retornar a imagem para inserir no modelo
-        item = self.db.get_item(item_id=item_id)
-        img_url = item['img_url']
+        return scores
+
+    def choose_best_outfit (self, outfits:list, scores:list) -> Outfit:
+        max_idx = np.argmax(scores)
+        best_outfit = outfits[max_idx]
+
+        return best_outfit
+
+    def download_image(self, img_url: str, img_name: str):
         img_data = requests.get(img_url).content
         with open(img_name, 'wb') as handler:
             handler.write(img_data)

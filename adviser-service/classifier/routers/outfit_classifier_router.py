@@ -18,8 +18,8 @@ async def sugest_outfit(user_id: int) -> Outfit :
     return JSONResponse(outfit_sugestor.sugest_outfit(user_id))
 
 @router.post('/add_like')
-async def add_like(user_id: int, new_like: Item):
-    return JSONResponse( db.add_like(user_id, new_like))
+async def add_like(user_id: int, user_gender: str,new_like: Item):
+    return JSONResponse( db.add_like(user_id, user_gender, new_like))
 
 #@router.post('/add_likes')
 #def add_likes(user_id: int, new_likes: ClothList):
@@ -30,6 +30,6 @@ async def rm_like(user_id: int, item_id: int, body_part: str):
     return JSONResponse( db.rm_like(user_id, item_id, body_part))
 
 
-@router.get('/test_route')
-async def test(user_id: int):
-    return JSONResponse( outfit_sugestor.build_search_space(user_id=user_id))
+@router.post('/test_route')
+async def test(item: Item):
+    return JSONResponse( db.add_item(item=item))

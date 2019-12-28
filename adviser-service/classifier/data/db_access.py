@@ -15,24 +15,42 @@ class Database:
 
     # Métodos na coleção de utilizadores
 
-    def add_like(self, user_id: int, new_like: Item):
+    def add_like(self, user_id: int, user_gender: str, new_like: Item):
         users_likes = self.db.get_collection(name='users-likes')
         
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id,"user_likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
+            new_user = {"id":user_id, "gender": user_gender,"likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
             users_likes.insert_one(new_user)
         
-        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'user_likes.'+new_like.body_part : json.loads(new_like.json())}})
+        users_likes.update_one(filter={'id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
         return "Inserted!"
     
         
     def rm_like(self, user_id: int, item_id: int, body_part: str):
         users_likes = self.db.get_collection(name='users-likes')
-        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'user_likes.'+body_part:{'item_id':item_id}} })
+        users_likes.update_one(filter={'id':user_id}, update= {'$pull': {'likes.'+body_part:{'item_id':item_id}} })
         return "Deleted!"
 
+    def get_user(self, user_id:int):
+        return self.db.get_collection('users-likes').find_one(filter={'id':user_id}, projection= {'_id':0})
+    
+    # Métodos na coleção do catálogo
+    
+    def get_item(self, item_id: int):
+        return self.db.get_collection('catalogue').find_one(filter={'item_id':item_id}, projection={'_id':0})
+    
+    def get_items(self, gender: str, body_part: str):
+        return self.db.get_collection('catalogue').find(filter={'gender':gender, 'body_part':body_part}, projection={'_id':0})
 
-    def add_likes(self, user_id:int, new_likes: ClothList):
+
+    def add_item(self, item: Item):
+        self.db.get_collection('catalogue').insert_one(dict(item))
+        return 'Done'
+
+
+
+
+    """     def add_likes(self, user_id:int, new_likes: ClothList):
         users_likes = self.db.get_collection(name='users-likes')
         if not users_likes.find_one(filter={'user_id':user_id}):
             new_user = {"user_id":user_id,"user_likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
@@ -47,15 +65,4 @@ class Database:
         users_likes.update_one(filter={'user_id':user_id}, 
                 update={'$push':{'user_likes.feet' : {'$each': [ json.loads(like.json()) for like in new_likes.feet] }}})
         
-        return 'Inserted'
-
-    def get_user(self, user_id:int):
-        return self.db.get_collection('users-likes').find_one(filter={'user_id':user_id}, projection= {'_id':0})
-    
-    # Métodos na coleção do catálogo
-    
-    def get_item(self, item_id: int):
-        return self.db.get_collection('catalogue').find_one(filter={'item_id':item_id}, projection={'_id':0})
-    
-    def get_items(self, gender: str):
-        return self.db.get_collection('catalogue').find(filter={'gender':gender})
+        return 'Inserted' """
