@@ -36,7 +36,7 @@
         </b-card-group>
     </b-row>
     <b-row align-v="center" align-h="center" class="mt-2">
-        <b-button>Proceed</b-button>
+        <b-button class="signin-button" type="submit">Proceed</b-button>
     </b-row>
   </b-container>
 </template>
@@ -89,4 +89,15 @@ export default {
 </script>
 
 <style lang="scss">
+
+.signin-button {
+  margin-top: 20px;
+  margin-bottom: 60px;
+  background-color: #2B1E02;
+  width: 100%;
+}
+
+.signin-button:hover {
+  background-color: #6D3C1D;
+}
 </style>
