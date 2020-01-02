@@ -3,7 +3,7 @@ import random
 import requests
 import json
 import os
-from tensorflow.keras.models import load_model
+#from tensorflow.keras.models import load_model
 from data.definitions import Outfit, ClothList
 from data.db_access import Database
 
