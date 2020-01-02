@@ -1,0 +1,643 @@
+{ "cloths" : [
+    {
+        "item_id": 2,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça chino com elastano para um conforto extra. Corte Slim fit.",
+        "url": "dummy_url",
+        "reference": "5604205842868",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1461393/Calca-chino.jpg?v=637032211526570000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 3,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça Chino com corte regular.",
+        "url": "dummy_url",
+        "reference": "5604205775890",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1329015/CALCAS-CHINO.jpg?v=636894823776830000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 4,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça Chino com corte regular.",
+        "url": "dummy_url",
+        "reference": "5604205775890",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1329015/CALCAS-CHINO.jpg?v=636894823776830000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 5,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 49.99,
+        "gender": "M",
+        "description": "Calças chino",
+        "url": "dummy_url",
+        "reference": "5604205770536",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1300997/CALCAS-CHINO.jpg?v=636861011737930000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 6,
+        "brand_id": 1,
+        "color_id": 4,
+        "type_id": 3,
+        "price": 0,
+        "gender": "M",
+        "description": "Calça chino com vinco. Corte slim. Tecido com relevo em stretch de algodão. Cintura média e  emblema identificativo da marca no cós. Braguilha com fecho.  Este modelo está tabelado pela escala Americana, verifique a correspondência na Guia de Tamanhos.",
+        "url": "dummy_url",
+        "reference": "3933814",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1329306/CALCAS-CHINO.jpg?v=636894826656770000",
+        "catalog": 1,
+        "color": {
+            "color_id": 4,
+            "name": "Verde",
+            "rgb_red": 0,
+            "rgb_green": 255,
+            "rgb_blue": 0,
+            "hexadecimal": "#00FF00"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 11,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 7,
+        "price": 0,
+        "gender": "M",
+        "description": "O conforto e a elegância aos seus pés: Sapato em camurça com sola reforçada atrás para um maior conforto.",
+        "url": "dummy_url",
+        "reference": "3959984",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1439936/Sapato.jpg?v=637027898656500000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 7,
+            "name": "Sapatos",
+            "body_part": "Shoes"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 12,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 7,
+        "price": 0,
+        "gender": "M",
+        "description": "O conforto e a elegância aos seus pés: Sapato em camurça com sola reforçada atrás para um maior conforto.",
+        "url": "dummy_url",
+        "reference": "3959984",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1439936/Sapato.jpg?v=637027898656500000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 7,
+            "name": "Sapatos",
+            "body_part": "Shoes"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 13,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 6,
+        "price": 0,
+        "gender": "M",
+        "description": "Sapatilha lace-up casual em pele combinada com tecido em rede. Calcanheira em contraste. Sola bicolor.  As fitas tricolores destacam a personalidade da marca. Emblema redondo com identificação da marca à frente.",
+        "url": "dummy_url",
+        "reference": "3956293",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1446145/Sapatilha-tricolor.jpg?v=637028077718600000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 6,
+            "name": "Sapatilhas",
+            "body_part": "Shoes"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 14,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calças chino slim fit",
+        "url": "dummy_url",
+        "reference": "5604205793542",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1461504/Calcas-chino-slim-fit.jpg?v=637032216157130000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 18,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 0,
+        "gender": "M",
+        "description": "Calças chino slim fit",
+        "url": "dummy_url",
+        "reference": "3872905",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1328220/CALCAS-CHINO-SLIM-FIT.jpg?v=636894814631200000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 24,
+        "brand_id": 1,
+        "color_id": 4,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "British Heritage: As calças chino são obrigatórias num estilo british. Este modelo com corte slim fit apresenta dois bolsos laterais e um pequeno bolso reto à frente. Atrás os bolsos retos fecham com um botão central. Etiqueta identificativa atrás.",
+        "url": "dummy_url",
+        "reference": "5604205729541",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1301069/CALCAS-CHINO.jpg?v=636861013962000000",
+        "catalog": 1,
+        "color": {
+            "color_id": 4,
+            "name": "Verde",
+            "rgb_red": 0,
+            "rgb_green": 255,
+            "rgb_blue": 0,
+            "hexadecimal": "#00FF00"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 25,
+        "brand_id": 1,
+        "color_id": 4,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "British Heritage: As calças chino são obrigatórias num estilo british. Este modelo com corte slim fit apresenta dois bolsos laterais e um pequeno bolso reto à frente. Atrás os bolsos retos fecham com um botão central. Etiqueta identificativa atrás.",
+        "url": "dummy_url",
+        "reference": "5604205729541",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1301069/CALCAS-CHINO.jpg?v=636861013962000000",
+        "catalog": 1,
+        "color": {
+            "color_id": 4,
+            "name": "Verde",
+            "rgb_red": 0,
+            "rgb_green": 255,
+            "rgb_blue": 0,
+            "hexadecimal": "#00FF00"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 26,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "British Heritage: As calças chino são obrigatórias num estilo british. Este modelo com corte slim fit apresenta dois bolsos laterais e um pequeno bolso reto à frente. Atrás os bolsos retos fecham com um botão central. Etiqueta identificativa atrás.",
+        "url": "dummy_url",
+        "reference": "5604205729640",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1301081/CALCAS-CHINO.jpg?v=636861014487400000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 29,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 49.99,
+        "gender": "M",
+        "description": "Calças chino um clássico intemporal, aliado ao poder do denim. Apresentam dois bolsos laterais e dois bolsos retos atrás com botão.",
+        "url": "dummy_url",
+        "reference": "5604205816593",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1389119/CALCAS-CHINO.jpg?v=636936150538000000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 30,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça 5 Pocket",
+        "url": "dummy_url",
+        "reference": "5604205795010",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1498698/Calca-5-Pocket.jpg?v=637068353913830000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 31,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça chino",
+        "url": "dummy_url",
+        "reference": "5604205836560",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1414709/CALCA-CHINO.jpg?v=636959616061600000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 33,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 7,
+        "price": 0,
+        "gender": "M",
+        "description": "Sapato náutico confecionado em pele e com sola branca em borracha. Os contornos vermelhos remetem para o legado da marca.",
+        "url": "dummy_url",
+        "reference": "3956263",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1439995/Sapato-nautico.jpg?v=637027900193130000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 7,
+            "name": "Sapatos",
+            "body_part": "Shoes"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 34,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Calça chino",
+        "url": "dummy_url",
+        "reference": "5604205751542",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1411755/CALCA-CHINO.jpg?v=636949186058530000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 35,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Com um corte que acompanha o molde da perna, este modelo chino slim apresenta tecido stretch e abotoa com um botão e fecho. Etiqueta com identificação da marca aplicada no cós.",
+        "url": "dummy_url",
+        "reference": "5604205787725",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1389545/CALCAS-CHINO.jpg?v=636936160069670000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    },
+    {
+        "item_id": 36,
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 3,
+        "price": 39.99,
+        "gender": "M",
+        "description": "Com um corte que acompanha o molde da perna, este modelo chino slim apresenta tecido stretch e abotoa com um botão e fecho. Etiqueta com identificação da marca aplicada no cós.",
+        "url": "dummy_url",
+        "reference": "5604205787725",
+        "photo": "https://lionofporches.vteximg.com.br/arquivos/ids/1389545/CALCAS-CHINO.jpg?v=636936160069670000",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 3,
+            "name": "Calças",
+            "body_part": "Lower body"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        },
+        "materials": []
+    }
+]
+}
