@@ -17,7 +17,7 @@
       <h3> About Okapi </h3>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
-      <router-link class="about-r" to="/aboutUs">
+      <router-link class="about-r" to="/about">
       About us
       </router-link>
     </b-row>
