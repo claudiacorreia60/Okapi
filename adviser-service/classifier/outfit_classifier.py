@@ -1,21 +1,21 @@
 import numpy as np
 import random
 import requests
-from data.definitions import Outfit, ClothList
-from data.db_access import Database
 import json
 import os
+from tensorflow.keras.models import load_model
+from data.definitions import Outfit, ClothList
+from data.db_access import Database
+
 
 class OutfitSugestor:
 
     def __init__(self):
         # TODO 
         # Carregar o modelo de classificação previamente treinado 
-        # self.trained_model = load_model ...
-        
-        
-        self.db = Database()
+        # self.model = load_model('model.h5')
 
+        self.db = Database()
 
 
     def sugest_outfit(self, user_id: int):
@@ -34,18 +34,15 @@ class OutfitSugestor:
         return best_outfit
 
     def classify_outfit(self, outfit: Outfit) -> float:
-        # TODO
-        # Fazer previsão com o modelo
-        # Retorna a classificação do outfit
-    
-        print(outfit['upper_in']['img_url'])
-
         self.download_image(outfit['upper_in']['img_url'], 'upper_in')
         self.download_image(outfit['upper_out']['img_url'], 'upper_out')
         self.download_image(outfit['bottom']['img_url'], 'bottom')
         self.download_image(outfit['feet']['img_url'], 'feet')
 
-        # score = self.trained_model.predict('upper_in', 'upper_out, ...)
+        # TODO
+        # Fazer previsão com o modelo
+        # score = self.model.predict('upper_in', 'upper_out, ...) Passar aqui as imagens!!!
+
         score = round(random.random(),2)
         outfit['score'] = score
 

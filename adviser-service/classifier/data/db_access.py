@@ -48,8 +48,6 @@ class Database:
         return 'Done'
 
 
-
-
     """     def add_likes(self, user_id:int, new_likes: ClothList):
         users_likes = self.db.get_collection(name='users-likes')
         if not users_likes.find_one(filter={'user_id':user_id}):
