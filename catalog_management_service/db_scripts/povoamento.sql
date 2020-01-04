@@ -7,16 +7,16 @@ INSERT INTO `okapi_catalog`.`brand`
 	(`name`, `website`)
 VALUES
 	('Ana Sousa','https://www.anasousa.com/pt/');
-
-INSERT INTO `okapi_catalog`.`brand`
-	(`name`, `website`)
-VALUES
-	('Zara','https://www.zara.com/pt/'); 
     
 INSERT INTO `okapi_catalog`.`color`
 	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
 VALUES
 	('Azul',0,0,255,'#0000FF');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Castanho',150,75,0,'#964B00');
     
 INSERT INTO `okapi_catalog`.`color`
 	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
@@ -33,82 +33,123 @@ INSERT INTO `okapi_catalog`.`color`
 VALUES
 	('Verde',0,255,0,'#00FF00');
 
-INSERT INTO `okapi_catalog`.`material`
-	(`name`)
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
 VALUES
-	('Viscose');
+	('Bordeaux',128,0,0,'#800000');
 
-INSERT INTO `okapi_catalog`.`material`
-	(`name`)
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
 VALUES
-	('Nylon');
+	('Rosa',255,192,203,'#FFC0CB');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Beje',245,245,220,'#F5F5DC');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Branco',255,255,255,'#FFFFFF');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Cinza',128,128,128,'#808080');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Telha',200,99,85,'#c86355');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Camel',76,60,42,'#c19a6b');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Preto',0,0,0,'#000000');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Salmão',98,50,45,'#fa8072');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Laranja',100,65,0,'#ffa500');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Pêssego',100,90,71,'#ffe5b4');
+
+INSERT INTO `okapi_catalog`.`color`
+	(`name`,`rgb_red`,`rgb_green`,`rgb_blue`,`hexadecimal`)
+VALUES
+	('Kaki',189,183,107,'#bdb76b');
+
+INSERT INTO `okapi_catalog`.`type`
+	(`name`,`body_part`)
+VALUES
+	('Casacos','cover');
     
-INSERT INTO `okapi_catalog`.`material`
-	(`name`)
-VALUES
-	('Elastano');
-
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('T-shirt','Upper body');
+	('Fatos','cover');
     
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('Saia','Lower body');
-    
+	('Blazers','cover');
+
 INSERT INTO `okapi_catalog`.`type`
-	(`name`,`body_part`)
+	(`name`,`body_part`)  
 VALUES
-	('Calças','Lower body');
+	('Calças e Calções','bottom');
 
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('Jeans','Lowes body');
+	('Vestidos','full');
 
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('Camisa','Upper body');
+	('Saias','bottom');
 
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('Sapatilhas','Shoes');
-    
-INSERT INTO `okapi_catalog`.`type`
-	(`name`,`body_part`)
-VALUES
-	('Sapatos','Shoes');
-    
-INSERT INTO `okapi_catalog`.`type`
-	(`name`,`body_part`)
-VALUES
-	('Chinelos','Shoes');
+	('Camisolas','upper');
 
 INSERT INTO `okapi_catalog`.`type`
 	(`name`,`body_part`)
 VALUES
-	('Vestido','Full');
+	('T-shirts','upper');
 
-INSERT INTO `okapi_catalog`.`item`
-	(`item_id`,`brand_id`,`color_id`,`type_id`,`price`,`gender`,`description`,`url`,`reference`,`photo`,`catalog`)
+INSERT INTO `okapi_catalog`.`type`
+	(`name`,`body_part`)
 VALUES
-	(1,1,1,9,12.99,'W','Vestido manga 3/4','','shorturl.at/jvRS1','Vestido manga 3/4',1);
+	('Sweats','upper');
 
-INSERT INTO `okapi_catalog`.`item_material`
-	(`item_id`,`material_id`,`weight`)
+INSERT INTO `okapi_catalog`.`type`
+	(`name`,`body_part`)
 VALUES
-	(1,1,70.0);
+	('Camisas','upper');
 
-INSERT INTO `okapi_catalog`.`item_material`
-	(`item_id`,`material_id`,`weight`)
+INSERT INTO `okapi_catalog`.`type`
+	(`name`,`body_part`)
 VALUES
-	(1,2,25.0);
-    
-INSERT INTO `okapi_catalog`.`item_material`
-	(`item_id`,`material_id`,`weight`)
+	('Túnicas e Tops','upper');
+
+INSERT INTO `okapi_catalog`.`type`
+	(`name`,`body_part`)
 VALUES
-	(1,3,5.0);
+	('Calçado','feet');
+

@@ -63,7 +63,8 @@ CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
   `description` VARCHAR(500) NULL,
   `url` VARCHAR(45) NOT NULL,
   `reference` VARCHAR(45) NOT NULL,
-  `photo` VARCHAR(250) NULL,
+  `photo` VARCHAR(500) NULL,
+  `composition` VARCHAR(250) NOT NULL,
   `catalog` TINYINT NOT NULL,
   PRIMARY KEY (`item_id`),
   INDEX `fk_item_1_idx` (`brand_id` ASC),
@@ -85,91 +86,3 @@ CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `okapi_catalog`.`material`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`material` (
-  `material_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`material_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `okapi_catalog`.`item_material`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item_material` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `item_id` INT NOT NULL,
-  `material_id` INT NOT NULL,
-  `weight` DECIMAL NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_item_material_1_idx` (`item_id` ASC),
-  INDEX `fk_item_material_2_idx` (`material_id` ASC),
-  CONSTRAINT `fk_item_material_1`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `okapi_catalog`.`item` (`item_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_item_material_2`
-    FOREIGN KEY (`material_id`)
-    REFERENCES `okapi_catalog`.`material` (`material_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `okapi_catalog`.`item_tag`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item_tag` (
-  `tag_id` INT NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`tag_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `okapi_catalog`.`feature`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`feature` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `item_id` INT NOT NULL,
-  `tag_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_feature_1_idx` (`item_id` ASC),
-  CONSTRAINT `fk_feature_1`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `okapi_catalog`.`item` (`item_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_feature_2`
-    FOREIGN KEY (`tag_id`)
-    REFERENCES `okapi_catalog`.`item_tag` (`tag_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `okapi_catalog`.`embedding`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `okapi_catalog`.`embedding` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `item_id` INT NOT NULL,
-  `vetor` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_embedding_item1_idx` (`item_id` ASC),
-  CONSTRAINT `fk_embedding_item1`
-    FOREIGN KEY (`item_id`)
-    REFERENCES `okapi_catalog`.`item` (`item_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
