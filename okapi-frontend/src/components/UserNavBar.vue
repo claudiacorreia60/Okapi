@@ -14,7 +14,7 @@
         <b-navbar-nav class="ml-auto mr-auto">
           <b-nav-item>
             <div class="dropdown">
-              <router-link to="/catalog">
+              <router-link to="/catalog/woman">
                 <button
                   class="dropbtn link m-2">WOMEN</button>
               </router-link>
@@ -25,7 +25,7 @@
           </b-nav-item>
           <b-nav-item>
             <div class="dropdown">
-              <router-link to="/catalog">
+              <router-link to="/catalog/man">
                 <button
                 class="dropbtn link m-2">MEN</button>
               </router-link>
@@ -141,6 +141,10 @@
 <script>
 export default {
   name: 'HomeNavBar',
+  data () {
+      return {
+      }
+  },
   methods: {
     /*showWomenTab() {
       document.getElementById('womenTab').style.display = 'none';

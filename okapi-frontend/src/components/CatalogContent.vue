@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-card-group>
-      <b-col md="4" sm="6" align-self="center" v-for="item in items" v-bind:key="item.item_id">
+      <b-col md="4" sm="6" align-self="center" v-for="item in clothes" v-bind:key="item.item_id">
         <a :href="item.url">
           <b-card
               :img-src="item.photo"
@@ -14,7 +14,7 @@
           >
             <div class="details" v-if="hover & id_item === item.item_id">SEE DETAILS</div>
             <div v-else>
-              <div class="description">{{item.brand.name.toUpperCase()}} - {{item.type.body_part}}</div>
+              <div class="description">{{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}</div>
               <div v-if="item.price > 0" class="price">{{item.price}}€</div>
               <div v-else class="price">Price not defined</div>
             </div>
@@ -27,21 +27,18 @@
 
 <script>
 // @ is an alias to /src
-const cloths = require('../assets/cloths.json'); // with path
-
 export default {
   name: 'catalogContent',
+  props: ['clothes'],
   components: {
   },
   data() {
     return {
       hover: false,
       id_item: 0,
-      items: [],
     };
   },
   mounted() {
-    this.items = cloths.cloths.slice(0, 9);
   },
   computed: {
     productsOrdered: function() {
