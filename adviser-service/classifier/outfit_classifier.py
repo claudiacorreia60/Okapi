@@ -29,13 +29,14 @@ class OutfitSugestor:
         outfits = self.build_outfits(search_space, 4)
         scores = self.evaluate_outfits(outfits)
         best_outfit = self.choose_best_outfit(outfits, scores)
-
+        best_outfit['score'] = '' + str(best_outfit['score'])
+        
         # Fazer download das imagens para visualizar o outfit
         """ self.download_image(best_outfit['upper_in']['img_url'], 'upper_in')
         self.download_image(best_outfit['upper_out']['img_url'], 'upper_out')
         self.download_image(best_outfit['bottom']['img_url'], 'bottom')
         self.download_image(best_outfit['feet']['img_url'], 'feet') """ 
-        
+        print(best_outfit)
         return best_outfit
 
     def loadImage(self, image_path):
@@ -63,19 +64,24 @@ class OutfitSugestor:
         bottom = bottom / 255
         feet = feet / 255
 
+        upper_in = upper_in.reshape(-1,64,64,3)
+        upper_out = upper_out.reshape(-1,64,64,3)
+        bottom = bottom.reshape(-1,64,64,3)
+        feet = feet.reshape(-1,64,64,3)
+
         # TODO
         # Fazer previsão com o modelo
-        score = self.model.predict(upper_in, upper_out, bottom, feet) 
+        score = self.model.predict([upper_in, upper_out, bottom, feet]) 
 
         # score = round(random.random(),2)
-        outfit['score'] = score
+        outfit['score'] = score[0][0]
 
         os.remove('upper_in')
         os.remove('upper_out')
         os.remove('bottom')
         os.remove('feet')
 
-        return score
+        return score[0][0]
 
     def build_search_space(self, user_id: int) -> ClothList:
         # TODO
@@ -132,6 +138,7 @@ class OutfitSugestor:
 
         for outfit in outfits:
             score = self.classify_outfit(outfit)
+            print(score)
             scores.append(score)
 
         return scores
