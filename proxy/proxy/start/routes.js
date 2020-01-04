@@ -417,7 +417,7 @@ Route.group(() => {
 }).prefix('outfit')
   //.middleware(['tokenVerify', 'userExists'])
 
-  Route.group(() => {
+Route.group(() => {
   /**
    * @api {post} /auth/register User registration
    * @apiName RegisterUser
@@ -490,3 +490,9 @@ Route.group(() => {
    */
     Route.post('/refresh', 'Auth/AuthController.refresh')
   }).prefix('auth')
+
+
+Route.group(() => {
+  Route.get('/classify', 'Adviser/AdviserController')
+  Route.get('/advise', 'Adviser/AdviserController.advise')
+}).prefix('adivser')
