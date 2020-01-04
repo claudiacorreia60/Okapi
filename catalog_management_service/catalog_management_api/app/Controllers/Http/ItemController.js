@@ -14,7 +14,6 @@ class ItemController {
                                 .with('color')
                                 .with('type')
                                 .with('brand')
-                                .with('materials')
                                 .where('catalog',1)
                                 .whereHas('color', (builder) => {
                                     builder.where('name', 'like', color)
@@ -40,7 +39,6 @@ class ItemController {
                                 .with('color')
                                 .with('type')
                                 .with('brand')
-                                .with('materials')
                                 .where('catalog',1)
                                 .whereHas('color', (builder) => {
                                     builder.where('name', 'like', color)
@@ -60,7 +58,6 @@ class ItemController {
                                 .with('color')
                                 .with('type')
                                 .with('brand')
-                                .with('materials')
                                 .where('item_id', id)
                                 .where('catalog',1)
                                 .fetch()
