@@ -2,6 +2,7 @@
   <div id="app">
     <UserNavBar v-if="loggedIn"/>
     <HomeNavBar v-else/>
+    <div class="margin"></div>
     <router-view/>
   </div>
 </template>
@@ -18,7 +19,7 @@ export default {
   },
   data() {
     return {
-      loggedIn: false,
+      loggedIn: true,
     };
   },
 };
@@ -29,5 +30,14 @@ export default {
   font-family: 'Lato';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+*:focus,
+*:active {
+    outline: 0 !important;
+}
+
+.margin {
+  margin-bottom: 100px;
 }
 </style>

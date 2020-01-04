@@ -16,7 +16,9 @@ import {
   uniThumbsDown,
   uniLock,
   uniUnlock,
-  uniSync
+  uniSync,
+  uniAngleRight,
+  uniAngleDown,
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -41,6 +43,8 @@ Unicon.add([
   uniLock,
   uniUnlock,
   uniSync,
+  uniAngleRight,
+  uniAngleDown,
 ]);
 Vue.use(Unicon);
 

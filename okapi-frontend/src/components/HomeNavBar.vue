@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" class="sticky-top white-background">
+    <b-navbar toggleable="lg" class="top-bar white-background">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <!-- Brand -->
         <b-navbar-brand class="ml-5" title="go to home page">
@@ -14,20 +14,28 @@
         <b-navbar-nav class="ml-auto mr-auto">
           <b-nav-item>
             <div class="dropdown">
-              <button
+              <router-link to="/catalog">
+                <button
+                  class="dropbtn link m-2">WOMEN</button>
+              </router-link>
+              <!--<button
                 @mouseover="showWomenTab"
-                class="dropbtn link m-2">WOMEN</button>
-              </div>
+                class="dropbtn link m-2">WOMEN</button>-->
+            </div>
           </b-nav-item>
           <b-nav-item>
             <div class="dropdown">
-              <button
-                @mouseover="showMenTab"
+              <router-link to="/catalog">
+                <button
                 class="dropbtn link m-2">MEN</button>
-              </div>
+              </router-link>
+              <!--<button
+                @mouseover="showMenTab"
+                class="dropbtn link m-2">MEN</button>-->
+            </div>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/createOutfit" class="link ml-2">
+            <router-link to="/adviser" class="link ml-2">
               <div class="dropdown">
                 <button class="dropbtn link m-2">CREATE OUTFIT</button>
               </div>
@@ -50,7 +58,7 @@
             </router-link>
           </b-nav-item>
           <b-nav-item title="go to sign in page">
-            <router-link to="/login" class="nav-right ml-2">
+            <router-link to="/signin" class="nav-right ml-2">
               <unicon name="user" fill="#2B1E02"></unicon>
               <span class="ml-2">My Account</span>
             </router-link>
@@ -127,7 +135,7 @@
 export default {
   name: 'HomeNavBar',
   methods: {
-    showWomenTab() {
+    /*showWomenTab() {
       document.getElementById('womenTab').style.display = 'none';
       document.getElementById('menTab').style.display = 'none';
       document.getElementById('womenTab').style.display = 'flex';
@@ -140,14 +148,22 @@ export default {
     hideTabs() {
       document.getElementById('womenTab').style.display = 'none';
       document.getElementById('menTab').style.display = 'none';
-    },
+    },*/
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.animate-top{
+.top-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.animate-top {
   position:relative;
   animation:animatetop 0.3s
 }
@@ -190,7 +206,7 @@ export default {
   background-color: white;
   width: 100vw;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   padding-top: 20px;
   padding-left: 400px;
   padding-right: 20px;
