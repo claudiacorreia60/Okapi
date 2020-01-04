@@ -1,0 +1,12 @@
+version: '0.1'
+services:
+  proxy:
+    build: ./proxy/proxy
+    ports:
+    - "3334:3334"
+    links:
+    - catalog 
+
+  catalog:
+    build: ../OkapiCatalog/catalog_management_service
+
