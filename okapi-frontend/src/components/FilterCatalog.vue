@@ -9,6 +9,7 @@
         <b-form-radio-group
           v-model="sort_by"
           :options="sort_options"
+          class="filter-options"
         ></b-form-radio-group>
       </b-form-group>
     </b-row>
@@ -33,13 +34,13 @@
         <b-collapse
         id="collapse-type"
         v-model="type_visible">
-          <b-form-group>
-            <p>CLOTHING</p>
+          <b-form-group style="margin-top: 15px;">
             <b-form-checkbox
               v-model="all_clothing"
               aria-describedby="clothing"
               aria-controls="clothing"
               @change="toggleAllClothing"
+              class="filter-options"
             >
               All clothing
             </b-form-checkbox>
@@ -48,6 +49,7 @@
               v-model="clothing_types"
               :options="clothing_type_options"
               name="clothing"
+              class="filter-options"
               stacked
             ></b-form-checkbox-group>
           </b-form-group>
@@ -79,6 +81,7 @@
               aria-describedby="brands"
               aria-controls="brands"
               @change="toggleAllBrands"
+              class="filter-options"
             >
               All brands
             </b-form-checkbox>
@@ -87,6 +90,7 @@
               v-model="brands"
               :options="brand_options"
               name="brands"
+              class="filter-options"
               stacked
             ></b-form-checkbox-group>
           </b-form-group>
@@ -118,6 +122,7 @@
                 aria-describedby="colors"
                 aria-controls="colors"
                 @change="toggleAllColors"
+                class="filter-options"
               >
                 All colors
             </b-form-checkbox>
@@ -126,6 +131,7 @@
               v-model="colors"
               :options="color_options"
               name="colors"
+              class="filter-options"
               stacked
             ></b-form-checkbox-group>
           </b-form-group>
@@ -336,6 +342,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.filter-options {
+  font-size: 15px;
+}
+
 .checkbox-margin {
   margin-left: 10px;
 }

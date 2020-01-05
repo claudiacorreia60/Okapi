@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .card {
   border: none;
 }
@@ -68,7 +67,7 @@ a {
 }
 
 .details {
-  color: #6D3C1D;
+  color: #999999;
   margin-top: 10px;
   text-align: center;
   margin-bottom: 14px;
