@@ -116,6 +116,7 @@ export default {
       // Chamada a API
 
       this.clickedDislike[id] = false;
+      this.$forceUpdate();
     },
     clickDislikeBlue(e, id) {
       e.preventDefault();
@@ -123,6 +124,7 @@ export default {
       // Chamada a API
 
       this.clickedLike[id] = false;
+      this.$forceUpdate();
     },
   },
 };
