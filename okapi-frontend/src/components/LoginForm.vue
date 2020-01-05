@@ -66,7 +66,7 @@
 
           <!-- Buttons -->
           <div>
-            <b-button class="signin-button" type="submit">Sign in</b-button>
+            <b-button @click="$router.push('catalog/man')" class="signin-button" type="submit">Sign in</b-button>
           </div>
         </b-form>
 
@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      alert(JSON.stringify(this.form));
+      //alert(JSON.stringify(this.form));
     },
   },
 };

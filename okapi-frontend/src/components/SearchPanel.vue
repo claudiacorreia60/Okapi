@@ -32,8 +32,7 @@ export default {
 
           const words = this.search.split(" ");
           const gender = this.getGender(words);
-          this.search = words.filter(x => x != "man" || x != "woman").concat()[0];
-          console.log(this.search);
+          this.search = words.filter(x => x != "man" || x != "woman").join(' ');
 
           if (colors.indexOf(this.search.toLowerCase()) >= 0){
             this.$router.push("catalog/" + gender + "?color="+this.search);
