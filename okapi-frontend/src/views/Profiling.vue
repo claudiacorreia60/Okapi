@@ -96,7 +96,7 @@ export default {
         }
     })
     .then(r => r.json())
-    .then(r => this.items = this.items.concat(r.slice(0,6)))
+    .then(r => { this.items = this.items.concat(r.slice(0,6)); this.$forceUpdate(); })
     .catch(err => console.log(err));
 
     this.clickedLike = cloths.cloths.reduce((acc, cur) => {
