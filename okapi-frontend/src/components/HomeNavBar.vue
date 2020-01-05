@@ -16,28 +16,28 @@
             <div class="dropdown">
               <router-link to="/catalog/woman">
                 <button
-                  class="dropbtn link m-2">WOMEN</button>
+                  class="dropbtn m-2">WOMEN</button>
               </router-link>
               <!--<button
                 @mouseover="showWomenTab"
-                class="dropbtn link m-2">WOMEN</button>-->
+                class="dropbtn m-2">WOMEN</button>-->
             </div>
           </b-nav-item>
           <b-nav-item>
             <div class="dropdown">
               <router-link to="/catalog/man">
                 <button
-                class="dropbtn link m-2">MEN</button>
+                class="dropbtn m-2">MEN</button>
               </router-link>
               <!--<button
                 @mouseover="showMenTab"
-                class="dropbtn link m-2">MEN</button>-->
+                class="dropbtn m-2">MEN</button>-->
             </div>
           </b-nav-item>
           <b-nav-item>
             <router-link to="/adviser" class="link ml-2">
               <div class="dropdown">
-                <button class="dropbtn link m-2">CREATE OUTFIT</button>
+                <button class="dropbtn m-2">ADVISER</button>
               </div>
             </router-link>
           </b-nav-item>
@@ -189,8 +189,9 @@ export default {
   background-color: white;
   color: white;
   padding: 16px;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
+  color: #2B1E02;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -241,22 +242,17 @@ export default {
 }
 
 .logo-image {
-  width: 150px;
-  height: 70px;
+  width: 130px;
+  height: 50px;
 }
 
 .white-background {
   background-color: #ffffff;
 }
 
-.link {
-  color: #2B1E02;
-  font-size: 17px;
-}
-
 .nav-right {
   color: #2B1E02;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .nav-right:hover {

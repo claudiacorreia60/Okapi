@@ -14,11 +14,15 @@ import {
   uniTimes,
   uniThumbsUp,
   uniThumbsDown,
-  uniLock,
-  uniUnlock,
+  uniUnlockAlt,
+  uniLockAlt,
   uniSync,
   uniAngleRight,
   uniAngleDown,
+  uniAngleDoubleLeft,
+  uniAngleDoubleRight,
+  uniQuestionCircle,
+  uniTrashAlt,
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -40,11 +44,15 @@ Unicon.add([
   uniTimes,
   uniThumbsUp,
   uniThumbsDown,
-  uniLock,
-  uniUnlock,
+  uniUnlockAlt,
+  uniLockAlt,
   uniSync,
   uniAngleRight,
   uniAngleDown,
+  uniAngleDoubleLeft,
+  uniAngleDoubleRight,
+  uniQuestionCircle,
+  uniTrashAlt,
 ]);
 Vue.use(Unicon);
 
