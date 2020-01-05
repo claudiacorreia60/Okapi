@@ -96,7 +96,7 @@
 
           <!-- Buttons -->
           <div>
-            <b-button class="signin-button" type="submit">Sign up</b-button>
+            <b-button @click="$router.push('profiling')" class="signin-button" type="submit">Sign up</b-button>
           </div>
         </b-form>
 
@@ -133,7 +133,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      alert(JSON.stringify(this.form));
+      // alert(JSON.stringify(this.form));
     },
   },
 };

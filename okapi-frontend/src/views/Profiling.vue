@@ -3,7 +3,8 @@
     <b-row align-v="center" align-h="center">
         <h2> Tell us what's your style </h2>
         <b-card-group>
-        <b-col md="3" sm="6" align-self="center" v-for="item in items" v-bind:key="item.item_id">
+        <b-col md="2" sm="6" align-self="center" v-for="item in items"
+        v-bind:key="item.item_id">
                 <b-card
                     :img-src="item.photo"
                     img-top
@@ -36,7 +37,7 @@
         </b-card-group>
     </b-row>
     <b-row align-v="center" align-h="center" class="mt-2">
-        <b-button class="signin-button" type="submit">Proceed</b-button>
+        <b-button @click="$router.push('catalog/man')" class="signin-button" type="submit">Proceed</b-button>
     </b-row>
   </b-container>
 </template>
@@ -57,7 +58,46 @@ export default {
     };
   },
   mounted() {
-    this.items = cloths.cloths;
+
+    fetch("http://localhost:3333/catalog/man", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => this.items = r.slice(0,6))
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/catalog/man?color=Amarelo", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => this.items = this.items.concat(r.slice(0,6)))
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/catalog/man?color=Vermelho&type=calças e calçoes", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => this.items = this.items.concat(r.slice(0,6)))
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/catalog/man?color=Castanho&type=calçado", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => { this.items = this.items.concat(r.slice(0,6)); this.$forceUpdate(); })
+    .catch(err => console.log(err));
 
     this.clickedLike = cloths.cloths.reduce((acc, cur) => {
       acc[cur.item_id] = false;
@@ -76,6 +116,7 @@ export default {
       // Chamada a API
 
       this.clickedDislike[id] = false;
+      this.$forceUpdate();
     },
     clickDislikeBlue(e, id) {
       e.preventDefault();
@@ -83,6 +124,7 @@ export default {
       // Chamada a API
 
       this.clickedLike[id] = false;
+      this.$forceUpdate();
     },
   },
 };
