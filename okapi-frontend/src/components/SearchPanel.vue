@@ -34,9 +34,9 @@ export default {
           const gender = this.getGender(words);
           this.search = words.filter(x => x != "homem" && x != "mulher").join(' ');
           if (colors.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?perpage=18&color="+this.search);
+            this.$router.push("catalog/" + gender + "?perpage=18&color[]="+this.search);
           } else if (types.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?perpage=18&type="+this.search);
+            this.$router.push("catalog/" + gender + "?perpage=18&type[]="+this.search);
           } else {
             this.$router.push("catalog/man?perpage=18");
           }

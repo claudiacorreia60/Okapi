@@ -10,6 +10,7 @@
           v-model="sort_by"
           :options="sort_options"
           class="filter-options"
+          @change="sortEvent($event)"
         ></b-form-radio-group>
       </b-form-group>
     </b-row>
@@ -51,6 +52,7 @@
               name="clothing"
               class="filter-options"
               stacked
+              @change="typeEvent($event)"
             ></b-form-checkbox-group>
           </b-form-group>
         </b-collapse>
@@ -92,6 +94,7 @@
               name="brands"
               class="filter-options"
               stacked
+              @change="brandEvent($event)"
             ></b-form-checkbox-group>
           </b-form-group>
         </b-collapse>
@@ -133,6 +136,7 @@
               name="colors"
               class="filter-options"
               stacked
+              @change="colorEvent($event)"
             ></b-form-checkbox-group>
           </b-form-group>
         </b-collapse>
@@ -189,7 +193,7 @@ export default {
   props: ['title'],
   data() {
     return {
-      sort_by: 'price_low',
+      sort_by: '',
       price: [0, 200],
       sort_visible: false,
       type_visible: false,
@@ -197,46 +201,14 @@ export default {
       color_visible: false,
       price_visible: false,
       clothing_types: [
-        'Casacos',
-        'Fatos',
-        'Blazers',
-        'Calças e calçoes',
-        'Vestidos',
-        'Saias',
-        'Camisolas',
-        'Sweats',
-        'Camisas',
-        'Túnicas e tops',
-        'Calçado',
       ],
-      all_clothing: true,
+      all_clothing: false,
       brands: [
-        'Ana Sousa',
-        'Decenio',
-        'Lion of porches',
-        'Minga London',
       ],
-      all_brands: true,
+      all_brands: false,
       colors: [
-        'Azul',
-        'Castanho',
-        'Amarelo',
-        'Vermelho',
-        'Verde',
-        'Bordeaux',
-        'Rosa',
-        'Beje',
-        'Branco',
-        'Cinza',
-        'Telha',
-        'Camel',
-        'Preto',
-        'Salmão',
-        'Laranja',
-        'Pessego',
-        'Kaki',
       ],
-      all_colors: true,
+      all_colors: false,
       sort_options: [
         { text: 'Price low to high', value: 'price_low' },
         { text: 'Price high to low', value: 'price_high' },
@@ -263,7 +235,7 @@ export default {
       brand_options: [
         'Ana Sousa',
         'Decenio',
-        'Lion of porches',
+        'Lion of Porches',
         'Minga London',
       ],
       clothing_type_options: [
@@ -282,17 +254,29 @@ export default {
     };
   },
   methods: {
+    sortEvent(event) {
+        this.$root.$emit('filter-price', event);
+    },
+    typeEvent(event) {
+        this.$root.$emit('filter-type', event);
+    },
+    colorEvent(event) {
+        this.$root.$emit('filter-color', event);
+    },
+    brandEvent(event) {
+        this.$root.$emit('filter-brand', event);
+    },
     toggleAllClothing(checked) {
       this.clothing_types = checked ? this.clothing_type_options.slice() : []
-    },
-    toggleAllShoes(checked) {
-      this.shoes_types = checked ? this.shoes_type_options.slice() : []
+      this.$root.$emit('filter-type', this.clothing_types);
     },
     toggleAllColors(checked) {
       this.colors = checked ? this.color_options.slice() : []
+      this.$root.$emit('filter-color', this.colors);
     },
     toggleAllBrands(checked) {
       this.brands = checked ? this.brand_options.slice() : []
+      this.$root.$emit('filter-brand', this.brands);
     },
   },
   watch: {

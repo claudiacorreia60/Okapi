@@ -60,31 +60,107 @@ export default {
       id_item: 0,
       page: 1,
       clothes: [],
+      old_clothes: [],
       is_next: true,
+      sort: '',
+      types: [
+        'Casacos',
+        'Fatos',
+        'Blazers',
+        'Calças e calçoes',
+        'Vestidos',
+        'Saias',
+        'Camisolas',
+        'Sweats',
+        'Camisas',
+        'Túnicas e tops',
+        'Calçado',
+      ],
+      brands: [
+        'Ana Sousa',
+        'Decenio',
+        'Lion of Porches',
+        'Minga London',
+      ],
+      colors: [
+        'Azul',
+        'Castanho',
+        'Amarelo',
+        'Vermelho',
+        'Verde',
+        'Bordeaux',
+        'Rosa',
+        'Beje',
+        'Branco',
+        'Cinza',
+        'Telha',
+        'Camel',
+        'Preto',
+        'Salmão',
+        'Laranja',
+        'Pessego',
+        'Kaki',
+      ],
     };
   },
   mounted() {
-    let query = "";
-    if (!this.isEmpty(this.$route.query)) {
-      query = this.toString(this.$route.query, this.page);
-    } else {
-      query = "?page=" + this.page + '&perpage=18';
-    }
-    fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+    this.$root.$on('filter-price', a => {
+        if (a == "price_low") {
+            this.sort = 'asc';
+            this.fetchClothes();
         }
-    })
-    .then(r => r.json())
-    .then(r => {this.clothes = r;
-                this.checkNext();
-                this.$forceUpdate();
-                this.scrollToTop();
-                })
-    .catch(err => console.log(err));
+        if (a == "price_high") {
+            this.sort = 'desc';
+            this.fetchClothes();
+        }
+        });
+    this.$root.$on('filter-type', a => {
+        this.types = a;
+        this.fetchClothes();
+        });
+    this.$root.$on('filter-brand', a => {
+        this.brands = a;
+        this.filter();
+        });
+    this.$root.$on('filter-color', a => {
+        this.colors = a;
+        this.fetchClothes();
+        });
+
+    this.fetchClothes();
+
   },
   methods: {
+    fetchClothes() {
+        let query = "";
+
+        query = this.toString(this.$route.query, this.page);
+
+        fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            }
+        })
+        .then(r => r.json())
+        .then(r => {this.clothes = r;
+                    this.old_clothes = r;
+                    this.filter();
+                    this.checkNext();
+                    this.$forceUpdate();
+                    this.scrollToTop();
+                    })
+        .catch(err => console.log(err));
+    },
+    filter() {
+        this.clothes = this.old_clothes.filter(x => {
+            if (this.brands.length > 0) {
+                return this.brands.includes(x.brand.name);
+            } else {
+                return true;
+            }
+        });
+    },
     scrollToTop() {
         window.scrollTo(0,0);
     },
@@ -97,19 +173,20 @@ export default {
     },
     toString(obj, n_page) {
         let r = "?page=" + n_page + '&perpage=18&';
+        if (this.sort.length > 0) r = r + "sort=" + this.sort + "&";
         for(var key in obj) {
             if(obj.hasOwnProperty(key))
-               r = r + key + "=" + obj[key] + "&" 
+               r = r + key + "[]=" + obj[key] + "&" 
         }
+        for(var i in this.types)
+            r = r + "type[]=" + this.types[i] + "&"
+        for(var i in this.colors)
+            r = r + "color[]=" + this.colors[i] + "&"
         return r;
     },
     checkNext() {
       let query = "";
-      if (!this.isEmpty(this.$route.query)) {
-        query = this.toString(this.$route.query, (this.page + 1));
-      } else {
-        query = "?page=" + (this.page + 1) + '&perpage=18';
-      }
+      query = this.toString(this.$route.query, (this.page + 1));
       fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
           headers: {
             'Content-Type': 'application/json',
@@ -129,34 +206,14 @@ export default {
     nextPage() {
       this.page = this.page + 1;
 
-      let query = "";
-      if (!this.isEmpty(this.$route.query)) {
-        query = this.toString(this.$route.query, this.page);
-      } else {
-        query = "?page=" + this.page + '&perpage=18';
-      }
-      fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
-      })
-      .then(r => r.json())
-      .then(r => {this.clothes = r;
-                  this.checkNext();
-                  this.$forceUpdate();
-                  this.scrollToTop();})
-      .catch(err => console.log(err));
+      this.fetchClothes();
     },
     previousPage() {
       this.page = this.page - 1;
 
       let query = "";
-      if (!this.isEmpty(this.$route.query)) {
-        query = this.toString(this.$route.query, this.page);
-      } else {
-        query = "?page=" + this.page + '&perpage=18';
-      }
+      query = this.toString(this.$route.query, this.page);
+
       fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
           headers: {
             'Content-Type': 'application/json',
@@ -165,6 +222,8 @@ export default {
       })
       .then(r => r.json())
       .then(r => {this.clothes = r;
+                  this.old_clothes = r;
+                  this.filter();
                   this.checkNext();
                   this.$forceUpdate();
                   this.scrollToTop();})
