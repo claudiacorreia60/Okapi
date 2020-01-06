@@ -36,7 +36,7 @@ class UserController {
         if (user) {
             response.status(200).json(user)
         } else {
-            response.status(404).json({status:404, error:"User not found.", id})
+            response.status(404).json({status:404, message:"User not found.", id})
         }
 
     }
@@ -58,7 +58,8 @@ class UserController {
 
         } else {
             response.status(404).json({
-                message: "User not found."
+                message: "User not found.",
+                id
             })
         }
     }
@@ -76,7 +77,8 @@ class UserController {
 
         } else {
             response.status(404).json({
-                message: "User not found."
+                message: "User not found.",
+                id
             })
         }
     

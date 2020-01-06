@@ -19,7 +19,7 @@ class BodyMeasurement extends Model {
    * Indicates the primary key
    */
   static get primaryKey () {
-    return 'id'
+    return 'user_id'
   }
 
 /**
