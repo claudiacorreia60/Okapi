@@ -4,7 +4,6 @@ import requests
 import json
 import os
 import cv2
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 
 from data.definitions import Outfit, ClothList
