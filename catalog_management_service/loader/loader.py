@@ -11,6 +11,7 @@ db_config = config['Database']
 # Connect to db
 mydb = mysql.connector.connect(
   host=db_config['host'],
+  port=db_config['port'],
   user=db_config['user'],
   passwd=db_config['password'],
   database=db_config['database']
@@ -148,6 +149,14 @@ print(db_types)
 db_brands = getBrands()
 print(db_brands)
 
+# Load item to adviser database 
+def load_to_mongo(item):
+    # id 
+    # body_part
+    # gender
+    # img_url
+    pass
+
 # Load item to database
 def load_item(item):
     mycursor = mydb.cursor()
@@ -169,6 +178,8 @@ def load_item(item):
     mydb.commit()
 
     mycursor.close()
+
+    load_to_mongo(item)
 
 # Start parsing
 root = etree.parse("./feed.xml")

@@ -10,7 +10,7 @@ class ClosetController {
 
                         var promises = []
 
-                        res.data.data.forEach(async item => {
+                        res.data.forEach(async item => {
         
                             promises.push(axios.get(`${Env.get('CATALOG_MS')}/catalog/${item.item_id}`))
                         });
@@ -23,11 +23,9 @@ class ClosetController {
                                     return response.json(data_final)
                                })
 
-                        return response.json(res.data)
-
                     })
                     .catch(err => {
-
+                        console.log(err)
                         let status = err.response.status
                         let data = err.response.data
 

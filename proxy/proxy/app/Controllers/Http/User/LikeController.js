@@ -10,7 +10,7 @@ class LikeController {
 
                         var promises = []
 
-                        res.data.data.forEach(async item => {
+                        res.data.forEach(async item => {
         
                             promises.push(axios.get(`${Env.get('CATALOG_MS')}/catalog/${item.item_id}`))
                         });
@@ -25,7 +25,7 @@ class LikeController {
 
                     })
                     .catch(err => {
-                        
+                        console.log(err)
                         let status = err.response.status
                         let data = err.response.data
 

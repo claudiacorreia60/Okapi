@@ -8,13 +8,30 @@ services:
     - catalog 
     - virtual_closet
     - users
+    - adviser
 
   catalog:
-    build: ../OkapiCatalog/catalog_management_service
+    build: ./catalog_management_service
+    links:
+    - mysql 
 
   virtual_closet:
-    build: ../OkapiVirtualCloset/virtual_closet_management_service
+    build: ./virtual_closet_management_service
+    links:
+    - mysql 
 
   users: 
-    build: ../OkapiUsers/user_management_service
+    build: ./user_management_service
+    links:
+    - mysql 
 
+  adviser:
+    build: ./adviser-service/classifier
+    ports: 
+    - "3335:3335"
+
+  mysql: 
+    build: ./databases/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports: 
+      - "3301:3306"
