@@ -81,6 +81,7 @@ def clean_category (category):
 def clean_title(title):
     title = re.sub(r'\d+$', '', title) # Remove sizes Numbers
     title = re.sub(r'(L|XL|XXL|3XL|S|M|XS|XXS)$', '', title) # remove sizes Letters
+    title = re.sub('\'','′',title) # Substitui apostrofos por plicas
     return title
 
 def write_to_csv(file, obj):
