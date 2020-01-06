@@ -155,6 +155,7 @@ def load_item(item):
     color = db_colors.get(item['color'], -1)
     type = db_types.get(item['category'], -1)
 
+    title = item['title']
     price = item['price']
     gender = item['gender']
     description = item['description']
@@ -163,7 +164,7 @@ def load_item(item):
     composition = item['composition']
 
     if color != -1 and type != -1:
-        sql = f"INSERT INTO item VALUES (NULL, 1, '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
+        sql = f"INSERT INTO item VALUES (NULL, 1, '{title}', '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
         mycursor.execute(sql)
 
     mydb.commit()
