@@ -140,6 +140,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+span {
+  color: #999999;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
 .small-logo-image {
   width: 170px;
   height: 170px;

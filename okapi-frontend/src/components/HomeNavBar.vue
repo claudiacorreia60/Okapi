@@ -14,10 +14,9 @@
         <b-navbar-nav class="ml-auto mr-auto">
           <b-nav-item>
             <div class="dropdown">
-              <router-link to="/catalog/woman">
                 <button
+                  @click="goToWoman()"
                   class="dropbtn m-2">WOMEN</button>
-              </router-link>
               <!--<button
                 @mouseover="showWomenTab"
                 class="dropbtn m-2">WOMEN</button>-->
@@ -25,10 +24,9 @@
           </b-nav-item>
           <b-nav-item>
             <div class="dropdown">
-              <router-link to="/catalog/man">
                 <button
+                @click="goToMan()"
                 class="dropbtn m-2">MEN</button>
-              </router-link>
               <!--<button
                 @mouseover="showMenTab"
                 class="dropbtn m-2">MEN</button>-->
@@ -135,6 +133,15 @@
 export default {
   name: 'HomeNavBar',
   methods: {
+    goToMan() {
+        window.location='http://localhost:8080/catalog/man'
+    },
+    goToWoman() {
+        window.location='http://localhost:8080/catalog/woman'
+    },
+    goToVirtualCloset() {
+        window.location='http://localhost:8080/virtualCloset'
+    },
     /*showWomenTab() {
       document.getElementById('womenTab').style.display = 'none';
       document.getElementById('menTab').style.display = 'none';

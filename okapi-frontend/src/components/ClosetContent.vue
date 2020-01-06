@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-card-group>
       <b-col md="4" sm="6" align-self="center" v-for="item in clothes" v-bind:key="item.item_id">
-        <a :href="item.url">
+        <a @click="seeDetails(item)">
           <b-card
               :img-src="item.photo"
               img-top
@@ -43,6 +43,11 @@ export default {
   computed: {
     productsOrdered: function() {
       
+    },
+  },
+  methods: {
+    seeDetails(item){
+      this.$router.push({name: "details", params: {item: item}})
     },
   }
 };
