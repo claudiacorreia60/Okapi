@@ -139,7 +139,7 @@
                 <div
                   class="body-part mb-3"
                   align-h="center">
-                  COVER
+                  COAT
                 </div>
                 <div
                   v-if="closet_items_coat.length == 0"
@@ -179,7 +179,7 @@
               <div
                 class="body-part mb-3"
                 align-h="center">
-                LOWER BODDY
+                BOTTOM
               </div>
               <div
                 v-if="closet_items_lower.length == 0"
@@ -219,7 +219,7 @@
               <div
                 class="body-part mb-3"
                 align-h="center">
-                FEET
+                SHOES
               </div>
               <div
                 v-if="closet_items_shoes.length == 0"
@@ -275,7 +275,7 @@
               >
                 <b-row align-h="center" align-v="center" class="advise-card">
                   <div class="body-part mb-3">UPPER BODY</div>
-                  <a :href="adviser_upper[0].url">
+                  <a @click="seeDetails(item)">
                   <b-card
                     :img-src="adviser_upper[0].photo"
                     img-top
@@ -324,7 +324,7 @@
                   :id="adviser_coat[0].item_id"
               >
                 <b-row align-h="center" align-v="center" class="advise-card">
-                  <div class="body-part mb-3">COVER</div>
+                  <div class="body-part mb-3">COAT</div>
                   <a :href="adviser_coat[0].url">
                   <b-card
                     :img-src="adviser_coat[0].photo"
@@ -374,7 +374,7 @@
               :id="adviser_lower[0].item_id"
             >
               <b-row align-h="center" align-v="center" class="advise-card">
-                <div class="body-part mb-3">LOWER BODDY</div>
+                <div class="body-part mb-3">BOTTOM</div>
                 <a :href="adviser_lower[0].url">
                   <b-card
                     :img-src="adviser_lower[0].photo"
@@ -515,7 +515,7 @@
               :alt="item.reference"
               class="mb-2 no-border closet-item">
               <div class="description">
-                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
             </b-card>
           </b-col>
@@ -529,7 +529,7 @@
     <b-modal
       ref="coat-modal"
       hide-footer
-      title="Virtual Closet - Cover items"
+      title="Virtual Closet - Coats"
       size="xl">
       <b-container fluid>
         <b-card-group>
@@ -550,7 +550,7 @@
               :alt="item.reference"
               class="mb-2 no-border closet-item">
               <div class="description">
-                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
             </b-card>
           </b-col>
@@ -564,7 +564,7 @@
     <b-modal
       ref="lower-modal"
       hide-footer
-      title="Virtual Closet - Lower items"
+      title="Virtual Closet - Bottom items"
       size="xl">
       <b-container fluid>
         <b-card-group>
@@ -585,7 +585,7 @@
               :alt="item.reference"
               class="mb-2 no-border closet-item">
               <div class="description">
-                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
             </b-card>
           </b-col>
@@ -599,7 +599,7 @@
     <b-modal
       ref="shoes-modal"
       hide-footer
-      title="Virtual Closet - Feet items"
+      title="Virtual Closet - Shoes"
       size="xl">
       <b-container fluid>
         <b-card-group>
@@ -620,7 +620,7 @@
               :alt="item.reference"
               class="mb-2 no-border closet-item">
               <div class="description">
-                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
             </b-card>
           </b-col>
@@ -815,6 +815,9 @@ export default {
           if (!this.lock_shoes) {
             this.refresh("shoes");
           }
+      },
+      seeDetails(item){
+        this.$router.push({name: "details", params: {item: item}})
       }
   },
 };

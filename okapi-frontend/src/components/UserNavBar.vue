@@ -40,11 +40,12 @@
             </router-link>
           </b-nav-item>
           <b-nav-item>
-            <router-link to="/virtualCloset" class="link ml-2">
-              <div class="dropdown">
-                <button class="dropbtn m-2">VIRTUAL CLOSET</button>
-              </div>
-            </router-link>
+            <div class="dropdown">
+              <button
+              class="dropbtn m-2"
+              @click="goToVirtualCloset()"
+              >VIRTUAL CLOSET</button>
+            </div>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -149,6 +150,9 @@ export default {
       },
       goToWoman() {
           window.location='http://localhost:8080/catalog/woman'
+      },
+      goToVirtualCloset() {
+          window.location='http://localhost:8080/virtualCloset'
       },
     /*showWomenTab() {
       document.getElementById('womenTab').style.display = 'none';

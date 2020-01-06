@@ -1,15 +1,13 @@
 <template>
   <b-container>
-    <b-row class="mt-5">
-      <b-col>
-        <b-form-input
-          v-model="search"
-          placeholder="Search for inspiration"
-          class="search-bar"
-          @keydown.enter.native="searchCatalog()"
-          >
-        </b-form-input>
-      </b-col>
+    <b-row align-h="center" align-v="center" class="margin">
+      <b-form-input
+        v-model="search"
+        placeholder="Search for inspiration"
+        class="search-bar"
+        @keydown.enter.native="searchCatalog()"
+        >
+      </b-form-input>
     </b-row>
   </b-container>
 </template>
@@ -52,6 +50,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.margin {
+  margin-top: 20%;
+}
+
 .search-bar {
   background: url('../assets/search.svg') no-repeat scroll 10px 11px;
   background-size: 30px;
@@ -69,7 +71,7 @@ export default {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #999999;
+  color: #cecece;
   font-size: 30px;
 }
 </style>

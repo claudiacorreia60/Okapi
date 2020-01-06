@@ -23,6 +23,10 @@ import {
   uniAngleDoubleRight,
   uniQuestionCircle,
   uniTrashAlt,
+  uniUserCircle,
+  uniHeart,
+  uniBookmark,
+  uniTagAlt,
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -53,6 +57,10 @@ Unicon.add([
   uniAngleDoubleRight,
   uniQuestionCircle,
   uniTrashAlt,
+  uniUserCircle,
+  uniHeart,
+  uniBookmark,
+  uniTagAlt,
 ]);
 Vue.use(Unicon);
 
