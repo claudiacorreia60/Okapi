@@ -7,7 +7,7 @@
           <FilterCatalog title="VIRTUAL CLOSET"/>
         </b-col>
         <b-col cols="10">
-          <CatalogContent :clothes="man_clothes"/> 
+          <ClosetContent :clothes="man_clothes"/> 
         </b-col>
     </b-row>
   </b-container>
@@ -15,14 +15,14 @@
 
 <script>
 // @ is an alias to /src
-import CatalogContent from '@/components/CatalogContent.vue';
+import ClosetContent from '@/components/ClosetContent.vue';
 import FilterCatalog from '@/components/FilterCatalog.vue';
 
 export default {
   name: 'catalog',
   props: ['gender', 'type', 'color'],
   components: {
-    CatalogContent,
+    ClosetContent,
     FilterCatalog,
   },
   data() {

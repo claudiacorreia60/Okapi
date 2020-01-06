@@ -7,7 +7,7 @@
           <FilterCatalog :title="this.$route.params.gender.toUpperCase() + '\'S CATALOG'"/>
         </b-col>
         <b-col cols="10">
-          <CatalogContent :clothes="man_clothes"/> 
+          <CatalogContent/> 
         </b-col>
     </b-row>
   </b-container>
@@ -27,38 +27,9 @@ export default {
   },
   data() {
       return {
-        man_clothes: [],
       }
   },
   mounted() {
-    function isEmpty(obj) {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-                return false;
-        }
-        return true;
-    }
-
-    function toString(obj) {
-        let r = "?"
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-               r = r + key + "=" + obj[key] + "&" 
-        }
-        return r;
-    }
-
-    let query = "";
-    if (!isEmpty(this.$route.query)) query = toString(this.$route.query);
-    fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
-    })
-    .then(r => r.json())
-    .then(r => {this.man_clothes = r; this.$forceUpdate()})
-    .catch(err => console.log(err));
   },
 };
 </script>

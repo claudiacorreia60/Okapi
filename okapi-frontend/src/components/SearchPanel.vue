@@ -28,23 +28,22 @@ export default {
           'rosa', 'beje', 'branco', 'cinza', 'telha', 'camel', 'preto', 'salmão',
           'laranja', 'pessego', 'kaki'];
           const types = ['casacos', 'fatos', 'blazers', 'calças e calçoes', 'vestidos',
-          'saias', 'camisolas', 'sweats', 'camisas', 'Túnicas e tops', 'calçado'];
+          'saias', 'camisolas', 'sweats', 'camisas', 'túnicas e tops', 'calçado'];
 
           const words = this.search.split(" ");
           const gender = this.getGender(words);
-          this.search = words.filter(x => x != "man" || x != "woman").join(' ');
-
+          this.search = words.filter(x => x != "homem" && x != "mulher").join(' ');
           if (colors.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?color="+this.search);
+            this.$router.push("catalog/" + gender + "?perpage=18&color="+this.search);
           } else if (types.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?type="+this.search);
+            this.$router.push("catalog/" + gender + "?perpage=18&type="+this.search);
           } else {
-            this.$router.push("catalog/man");
+            this.$router.push("catalog/man?perpage=18");
           }
       },
       getGender(words) {
           let r = "man";
-          if (words.filter(x => x == "woman").length > 0) r = "woman";
+          if (words.filter(x => x == "mulher").length > 0) r = "woman";
           return r;
       }
   }
