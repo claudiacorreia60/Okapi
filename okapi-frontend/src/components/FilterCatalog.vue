@@ -193,7 +193,7 @@ export default {
   props: ['title'],
   data() {
     return {
-      sort_by: '',
+      sort_by: 'price_low',
       price: [0, 200],
       sort_visible: false,
       type_visible: false,
