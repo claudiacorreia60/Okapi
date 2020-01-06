@@ -6,7 +6,8 @@ class ItemController {
     async indexMan({request, response}) {
         const params = request.get()
 
-        const page = params.page 
+        const page = params.page ? params.page : 1
+        const perpage = params.perpage ? params.perpage : 20
 
         const items = await Item.query()
                                 .with('color')
@@ -20,7 +21,7 @@ class ItemController {
                                     params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'M')
-                                .forPage(page)
+                                .forPage(page, perpage)
                                 .fetch()
         
         return response.json( items )
@@ -28,7 +29,9 @@ class ItemController {
 
     async indexWoman({request, response}) {
         const params = request.get()
-        const page = params.page 
+
+        const page = params.page ? params.page : 1
+        const perpage = params.perpage ? params.perpage : 20
 
         const items = await Item.query()
                                 .with('color')
@@ -42,7 +45,7 @@ class ItemController {
                                     params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'W')
-                                .forPage(page)
+                                .forPage(page, perpage)
                                 .fetch()
         
         return response.json( items)
