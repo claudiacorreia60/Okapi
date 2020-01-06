@@ -82,6 +82,7 @@ def clean_category (category):
 def clean_title(title):
     title = re.sub(r'\d+$', '', title) # Remove sizes Numbers
     title = re.sub(r'(L|XL|XXL|3XL|S|M|XS|XXS)$', '', title) # remove sizes Letters
+    title = re.sub('\'','′',title) # Substitui apostrofos por plicas
     return title
 
 def write_to_csv(file, obj):
@@ -164,6 +165,7 @@ def load_item(item):
     color = db_colors.get(item['color'], -1)
     type = db_types.get(item['category'], -1)
 
+    title = item['title']
     price = item['price']
     gender = item['gender']
     description = item['description']
@@ -172,7 +174,7 @@ def load_item(item):
     composition = item['composition']
 
     if color != -1 and type != -1:
-        sql = f"INSERT INTO item VALUES (NULL, 1, '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
+        sql = f"INSERT INTO item VALUES (NULL, 1, '{title}', '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
         mycursor.execute(sql)
 
     mydb.commit()
