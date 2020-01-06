@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class="filter-tab">
     <div class="catalog-gender">
-      {{gender.toUpperCase()}}'S CATALOG
+      {{title}}
     </div>
     <div class="title">SORT BY</div>
     <b-row align-v="start" align-h="start" class="filter-first">
@@ -186,10 +186,10 @@ export default {
   components: {
     VueSlider
   },
+  props: ['title'],
   data() {
     return {
       sort_by: 'price_low',
-      gender: 'men',
       price: [0, 200],
       sort_visible: false,
       type_visible: false,

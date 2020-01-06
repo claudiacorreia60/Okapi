@@ -1,490 +1,636 @@
 <template>
-  <b-container fluid>
-    <b-tabs v-model="step" justified>
-      <!--<b-tab active>
-        <template v-slot:title>
-          <h4>1. Add some filters</h4>
-        </template>
-          <h3>TYPE</h3>
-          <p>
-            <span class="box"><b-button variant="outline-secondary">T-Shirt</b-button></span>
-            <span class="box"><b-button variant="outline-secondary">Trousers</b-button></span>
-            <span class="box"><b-button variant="outline-secondary">Coats</b-button></span>
-          </p>
+  <div>
+    <b-container fluid>
+      <b-tabs v-model="step" justified>
+        <!--<b-tab active>
+          <template v-slot:title>
+            <h4>1. Add some filters</h4>
+          </template>
+            <h3>TYPE</h3>
+            <p>
+              <span class="box"><b-button variant="outline-secondary">T-Shirt</b-button></span>
+              <span class="box"><b-button variant="outline-secondary">Trousers</b-button></span>
+              <span class="box"><b-button variant="outline-secondary">Coats</b-button></span>
+            </p>
 
-          <h3>OCCASION</h3>
-          <p>
-            <span class="box"><b-button variant="outline-secondary">Meetings</b-button></span>
-          </p>
-          <b-button @click="step=1">Next</b-button>
-      </b-tab>
-      <b-tab id="tab2" active>
-        <template v-slot:title>
-          ① 
-          <span style="padding-left: 10px;">Add clothes from your closet</span>
-        </template>
-        <b-row align-h="center" align-v="center">
-          <b-col cols="3">
-              <h3>UPPER BODDY</h3>
-          </b-col>
-          <b-col cols="9">
-            <b-row align-h="center" align-v="center">
-              <b-col class="closet" v-on:click="selectUpper(item.item_id, item)" v-for="item in closet_items_upper" v-bind:key="item.item_id">
-                  <b-card
-                      overlay
-                      :img-src="item.photo"
-                      img-top
-                      :alt="item.reference"
-                      class="mb-2"
-                      :id="item.item_id"
-                  >
-                  </b-card>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-        <b-row class="mt-5 mb-5" align-h="center" align-v="center">
-          <b-col cols="3">
-              <h3>LOWER BODDY</h3>
-          </b-col>
-          <b-col cols="9">
-            <b-row align-h="center" align-v="center">
-              <b-col class="closet" v-on:click="selectLower(item.item_id, item)" v-for="item in closet_items_lower" v-bind:key="item.item_id">
-                  <b-card
-                      overlay
-                      :img-src="item.photo"
-                      img-top
-                      :alt="item.reference"
-                      class="mb-2"
-                      :id="item.item_id"
-                  >
-                  </b-card>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-        <b-row align-h="center" align-v="center">
-          <b-col cols="3">
-              <h3>FEET</h3>
-          </b-col>
-          <b-col cols="9">
-            <b-row align-h="center" align-v="center">
-              <b-col class="closet" v-on:click="selectShoes(item.item_id, item)" v-for="item in closet_items_shoes" v-bind:key="item.item_id">
-                  <b-card
-                      overlay
-                      :img-src="item.photo"
-                      img-top
-                      :alt="item.reference"
-                      class="mb-2"
-                      :id="item.item_id"
-                  >
-                  </b-card>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-        <b-button @click="step=0">Back</b-button>
-        <b-button @click="step=2">Next</b-button>
-      </b-tab> -->
-      <b-tab id="tab2" active>
-        <template v-slot:title>
-          ① 
-          <span style="padding-left: 10px;">Add clothes from your closet</span>
-        </template>
-          <b-row align-h="center" align-v="center" class="elements">
+            <h3>OCCASION</h3>
+            <p>
+              <span class="box"><b-button variant="outline-secondary">Meetings</b-button></span>
+            </p>
+            <b-button @click="step=1">Next</b-button>
+        </b-tab>
+        <b-tab id="tab2" active>
+          <template v-slot:title>
+            ① 
+            <span style="padding-left: 10px;">Add clothes from your closet</span>
+          </template>
+          <b-row align-h="center" align-v="center">
+            <b-col cols="3">
+                <h3>UPPER BODDY</h3>
+            </b-col>
+            <b-col cols="9">
+              <b-row align-h="center" align-v="center">
+                <b-col class="closet" v-on:click="selectUpper(item.item_id, item)" v-for="item in closet_items_upper" v-bind:key="item.item_id">
+                    <b-card
+                        overlay
+                        :img-src="item.photo"
+                        img-top
+                        :alt="item.reference"
+                        class="mb-2"
+                        :id="item.item_id"
+                    >
+                    </b-card>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+          <b-row class="mt-5 mb-5" align-h="center" align-v="center">
+            <b-col cols="3">
+                <h3>LOWER BODDY</h3>
+            </b-col>
+            <b-col cols="9">
+              <b-row align-h="center" align-v="center">
+                <b-col class="closet" v-on:click="selectLower(item.item_id, item)" v-for="item in closet_items_lower" v-bind:key="item.item_id">
+                    <b-card
+                        overlay
+                        :img-src="item.photo"
+                        img-top
+                        :alt="item.reference"
+                        class="mb-2"
+                        :id="item.item_id"
+                    >
+                    </b-card>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+          <b-row align-h="center" align-v="center">
+            <b-col cols="3">
+                <h3>FEET</h3>
+            </b-col>
+            <b-col cols="9">
+              <b-row align-h="center" align-v="center">
+                <b-col class="closet" v-on:click="selectShoes(item.item_id, item)" v-for="item in closet_items_shoes" v-bind:key="item.item_id">
+                    <b-card
+                        overlay
+                        :img-src="item.photo"
+                        img-top
+                        :alt="item.reference"
+                        class="mb-2"
+                        :id="item.item_id"
+                    >
+                    </b-card>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+          <b-button @click="step=0">Back</b-button>
+          <b-button @click="step=2">Next</b-button>
+        </b-tab> -->
+        <b-tab id="tab2" active>
+          <template v-slot:title>
+            ① 
+            <span style="padding-left: 10px;">Add clothes from your closet</span>
+          </template>
+            <b-row align-h="center" align-v="center" class="elements">
+              <b-card
+                class="adviser separator advise-card"
+              >
+                <div
+                  class="body-part mb-3"
+                  align-h="center">
+                  UPPER BODY
+                </div>
+                <div
+                  v-if="closet_items_upper.length == 0"
+                  class="mt-5 mb-5 question">
+                  ?
+                </div>
+                <b-card
+                  v-else
+                  :img-src="closet_items_upper[0].photo"
+                  img-top
+                  :alt="closet_items_upper[0].reference"
+                  class="mb-2 no-border">
+                  <div class="description">
+                    {{closet_items_upper[0].brand.name.toUpperCase()}} - {{closet_items_upper[0].type.body_part}}
+                  </div>
+                </b-card>
+              <b-row align-h="center">
+                <div class="advise-button">
+                  <b-button
+                    @click="showModal('upper')"
+                    v-if="closet_items_upper.length == 0"
+                    class="mt-3 advise-btn">
+                    Select item
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="clear('upper')"
+                    class="mt-3 advise-btn">
+                    Clear
+                  </b-button>
+                </div>
+              </b-row>
+            </b-card>
+              <b-card
+                  class="adviser ml-5 separator advise-card"
+              >
+                <div
+                  class="body-part mb-3"
+                  align-h="center">
+                  COVER
+                </div>
+                <div
+                  v-if="closet_items_coat.length == 0"
+                  class="mt-5 mb-5 question">
+                  ?
+                </div>
+                <b-card
+                  v-else
+                  :img-src="closet_items_coat[0].photo"
+                  img-top
+                  :alt="closet_items_coat[0].reference"
+                  class="mb-2 no-border">
+                  <div class="description">
+                    {{closet_items_coat[0].brand.name.toUpperCase()}} - {{closet_items_coat[0].type.body_part}}
+                  </div>
+                </b-card>
+              <b-row align-h="center">
+                <div class="advise-button">
+                  <b-button
+                    @click="showModal('coat')"
+                    v-if="closet_items_coat.length == 0"
+                    class="mt-3 advise-btn">
+                    Select item
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="clear('coat')"
+                    class="mt-3 advise-btn">
+                    Clear
+                  </b-button>
+                </div>
+              </b-row>
+            </b-card>
             <b-card
-              class="adviser separator advise-card"
+              class="adviser ml-5 separator advise-card"
             >
               <div
                 class="body-part mb-3"
                 align-h="center">
-                UPPER BODY
+                LOWER BODDY
               </div>
               <div
-                v-if="closet_items_upper=[]"
+                v-if="closet_items_lower.length == 0"
                 class="mt-5 mb-5 question">
                 ?
               </div>
               <b-card
                 v-else
-                :img-src="closet_items_upper[0].photo"
+                :img-src="closet_items_lower[0].photo"
                 img-top
-                :alt="closet_items_upper[0].reference"
+                :alt="closet_items_lower[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_upper[0].brand.name.toUpperCase()}} - {{closet_items_upper[0].type.body_part}}
+                  {{closet_items_lower[0].brand.name.toUpperCase()}} - {{closet_items_lower[0].type.body_part}}
                 </div>
               </b-card>
-            <b-row align-h="center">
-              <div class="advise-button">
-                <b-button
-                  v-if="closet_items_upper=[]"
-                  class="mt-3 advise-btn">
-                  Select item
-                </b-button>
-                <b-button
-                  v-else
-                  @click="clear('coat')"
-                  class="mt-3 advise-btn">
-                  Clear
-                </b-button>
-              </div>
-            </b-row>
-          </b-card>
+              <b-row align-h="center">
+                <div class="advise-button">
+                  <b-button
+                    @click="showModal('lower')"
+                    v-if="closet_items_lower.length == 0"
+                    class="mt-3 advise-btn">
+                    Select item
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="clear('lower')"
+                    class="mt-3 advise-btn">
+                    Clear
+                  </b-button>
+                </div>
+              </b-row>
+            </b-card>
             <b-card
                 class="adviser ml-5 separator advise-card"
             >
               <div
                 class="body-part mb-3"
                 align-h="center">
-                COVER
+                FEET
               </div>
               <div
-                v-if="closet_items_coat=[]"
+                v-if="closet_items_shoes.length == 0"
                 class="mt-5 mb-5 question">
                 ?
               </div>
               <b-card
-                v-else
-                :img-src="closet_items_coat[0].photo"
+              v-else
+                :img-src="closet_items_shoes[0].photo"
                 img-top
-                :alt="closet_items_coat[0].reference"
+                :alt="closet_items_shoes[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_coat[0].brand.name.toUpperCase()}} - {{closet_items_coat[0].type.body_part}}
+                  {{closet_items_shoes[0].brand.name.toUpperCase()}} - {{closet_items_shoes[0].type.body_part}}
                 </div>
               </b-card>
-            <b-row align-h="center">
-              <div class="advise-button">
-                <b-button
-                  v-if="closet_items_coat=[]"
-                  class="mt-3 advise-btn">
-                  Select item
-                </b-button>
-                <b-button
-                  v-else
-                  @click="clear('coat')"
-                  class="mt-3 advise-btn">
-                  Clear
-                </b-button>
-              </div>
-            </b-row>
-          </b-card>
-          <b-card
-            class="adviser ml-5 separator advise-card"
-          >
-            <div
-              class="body-part mb-3"
-              align-h="center">
-              LOWER BODDY
-            </div>
-            <div
-              v-if="closet_items_lower=[]"
-              class="mt-5 mb-5 question">
-              ?
-            </div>
-            <b-card
-              v-else
-              :img-src="closet_items_lower[0].photo"
-              img-top
-              :alt="closet_items_lower[0].reference"
-              class="mb-2 no-border">
-              <div class="description">
-                {{closet_items_lower[0].brand.name.toUpperCase()}} - {{closet_items_lower[0].type.body_part}}
-              </div>
+              <b-row align-h="center">
+                <div class="advise-button">
+                  <b-button
+                    @click="showModal('shoes')"
+                    v-if="closet_items_shoes.length == 0"
+                    class="mt-3 advise-btn">
+                    Select item
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="clear('shoes')"
+                    class="mt-3 advise-btn">
+                    Clear
+                  </b-button>
+                </div>
+              </b-row>
             </b-card>
-            <b-row align-h="center">
-              <div class="advise-button">
-                <b-button
-                  v-if="closet_items_lower=[]"
-                  class="mt-3 advise-btn">
-                  Select item
-                </b-button>
-                <b-button
-                  v-else
-                  @click="clear('coat')"
-                  class="mt-3 advise-btn">
-                  Clear
-                </b-button>
-              </div>
-            </b-row>
-          </b-card>
-          <b-card
-              class="adviser ml-5 separator advise-card"
-          >
-            <div
-              class="body-part mb-3"
-              align-h="center">
-              FEET
-            </div>
-            <div
-              v-if="closet_items_shoes=[]"
-              class="mt-5 mb-5 question">
-              ?
-            </div>
-            <b-card
-            v-else
-              :img-src="closet_items_shoes[0].photo"
-              img-top
-              :alt="closet_items_shoes[0].reference"
-              class="mb-2 no-border">
-              <div class="description">
-                {{closet_items_shoes[0].brand.name.toUpperCase()}} - {{closet_items_shoes[0].type.body_part}}
-              </div>
-            </b-card>
-            <b-row align-h="center">
-              <div class="advise-button">
-                <b-button
-                  v-if="closet_items_shoes=[]"
-                  class="mt-3 advise-btn">
-                  Select item
-                </b-button>
-                <b-button
-                  v-else
-                  @click="clear('coat')"
-                  class="mt-3 advise-btn">
-                  Clear
-                </b-button>
-              </div>
-            </b-row>
-          </b-card>
-        </b-row>
-        <b-row class="buttons mt-5" align-h="end">
-          <div class="back-button">
-            <b-button @click="step=1">
-              Next
-              <unicon name="angle-double-right" class="back-icon" fill="#2B1E02"></unicon>
-            </b-button>
-          </div>
-        </b-row>
-      </b-tab>
-      <b-tab id="tab3" lazy>
-          <template v-slot:title>
-            ② 
-            <span style="padding-left: 10px;">Choose your outfit</span>
-          </template>
-          <b-row align-h="center" align-v="center" class="elements tab3">
-            <b-card
-              class="adviser separator"
-              :id="adviser_upper[0].item_id"
-            >
-              <b-row align-h="center" align-v="center" class="advise-card">
-                <div class="body-part mb-3">UPPER BODY</div>
-                <a :href="adviser_upper[0].url">
-                <b-card
-                  :img-src="adviser_upper[0].photo"
-                  img-top
-                  :alt="adviser_upper[0].reference"
-                  class="mb-2 no-border"
-                  @mouseover="hover = true; id_item = adviser_upper[0].item_id"
-                  @mouseleave="hover = false">
-                  <div class="details" v-if="hover & id_item === adviser_upper[0].item_id">SEE DETAILS</div>
-                  <div v-else>
-                    <div class="description">
-                      {{adviser_upper[0].brand.name.toUpperCase()}} - {{adviser_upper[0].type.body_part}}
-                    </div>
-                    <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
-                    <div v-else class="price">Price not defined</div>
-                  </div>
-                </b-card>
-              </a>
-              <b-row>
-                <b-button
-                  v-if="!lock_upper"
-                  @click="lock('upper')"
-                  id="upperb"
-                  class="mr-5 mt-3"
-                  title="lock item">
-                  <unicon name="unlock-alt" fill="#999999"></unicon>
-                </b-button>
-                <b-button
-                  v-else
-                  @click="lock('upper')"
-                  id="upperb"
-                  class="mr-5 mt-3"
-                  title="unlock item">
-                  <unicon name="lock-alt" fill="#2B1E02"></unicon>
-                </b-button>
-                <b-button
-                  @click="refresh('upper')"
-                  class="ml-5 mt-3"
-                  title="refresh item">
-                  <unicon name="sync" fill="#999999"></unicon>
-                </b-button>
-              </b-row>
-            </b-row>
-          </b-card>
-            <b-card
-                class="adviser ml-5 separator"
-                :id="adviser_coat[0].item_id"
-            >
-              <b-row align-h="center" align-v="center" class="advise-card">
-                <div class="body-part mb-3">COVER</div>
-                <a :href="adviser_coat[0].url">
-                <b-card
-                  :img-src="adviser_coat[0].photo"
-                  img-top
-                  :alt="adviser_coat[0].reference"
-                  class="mb-2 no-border"
-                  @mouseover="hover = true; id_item = adviser_coat[0].item_id"
-                  @mouseleave="hover = false">
-                  <div class="details" v-if="hover & id_item === adviser_coat[0].item_id">SEE DETAILS</div>
-                  <div v-else>
-                    <div class="description">
-                      {{adviser_coat[0].brand.name.toUpperCase()}} - {{adviser_coat[0].type.body_part}}
-                    </div>
-                    <div v-if="adviser_coat[0].price > 0" class="price">{{adviser_coat[0].price}}€</div>
-                    <div v-else class="price">Price not defined</div>
-                  </div>
-                </b-card>
-              </a>
-              <b-row>
-                <b-button
-                  v-if="!lock_coat"
-                  @click="lock('coat')"
-                  id="coatb"
-                  class="mr-5 mt-3"
-                  title="lock item">
-                  <unicon name="unlock-alt" fill="#999999"></unicon>
-                </b-button>
-                <b-button 
-                  v-else
-                  @click="lock('coat')"
-                  id="coatb"
-                  class="mr-5 mt-3"
-                  title="unlock item">
-                  <unicon name="lock-alt" fill="#2B1E02"></unicon>
-                </b-button>
-                <b-button
-                  @click="refresh('coat')"
-                  class="ml-5 mt-3"
-                  title="refresh item">
-                  <unicon name="sync" class="" fill="#999999"></unicon>
-                </b-button>
-              </b-row>
-            </b-row>
-          </b-card>
-          <b-card
-            class="adviser ml-5 separator"
-            :id="adviser_lower[0].item_id"
-          >
-            <b-row align-h="center" align-v="center" class="advise-card">
-              <div class="body-part mb-3">LOWER BODDY</div>
-              <a :href="adviser_lower[0].url">
-                <b-card
-                  :img-src="adviser_lower[0].photo"
-                  img-top
-                  :alt="adviser_lower[0].reference"
-                  class="mb-2 no-border"
-                  @mouseover="hover = true; id_item = adviser_lower[0].item_id"
-                  @mouseleave="hover = false">
-                  <div class="details" v-if="hover & id_item === adviser_lower[0].item_id">SEE DETAILS</div>
-                  <div v-else>
-                    <div class="description">
-                      {{adviser_lower[0].brand.name.toUpperCase()}} - {{adviser_lower[0].type.body_part}}
-                    </div>
-                    <div v-if="adviser_lower[0].price > 0" class="price">{{adviser_lower[0].price}}€</div>
-                    <div v-else class="price">Price not defined</div>
-                  </div>
-                </b-card>
-              </a>
-              <b-row>
-                <b-button
-                  v-if="!lock_lower"
-                  @click="lock('lower')"
-                  id="lowerb"
-                  class="mr-5 mt-3"
-                  title="lock item">
-                  <unicon name="unlock-alt" fill="#999999"></unicon>
-                </b-button>
-                <b-button
-                  v-else
-                  @click="lock('lower')"
-                  id="lower"
-                  class="mr-5 mt-3"
-                  title="unlock item">
-                  <unicon name="lock-alt" fill="#2B1E02"></unicon>
-                </b-button>
-                <b-button
-                  @click="refresh('lower')"
-                  class="ml-5 mt-3"
-                  title="refresh item">
-                  <unicon name="sync" class="" fill="#999999"></unicon>
-                </b-button>
-              </b-row>
-            </b-row>
-          </b-card>
-          <b-card
-              class="adviser ml-5 separator"
-              :id="adviser_shoes[0].item_id"
-          >
-            <b-row align-h="center" align-v="center" class="advise-card">
-              <div class="body-part mb-3">FEET</div>
-              <a :href="adviser_shoes[0].url">
-                <b-card
-                  :img-src="adviser_shoes[0].photo"
-                  img-top
-                  :alt="adviser_shoes[0].reference"
-                  class="mb-2 no-border"
-                  @mouseover="hover = true; id_item = adviser_shoes[0].item_id"
-                  @mouseleave="hover = false">
-                  <div class="details" v-if="hover & id_item === adviser_shoes[0].item_id">SEE DETAILS</div>
-                  <div v-else>
-                    <div class="description">
-                      {{adviser_shoes[0].brand.name.toUpperCase()}} - {{adviser_shoes[0].type.body_part}}
-                    </div>
-                    <div v-if="adviser_shoes[0].price > 0" class="price">{{adviser_shoes[0].price}}€</div>
-                    <div v-else class="price">Price not defined</div>
-                  </div>
-                </b-card>
-              </a>
-              <b-row>
-                <b-button
-                  v-if="!lock_shoes"
-                  @click="lock('shoes')"
-                  id="shoesb"
-                  class="mr-5 mt-3"
-                  title="lock item">
-                  <unicon name="unlock-alt" fill="#999999"></unicon>
-                </b-button>
-                <b-button
-                  v-else
-                  @click="lock('shoes')"
-                  id="shoes"
-                  class="mr-5 mt-3"
-                  title="unlock item">
-                  <unicon name="lock-alt" fill="#2B1E02"></unicon>
-                </b-button>
-                <b-button
-                  @click="refresh('shoes')"
-                  class="ml-5 mt-3"
-                  title="refresh item">
-                  <unicon name="sync" fill="#999999"></unicon>
-                </b-button>
-              </b-row>
-            </b-row>
-          </b-card>
-        </b-row>
-        <b-row class="buttons mt-5">
-          <b-col cols="5" align-self="end">
+          </b-row>
+          <b-row class="buttons mt-5" align-h="end">
             <div class="back-button">
-              <b-button @click="step=0">
-                <unicon name="angle-double-left" class="back-icon" fill="#2B1E02"></unicon>
-                Back
+              <b-button @click="step=1">
+                Next
+                <unicon name="angle-double-right" class="back-icon" fill="#2B1E02"></unicon>
               </b-button>
             </div>
+          </b-row>
+        </b-tab>
+        <b-tab id="tab3" lazy>
+            <template v-slot:title>
+              ② 
+              <span style="padding-left: 10px;">Choose your outfit</span>
+            </template>
+            <b-row align-h="center" align-v="center" class="elements tab3">
+              <b-card
+                class="adviser separator"
+                :id="adviser_upper[0].item_id"
+              >
+                <b-row align-h="center" align-v="center" class="advise-card">
+                  <div class="body-part mb-3">UPPER BODY</div>
+                  <a :href="adviser_upper[0].url">
+                  <b-card
+                    :img-src="adviser_upper[0].photo"
+                    img-top
+                    :alt="adviser_upper[0].reference"
+                    class="mb-2 no-border"
+                    @mouseover="hover = true; id_item = adviser_upper[0].item_id"
+                    @mouseleave="hover = false">
+                    <div class="details" v-if="hover & id_item === adviser_upper[0].item_id">SEE DETAILS</div>
+                    <div v-else>
+                      <div class="description">
+                        {{adviser_upper[0].brand.name.toUpperCase()}} - {{adviser_upper[0].type.body_part}}
+                      </div>
+                      <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+                      <div v-else class="price">Price not defined</div>
+                    </div>
+                  </b-card>
+                </a>
+                <b-row>
+                  <b-button
+                    v-if="!lock_upper"
+                    @click="lock('upper')"
+                    id="upperb"
+                    class="mr-5 mt-3"
+                    title="lock item">
+                    <unicon name="unlock-alt" fill="#999999"></unicon>
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="lock('upper')"
+                    id="upperb"
+                    class="mr-5 mt-3"
+                    title="unlock item">
+                    <unicon name="lock-alt" fill="#2B1E02"></unicon>
+                  </b-button>
+                  <b-button
+                    @click="refresh('upper')"
+                    class="ml-5 mt-3"
+                    title="refresh item">
+                    <unicon name="sync" fill="#999999"></unicon>
+                  </b-button>
+                </b-row>
+              </b-row>
+            </b-card>
+              <b-card
+                  class="adviser ml-5 separator"
+                  :id="adviser_coat[0].item_id"
+              >
+                <b-row align-h="center" align-v="center" class="advise-card">
+                  <div class="body-part mb-3">COVER</div>
+                  <a :href="adviser_coat[0].url">
+                  <b-card
+                    :img-src="adviser_coat[0].photo"
+                    img-top
+                    :alt="adviser_coat[0].reference"
+                    class="mb-2 no-border"
+                    @mouseover="hover = true; id_item = adviser_coat[0].item_id"
+                    @mouseleave="hover = false">
+                    <div class="details" v-if="hover & id_item === adviser_coat[0].item_id">SEE DETAILS</div>
+                    <div v-else>
+                      <div class="description">
+                        {{adviser_coat[0].brand.name.toUpperCase()}} - {{adviser_coat[0].type.body_part}}
+                      </div>
+                      <div v-if="adviser_coat[0].price > 0" class="price">{{adviser_coat[0].price}}€</div>
+                      <div v-else class="price">Price not defined</div>
+                    </div>
+                  </b-card>
+                </a>
+                <b-row>
+                  <b-button
+                    v-if="!lock_coat"
+                    @click="lock('coat')"
+                    id="coatb"
+                    class="mr-5 mt-3"
+                    title="lock item">
+                    <unicon name="unlock-alt" fill="#999999"></unicon>
+                  </b-button>
+                  <b-button 
+                    v-else
+                    @click="lock('coat')"
+                    id="coatb"
+                    class="mr-5 mt-3"
+                    title="unlock item">
+                    <unicon name="lock-alt" fill="#2B1E02"></unicon>
+                  </b-button>
+                  <b-button
+                    @click="refresh('coat')"
+                    class="ml-5 mt-3"
+                    title="refresh item">
+                    <unicon name="sync" class="" fill="#999999"></unicon>
+                  </b-button>
+                </b-row>
+              </b-row>
+            </b-card>
+            <b-card
+              class="adviser ml-5 separator"
+              :id="adviser_lower[0].item_id"
+            >
+              <b-row align-h="center" align-v="center" class="advise-card">
+                <div class="body-part mb-3">LOWER BODDY</div>
+                <a :href="adviser_lower[0].url">
+                  <b-card
+                    :img-src="adviser_lower[0].photo"
+                    img-top
+                    :alt="adviser_lower[0].reference"
+                    class="mb-2 no-border"
+                    @mouseover="hover = true; id_item = adviser_lower[0].item_id"
+                    @mouseleave="hover = false">
+                    <div class="details" v-if="hover & id_item === adviser_lower[0].item_id">SEE DETAILS</div>
+                    <div v-else>
+                      <div class="description">
+                        {{adviser_lower[0].brand.name.toUpperCase()}} - {{adviser_lower[0].type.body_part}}
+                      </div>
+                      <div v-if="adviser_lower[0].price > 0" class="price">{{adviser_lower[0].price}}€</div>
+                      <div v-else class="price">Price not defined</div>
+                    </div>
+                  </b-card>
+                </a>
+                <b-row>
+                  <b-button
+                    v-if="!lock_lower"
+                    @click="lock('lower')"
+                    id="lowerb"
+                    class="mr-5 mt-3"
+                    title="lock item">
+                    <unicon name="unlock-alt" fill="#999999"></unicon>
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="lock('lower')"
+                    id="lower"
+                    class="mr-5 mt-3"
+                    title="unlock item">
+                    <unicon name="lock-alt" fill="#2B1E02"></unicon>
+                  </b-button>
+                  <b-button
+                    @click="refresh('lower')"
+                    class="ml-5 mt-3"
+                    title="refresh item">
+                    <unicon name="sync" class="" fill="#999999"></unicon>
+                  </b-button>
+                </b-row>
+              </b-row>
+            </b-card>
+            <b-card
+                class="adviser ml-5 separator"
+                :id="adviser_shoes[0].item_id"
+            >
+              <b-row align-h="center" align-v="center" class="advise-card">
+                <div class="body-part mb-3">FEET</div>
+                <a :href="adviser_shoes[0].url">
+                  <b-card
+                    :img-src="adviser_shoes[0].photo"
+                    img-top
+                    :alt="adviser_shoes[0].reference"
+                    class="mb-2 no-border"
+                    @mouseover="hover = true; id_item = adviser_shoes[0].item_id"
+                    @mouseleave="hover = false">
+                    <div class="details" v-if="hover & id_item === adviser_shoes[0].item_id">SEE DETAILS</div>
+                    <div v-else>
+                      <div class="description">
+                        {{adviser_shoes[0].brand.name.toUpperCase()}} - {{adviser_shoes[0].type.body_part}}
+                      </div>
+                      <div v-if="adviser_shoes[0].price > 0" class="price">{{adviser_shoes[0].price}}€</div>
+                      <div v-else class="price">Price not defined</div>
+                    </div>
+                  </b-card>
+                </a>
+                <b-row>
+                  <b-button
+                    v-if="!lock_shoes"
+                    @click="lock('shoes')"
+                    id="shoesb"
+                    class="mr-5 mt-3"
+                    title="lock item">
+                    <unicon name="unlock-alt" fill="#999999"></unicon>
+                  </b-button>
+                  <b-button
+                    v-else
+                    @click="lock('shoes')"
+                    id="shoes"
+                    class="mr-5 mt-3"
+                    title="unlock item">
+                    <unicon name="lock-alt" fill="#2B1E02"></unicon>
+                  </b-button>
+                  <b-button
+                    @click="refresh('shoes')"
+                    class="ml-5 mt-3"
+                    title="refresh item">
+                    <unicon name="sync" fill="#999999"></unicon>
+                  </b-button>
+                </b-row>
+              </b-row>
+            </b-card>
+          </b-row>
+          <b-row class="buttons mt-5">
+            <b-col cols="5" align-self="end">
+              <div class="back-button">
+                <b-button @click="step=0">
+                  <unicon name="angle-double-left" class="back-icon" fill="#2B1E02"></unicon>
+                  Back
+                </b-button>
+              </div>
+            </b-col>
+            <b-col cols="2" align-self="center">
+              <div class="advise-button">
+                <b-button class="ml-3 advise-btn" @click="advise()">Advise</b-button>
+              </div>
+            </b-col>
+            <b-col cols="5" align-self="start">
+            </b-col>
+          </b-row>
+        </b-tab>
+      </b-tabs>
+    </b-container>
+
+    <b-modal
+      ref="upper-modal"
+      hide-footer
+      title="Virtual Closet - Upper body items"
+      size="xl">
+      <b-container fluid>
+        <b-card-group>
+          <div v-if="upper_closet_all.length == 0">
+            There are no upper body items in your closet.
+          </div>
+          <b-col
+            v-else
+            v-for="item in upper_closet_all"
+            v-bind:key="'upper' + item.item_id"
+            md="4"
+            sm="6"
+            align-self="center">
+            <b-card
+              @click="selectUpper('upper', item)"
+              :img-src="item.photo"
+              img-top
+              :alt="item.reference"
+              class="mb-2 no-border closet-item">
+              <div class="description">
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+              </div>
+            </b-card>
           </b-col>
-          <b-col cols="2" align-self="center">
-            <div class="advise-button">
-              <b-button class="ml-3 advise-btn" @click="advise()">Advise</b-button>
-            </div>
+        </b-card-group>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('upper')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="coat-modal"
+      hide-footer
+      title="Virtual Closet - Cover items"
+      size="xl">
+      <b-container fluid>
+        <b-card-group>
+          <div v-if="coat_closet_all.length == 0">
+            There are no upper body items in your closet.
+          </div>
+          <b-col
+            v-else
+            v-for="item in coat_closet_all"
+            v-bind:key="'coat' + item.item_id"
+            md="4"
+            sm="6"
+            align-self="center">
+            <b-card
+              @click="selectCoat('coat', item)"
+              :img-src="item.photo"
+              img-top
+              :alt="item.reference"
+              class="mb-2 no-border closet-item">
+              <div class="description">
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+              </div>
+            </b-card>
           </b-col>
-          <b-col cols="5" align-self="start">
+        </b-card-group>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('coat')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="lower-modal"
+      hide-footer
+      title="Virtual Closet - Lower items"
+      size="xl">
+      <b-container fluid>
+        <b-card-group>
+          <div v-if="lower_closet_all.length == 0">
+            There are no upper body items in your closet.
+          </div>
+          <b-col
+            v-else
+            v-for="item in lower_closet_all"
+            v-bind:key="'lower' + item.item_id"
+            md="4"
+            sm="6"
+            align-self="center">
+            <b-card
+              @click="selectLower('lower', item)"
+              :img-src="item.photo"
+              img-top
+              :alt="item.reference"
+              class="mb-2 no-border closet-item">
+              <div class="description">
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+              </div>
+            </b-card>
           </b-col>
-        </b-row>
-      </b-tab>
-    </b-tabs>
-  </b-container>
+        </b-card-group>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('lower')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="shoes-modal"
+      hide-footer
+      title="Virtual Closet - Feet items"
+      size="xl">
+      <b-container fluid>
+        <b-card-group>
+          <div v-if="shoes_closet_all.length == 0">
+            There are no upper body items in your closet.
+          </div>
+          <b-col
+            v-else
+            v-for="item in shoes_closet_all"
+            v-bind:key="'shoes' + item.item_id"
+            md="4"
+            sm="6"
+            align-self="center">
+            <b-card
+              @click="selectShoes('shoes', item)"
+              :img-src="item.photo"
+              img-top
+              :alt="item.reference"
+              class="mb-2 no-border closet-item">
+              <div class="description">
+                {{item.brand.name.toUpperCase()}} - {{item.type.body_part}}
+              </div>
+            </b-card>
+          </b-col>
+        </b-card-group>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('shoes')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+  </div>
 </template>
 
 <script>
@@ -508,67 +654,102 @@ export default {
       adviser_coat: [],
       closet_items_upper: [],
       closet_items_coat: [],
-      adviser_upper_element: null,
       closet_items_lower: [],
-      adviser_lower_element: null,
       closet_items_shoes: [],
-      adviser_shoes_element: null,
       lock_upper: false,
       lock_coat: false,
       lock_lower: false,
       lock_shoes: false,
+      upper_closet_all: [],
+      coat_closet_all: [],
+      lower_closet_all: [],
+      shoes_closet_all: [],
+      closet: [],
     };
   },
   mounted() {
-    this.closet_items = cloths.cloths.slice(0, 8);
-    this.closet_items_upper = cloths.cloths.filter(x => x.type.body_part == "Upper body").slice(0, 8);
-    this.closet_items_lower = cloths.cloths.filter(x => x.type.body_part == "Lower body").slice(0, 8);
-    this.closet_items_shoes = cloths.cloths.filter(x => x.type.body_part == "Shoes").slice(0, 8);
+    this.advise();
 
-    this.adviser_upper = cloths.cloths.filter(x => x.type.body_part == "Upper body").slice(0, 1);
-    this.adviser_coat = cloths.cloths.filter(x => x.type.body_part == "Upper body").slice(0, 1);
-    this.adviser_lower = cloths.cloths.filter(x => x.type.body_part == "Lower body").slice(0, 1);
-    this.adviser_shoes = cloths.cloths.filter(x => x.type.body_part == "Shoes").slice(0, 1);
+    fetch("http://localhost:3333/catalog/man?color=verde", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => {this.closet.push(r[1]);
+                this.closet.push(r[2]);
+                this.closet.push(r[9]);
+                this.closet.push(r[17]);
+                this.closet.push(r[19]);
+                this.closet.push(r[4]);
+                this.fetch_calcado()})
+    .catch(err => console.log(err));
   },
   methods: {
-      selectUpper(id, item) {
-            const el = document.getElementById(id);
-          if (this.adviser_upper_element == null) {
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-            this.adviser_upper = [item];
-            this.adviser_upper_element = el;
-          } else {
-            this.adviser_upper = [item];
-            this.adviser_upper_element.setAttribute("style", "");
-            this.adviser_upper_element = el;
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-          }
+      fetch_calcado() {
+        fetch("http://localhost:3333/catalog/man?type=calçado", {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            }
+        })
+        .then(r => r.json())
+        .then(r => {this.closet.push(r[1]);
+                    this.closet.push(r[5]);
+                    this.upper_closet_all = this.closet.filter(x => x.type.body_part === 'upper');
+                    this.coat_closet_all = this.closet.filter(x => x.type.body_part === 'cover');
+                    this.lower_closet_all = this.closet.filter(x => x.type.body_part === 'bottom');
+                    this.shoes_closet_all = this.closet.filter(x => x.type.body_part === 'feet');})
+        .catch(err => console.log(err));
       },
-      selectLower(id, item) {
-            const el = document.getElementById(id);
-          if (this.adviser_lower_element == null) {
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-            this.adviser_lower = [item];
-            this.adviser_lower_element = el;
-          } else {
-            this.adviser_lower = [item];
-            this.adviser_lower_element.setAttribute("style", "");
-            this.adviser_lower_element = el;
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-          }
+      showModal(type) {
+        if (type == "upper") {
+            this.$refs['upper-modal'].show()
+        }
+        if (type == "coat") {
+            this.$refs['coat-modal'].show()
+        }
+        if (type == "lower") {
+            this.$refs['lower-modal'].show()
+        }
+        if (type == "shoes") {
+            this.$refs['shoes-modal'].show()
+        }
       },
-      selectShoes(id, item) {
-            const el = document.getElementById(id);
-          if (this.adviser_shoes_element == null) {
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-            this.adviser_shoes = [item];
-            this.adviser_shoes_element = el;
-          } else {
-            this.adviser_shoes = [item];
-            this.adviser_shoes_element.setAttribute("style", "");
-            this.adviser_shoes_element = el;
-            el.setAttribute("style", "border-style: solid; border-width: medium;");
-          }
+      hideModal(type) {
+        if (type == "upper") {
+            this.$refs['upper-modal'].hide()
+        }
+        if (type == "coat") {
+            this.$refs['coat-modal'].hide()
+        }
+        if (type == "lower") {
+            this.$refs['lower-modal'].hide()
+        }
+        if (type == "shoes") {
+            this.$refs['shoes-modal'].hide()
+        }
+      },
+      selectUpper(id_modal, item) {
+        this.adviser_upper = [item];
+        this.closet_items_upper = [item];
+        this.hideModal(id_modal);
+      },
+      selectLower(id_modal, item) {
+        this.adviser_lower = [item];
+        this.closet_items_lower = [item];
+        this.hideModal(id_modal);
+      },
+      selectShoes(id_modal, item) {
+        this.adviser_shoes = [item];
+        this.closet_items_shoes = [item];
+        this.hideModal(id_modal);
+      },
+      selectCoat(id_modal, item) {
+        this.adviser_coat = [item];
+        this.closet_items_coat = [item];
+        this.hideModal(id_modal);
       },
       refresh(type) {
           if (type == "upper") {
@@ -640,6 +821,14 @@ export default {
 </script>
 
 <style lang="scss">
+.closet-item {
+  cursor: pointer;
+}
+
+.closet-item:hover img {
+  opacity: 0.5;
+}
+
 .question {
   font-size: 100px;
   color: #2B1E02;
@@ -691,6 +880,7 @@ export default {
 .advise-button .btn {
   border: none;
   background-color: #2B1E02;
+  color: white;
 }
 
 .advise-button .btn:hover {

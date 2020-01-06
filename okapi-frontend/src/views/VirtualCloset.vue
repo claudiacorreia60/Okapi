@@ -4,7 +4,7 @@
     <b-row class="m-5"></b-row>
     <b-row align-v="start" align-h="center" class="m-5">
         <b-col cols="2" id="filters">
-          <FilterCatalog :title="this.$route.params.gender.toUpperCase() + '\'S CATALOG'"/>
+          <FilterCatalog title="VIRTUAL CLOSET"/>
         </b-col>
         <b-col cols="10">
           <CatalogContent :clothes="man_clothes"/> 
@@ -50,14 +50,30 @@ export default {
 
     let query = "";
     if (!isEmpty(this.$route.query)) query = toString(this.$route.query);
-    fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
+    fetch("http://localhost:3333/catalog/man?color=verde", {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
     })
     .then(r => r.json())
-    .then(r => {this.man_clothes = r; this.$forceUpdate()})
+    .then(r => {this.man_clothes.push(r[1]);
+                this.man_clothes.push(r[2]);
+                this.man_clothes.push(r[9]);
+                this.man_clothes.push(r[17]);
+                this.man_clothes.push(r[19]);
+                this.man_clothes.push(r[4]);})
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/catalog/man?type=calçado", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => {this.man_clothes.push(r[1]);
+                this.man_clothes.push(r[5]);})
     .catch(err => console.log(err));
   },
 };
