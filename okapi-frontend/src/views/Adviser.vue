@@ -670,7 +670,7 @@ export default {
   mounted() {
     this.advise();
 
-    fetch("http://localhost:3333/catalog/man?color=verde", {
+    fetch("http://localhost:3333/catalog/man?color[]=verde", {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
@@ -688,7 +688,7 @@ export default {
   },
   methods: {
       fetch_calcado() {
-        fetch("http://localhost:3333/catalog/man?type=calçado", {
+        fetch("http://localhost:3333/catalog/man?type[]=calçado", {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'

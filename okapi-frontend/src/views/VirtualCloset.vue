@@ -50,7 +50,7 @@ export default {
 
     let query = "";
     if (!isEmpty(this.$route.query)) query = toString(this.$route.query);
-    fetch("http://localhost:3333/catalog/man?color=verde", {
+    fetch("http://localhost:3333/catalog/man?color[]=verde", {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
@@ -65,7 +65,7 @@ export default {
                 this.man_clothes.push(r[4]);})
     .catch(err => console.log(err));
 
-    fetch("http://localhost:3333/catalog/man?type=calçado", {
+    fetch("http://localhost:3333/catalog/man?type[]=calçado", {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'

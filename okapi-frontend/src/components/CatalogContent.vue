@@ -178,10 +178,13 @@ export default {
             if(obj.hasOwnProperty(key))
                r = r + key + "[]=" + obj[key] + "&" 
         }
-        for(var i in this.types)
-            r = r + "type[]=" + this.types[i] + "&"
-        for(var i in this.colors)
-            r = r + "color[]=" + this.colors[i] + "&"
+
+        if (this.$route.query.length == 0) {
+            for(var i in this.types)
+                r = r + "type[]=" + this.types[i] + "&"
+            for(var i in this.colors)
+                r = r + "color[]=" + this.colors[i] + "&"
+        }
         return r;
     },
     checkNext() {
