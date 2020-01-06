@@ -6,9 +6,9 @@ class ItemController {
     async indexMan({request, response}) {
         const params = request.get()
 
-        const page = params.page 
-        const color = params.color ? params.color : '%%'
-        const type = params.type ? params.type : '%%'
+        const page = params.page ? params.page : 1
+        const perpage = params.perpage ? params.perpage : 20
+        const sort = params.sort ? params.sort : 'asc'
 
         const items = await Item.query()
                                 .with('color')
@@ -16,13 +16,14 @@ class ItemController {
                                 .with('brand')
                                 .where('catalog',1)
                                 .whereHas('color', (builder) => {
-                                    builder.where('name', 'like', color)
+                                    params.color ? builder.where('name', 'in', params.color) : true
                                 }, '>', 0)
                                 .whereHas('type', (builder) => {
-                                    builder.where('name', 'like', type)
+                                    params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'M')
-                                .forPage(page)
+                                .orderBy('price', sort)
+                                .forPage(page, perpage)
                                 .fetch()
         
         return response.json( items )
@@ -31,9 +32,9 @@ class ItemController {
     async indexWoman({request, response}) {
         const params = request.get()
 
-        const page = params.page 
-        const color = params.color ? params.color : '%%'
-        const type = params.type ? params.type : '%%'
+        const page = params.page ? params.page : 1
+        const perpage = params.perpage ? params.perpage : 20
+        const sort = params.sort ? params.sort : 'asc'
 
         const items = await Item.query()
                                 .with('color')
@@ -41,13 +42,14 @@ class ItemController {
                                 .with('brand')
                                 .where('catalog',1)
                                 .whereHas('color', (builder) => {
-                                    builder.where('name', 'like', color)
+                                    params.color ? builder.where('name', 'in', params.color) : true
                                 }, '>', 0)
                                 .whereHas('type', (builder) => {
-                                    builder.where('name', 'like', type)
+                                    params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'W')
-                                .forPage(page)
+                                .orderBy('price', sort)
+                                .forPage(page, perpage)
                                 .fetch()
         
         return response.json( items)
