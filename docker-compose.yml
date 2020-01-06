@@ -6,7 +6,15 @@ services:
     - "3334:3334"
     links:
     - catalog 
+    - virtual_closet
+    - users
 
   catalog:
     build: ../OkapiCatalog/catalog_management_service
+
+  virtual_closet:
+    build: ../OkapiVirtualCloset/virtual_closet_management_service
+
+  users: 
+    build: ../OkapiUsers/user_management_service
 

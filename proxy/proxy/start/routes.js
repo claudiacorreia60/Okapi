@@ -725,7 +725,7 @@ Route.group(() => {
    */
   Route.delete('/:user_id/:item_id', 'VirtualCloset/ClosetController.removeFromCloset').middleware(['itemExists'])
 }).prefix('closet')
-  .middleware(['tokenVerify', 'userExists'])
+  .middleware([/*'tokenVerify',*/ 'userExists'])
 
 Route.group(() => {
   /**
@@ -869,7 +869,7 @@ Route.group(() => {
    * @apiHeader {String} access_token.token Primary token 
    * @apiHeader {String} access_token.refresh_token Refresh token
    * 
-   * @apiError ErrorTODO Saiyan poe aqui os erros
+   * @apiError Error TODO Saiyan poe aqui os erros
    * 
    * @apiSuccessExample Example success response: 
       {
