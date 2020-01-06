@@ -8,9 +8,7 @@ class SavedController {
                                    .where('user_id', user_id)
                                    .fetch()
 
-        return response.json({
-            data: saved
-        })
+        return response.json( saved)
     }
 
     async addToSaved({request, response, params: {user_id, item_id}}) {
@@ -30,7 +28,6 @@ class SavedController {
                             message: 'Item had already been saved.'
                         })
                     })
-
     }
 
     async removeFromSaved({request, response, params: {user_id, item_id}}) {
