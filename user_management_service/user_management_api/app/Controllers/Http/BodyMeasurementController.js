@@ -30,22 +30,17 @@ class BodyMeasurementController {
                 await measurements.save() 
 
                 response.json({
-                    message: "Successfully inserted new user body measurements.",
-                    data: measurements
+                    message: "Successfully inserted new user's body measurements."
                 })
             }
             
             else {
-                response.status(400).json({
-                    message : "User already has body measurements."
-                })
+                response.status(500).json({message: "Duplicated body measurements for the requested user.",user_id})
             }
         }
 
         else {
-            response.status(404).json({
-                message : "User not found"
-            })
+            response.status(404).json({message : "User not found.",user_id})
         }
     }
 
@@ -56,19 +51,13 @@ class BodyMeasurementController {
         const user = await User.find(user_id);
 
         if (user) {
-            const bodyMeasurement = await BodyMeasurement.query().where({
-                'user_id': user_id
-              }).fetch()
-    
-            return response.json({
-                data : bodyMeasurement
-            })
+            const bodyMeasurement = await user.body_measurements().fetch()
+
+            return response.json( bodyMeasurement )
         }
 
         else {
-            response.status(404).json({
-                message : "User not found"
-            })
+            response.status(404).json({message:"User not found.", user_id})
         }
     }
 
@@ -86,8 +75,8 @@ class BodyMeasurementController {
             if (measurements == null){
 
                 response.status(404).json({
-                    message : "Body measurements not found."
-                })
+                     message : "Body measurements for the requested user not found.",
+                     user_id })
             }
 
             else {
@@ -97,23 +86,19 @@ class BodyMeasurementController {
 
                 await measurements.save()
 
-                response.json({
-                    message: "Successfully updated body measurements."
-                })
+                response.json({message: "Successfully updated body measurements."})
             }
         }
 
         else {
-            response.status(404).json({
-                message : "User not found"
-            })
+            response.status(404).json({message : "User not found.", user_id})
         }
     }
 
     /**
      * Deletes user body measurements
      */
-    async deleteMeasurment({request, response, params: {user_id}}) {
+    async deleteMeasurement({request, response, params: {user_id}}) {
         const user = await User.find(user_id);
 
         if (user) {
@@ -130,13 +115,14 @@ class BodyMeasurementController {
     
             else {
                 return response.status(404).json({
-                    message: "Body measurements not found"
+                    message: "Body measurements for the requested user not found.",
+                    user_id
                 })
             }
         }
         else {
             return response.status(404).json({
-                message : "User not found"
+                message : "User not found."
             })
         }
     }

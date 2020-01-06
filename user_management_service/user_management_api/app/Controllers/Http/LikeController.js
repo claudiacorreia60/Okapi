@@ -15,14 +15,13 @@ class LikeController {
         if (user) {
             const likes = await user.likes().fetch()
     
-            return response.json({
-                data : likes
-            })
+            return response.json(likes)
         }
 
         else {
             return response.status(404).json({
-                message : "User not found"
+                message : "User not found",
+                user_id
             })
         }
     }
@@ -54,18 +53,21 @@ class LikeController {
                 new_like.user_id = user_id;
                 new_like.item_id = item_id;
 
+
                 await new_like.save();
+
             
                 response.json({
                     message: "Successfully inserted new like.",
-                    data: new_like
+                    like: {user_id, item_id} // ? save() changes new_like 
                 })
             }
         }
 
         else {
             return response.status(404).json({
-                message : "User not found"
+                message : "User not found",
+                user_id
             })
         }   
     }
@@ -94,7 +96,7 @@ class LikeController {
     
             else {
                 return response.status(404).json({
-                    message: "Like not found"
+                    message: "Like not found."
                 })
             }
         
@@ -102,7 +104,8 @@ class LikeController {
 
         else {
             return response.status(404).json({
-                message : "User not found"
+                message : "User not found.",
+                user_id
             })
         }
     }
