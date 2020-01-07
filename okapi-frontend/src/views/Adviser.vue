@@ -700,7 +700,9 @@ export default {
                     this.upper_closet_all = this.closet.filter(x => x.type.body_part === 'upper');
                     this.coat_closet_all = this.closet.filter(x => x.type.body_part === 'cover');
                     this.lower_closet_all = this.closet.filter(x => x.type.body_part === 'bottom');
-                    this.shoes_closet_all = this.closet.filter(x => x.type.body_part === 'feet');})
+                    this.shoes_closet_all = this.closet.filter(x => x.type.body_part === 'feet');
+                    this.$forceUpdate();
+                    })
         .catch(err => console.log(err));
       },
       showModal(type) {

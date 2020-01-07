@@ -17,9 +17,18 @@ export default {
     HomeNavBar,
     UserNavBar,
   },
+  mounted() {
+      this.$root.$on('sign-in', () => {
+        if (localStorage.getItem('user') == null) {
+            this.loggedIn = false;
+        } else {
+            this.loggedIn = true;
+        }
+      });
+  },
   data() {
     return {
-      loggedIn: true,
+      loggedIn: false,
     };
   },
 };

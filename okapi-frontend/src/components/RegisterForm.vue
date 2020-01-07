@@ -14,7 +14,7 @@
         </div>
 
         <!-- Title -->
-        <h4>Welcome back!</h4>
+        <h4>Welcome!</h4>
         <p class="details">Please enter your details below</p>
 
         <!-- Form -->
@@ -96,7 +96,7 @@
 
           <!-- Buttons -->
           <div>
-            <b-button @click="$router.push('profiling')" class="signin-button" type="submit">Sign up</b-button>
+            <b-button @click="register()" class="signin-button" type="submit">Sign up</b-button>
           </div>
         </b-form>
 
@@ -119,11 +119,12 @@ export default {
   data() {
     return {
       form: {
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
-        male: '',
-        female: '',
+        gender: '',
+        birthday: new Date(),
       },
       options: [
         { text: 'Male', value: 'male' },
@@ -132,6 +133,31 @@ export default {
     };
   },
   methods: {
+    register() {
+        console.log(this.form.birthday);
+        fetch("http://localhost:3333/users/", {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+            method: "POST",
+            body: JSON.stringify({
+                name: this.form.name,
+                username: this.form.email.slice(0,6),
+                gender: this.form.gender,
+                birthday: this.form.birthday,
+                photo: ''
+            })
+        })
+        .then(r => r.json())
+        .then(r => {
+                console.log(r);
+                localStorage.setItem('user', JSON.stringify(r.data));
+                this.$root.$emit('sign-in', '');
+                this.$router.push('profiling');
+            })
+        .catch(err => console.log(err));
+    },
     onSubmit() {
       // alert(JSON.stringify(this.form));
     },
