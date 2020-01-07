@@ -8,6 +8,10 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 db_config = config['Database']
 
+file_config = config['Data']
+filename = file_config['filename']
+filebrand = file_config['brand']
+
 # Connect to db
 mydb = mysql.connector.connect(
   host=db_config['host'],
@@ -132,7 +136,7 @@ def getBrands():
     myresult = mycursor.fetchall()
 
     for row in myresult:
-        brands[row[1].capitalize()] = row[0] 
+        brands[row[1]] = row[0] 
 
     mycursor.close()
 
@@ -164,6 +168,7 @@ def load_item(item):
 
     color = db_colors.get(item['color'], -1)
     type = db_types.get(item['category'], -1)
+    brand = db_brands.get(filebrand, -1)
 
     title = item['title']
     price = item['price']
@@ -174,7 +179,7 @@ def load_item(item):
     composition = item['composition']
 
     if color != -1 and type != -1:
-        sql = f"INSERT INTO item VALUES (NULL, 1, '{title}', '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
+        sql = f"INSERT INTO item VALUES (NULL, '{title}', '{brand}' , '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
         mycursor.execute(sql)
 
     mydb.commit()
@@ -184,7 +189,7 @@ def load_item(item):
     load_to_mongo(item)
 
 # Start parsing
-root = etree.parse("./feed.xml")
+root = etree.parse(filename)
 
 products = root.findall('product')
 
