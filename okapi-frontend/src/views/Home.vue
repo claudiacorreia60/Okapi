@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HomeContent/>
+    <PageFooter/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import PageFooter from '@/components/PageFooter.vue';
+import HomeContent from '@/components/HomeContent.vue';
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
-    HelloWorld,
+    PageFooter,
+    HomeContent,
   },
+  data() {
+    return {
+      loggedIn: false,
+    };
+  },
+  methods: {
+    scrollToTop() {
+        window.scrollTo(0,0);
+    },
+  },
+  mounted() {
+    this.scrollToTop();
+  }
 };
 </script>
+
+<style lang="scss">
+</style>
