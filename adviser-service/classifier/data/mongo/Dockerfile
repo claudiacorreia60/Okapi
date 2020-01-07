@@ -1,0 +1,7 @@
+FROM mongo
+
+ENV MONGO_INITDB_DATABASE=adviser
+ENV MONGO_INITDB_ROOT_USERNAME=root
+ENV MONGO_INITDB_ROOT_PASSWORD=27remb3jZ5FKY31f
+
+COPY setup.js /docker-entrypoint-initdb.d/
