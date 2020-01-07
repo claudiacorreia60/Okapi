@@ -446,8 +446,8 @@ Route.group(() => {
 /* Catalog routes */
 Route.group(() => {
   /**
-   * @api {get} /catalog/men Show men's catalog 
-   * @apiName GetMenCatalog
+   * @api {get} /catalog/man Show men's catalog 
+   * @apiName GetManCatalog
    * @apiGroup Catalog
    * 
    * @apiDescription Returns a list of the current items in the men's catalog. Supports filters and pagination.
@@ -509,11 +509,11 @@ Route.group(() => {
                 }]
       }
    */
-  Route.get('/men', 'Catalog/ItemController.indexMan')
+  Route.get('/man', 'Catalog/ItemController.indexMan')
 
 /**
-   * @api {get} /catalog/women Show women's catalog 
-   * @apiName GetWomenCatalog
+   * @api {get} /catalog/woman Show women's catalog 
+   * @apiName GetWomanCatalog
    * @apiGroup Catalog
    * 
    * @apiDescription Returns a list of the current items in the women's catalog. Supports filters and pagination.
@@ -800,14 +800,14 @@ Route.group(() => {
    */
   Route.delete('/:user_id/:item_id', 'VirtualCloset/SavedController.removeFromSaved')
 }).prefix('saved')
-  //.middleware(['tokenVerify', 'userExists'])
+  .middleware([/*'tokenVerify',*/ 'userExists'])
 
 Route.group(() => {
   Route.get('/:user_id', 'VirtualCloset/OutfitController.indexByUser')
   Route.post('/:user_id', 'VirtualCloset/OutfitController.addOutfit')
   Route.delete('/:user_id/:outfit_id', 'VirtualCloset/OutfitController.removeOutfit')
 }).prefix('outfit')
-  //.middleware(['tokenVerify', 'userExists'])
+  .middleware([/*'tokenVerify',*/ 'userExists'])
 
 Route.group(() => {
   /**

@@ -14,7 +14,7 @@ class ItemController {
 
                     })
                     .catch(err => {
- 
+                        
                         let status = err.response.status
                         let data = err.response.data
 
