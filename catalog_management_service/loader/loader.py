@@ -2,6 +2,7 @@ from lxml import etree
 import re
 import csv
 import mysql.connector
+import pymongo
 import configparser
 
 config = configparser.ConfigParser()
@@ -18,8 +19,17 @@ mydb = mysql.connector.connect(
   port=db_config['port'],
   user=db_config['user'],
   passwd=db_config['password'],
-  database=db_config['database']
+  database=db_config['database'],
+  charset='utf8',
+  use_unicode=True
 )
+
+mongoClient = pymongo.MongoClient('localhost:27016', username='root',password='root')
+adviserdb = mongoClient.adviser 
+
+print(mongoClient.list_database_names())
+
+
 
 # Open file
 csvfile = open('./data.csv', 'w+',)
@@ -125,6 +135,22 @@ def getTypes():
 
     return categories
 
+def getBodyParts():
+    bodyParts = {}
+    mycursor = mydb.cursor()
+
+    sql = f"SELECT DISTINCT type_id, name, body_part FROM type"
+
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+
+    for row in myresult:
+        bodyParts[row[1]] = row[2] 
+
+    mycursor.close()
+
+    return bodyParts
+
 # Get brands in database
 def getBrands(): 
     brands = {}
@@ -142,6 +168,10 @@ def getBrands():
 
     return brands
 
+# Get existing body parts 
+db_bodyparts = getBodyParts()
+print(db_bodyparts)
+
 # Get existing color
 db_colors = getColors()
 print(db_colors)
@@ -155,12 +185,28 @@ db_brands = getBrands()
 print(db_brands)
 
 # Load item to adviser database 
-def load_to_mongo(item):
+def load_to_mongo(item, item_id):
     # id 
     # body_part
     # gender
     # img_url
-    pass
+    # 
+    
+    if (item['category'] is not None):
+    
+        new_item = { 
+            'id': item_id ,
+            'body_part': db_bodyparts[item['category']],
+            'gender': item['gender'], 
+            'img_url': item['photo']
+        }
+        
+        itemsColl = adviserdb['catalog']
+
+        itemsColl.insert_one(new_item)
+    else: 
+        pass
+
 
 # Load item to database
 def load_item(item):
@@ -184,9 +230,11 @@ def load_item(item):
 
     mydb.commit()
 
+    item_id = mycursor.lastrowid
+
     mycursor.close()
 
-    load_to_mongo(item)
+    load_to_mongo(item, item_id)
 
 # Start parsing
 root = etree.parse(filename)

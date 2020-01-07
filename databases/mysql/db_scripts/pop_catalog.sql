@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 INSERT INTO `okapi_catalog`.`brand`
 	(`name`, `website`)
 VALUES

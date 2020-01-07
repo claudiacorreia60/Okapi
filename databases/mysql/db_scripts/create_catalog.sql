@@ -87,3 +87,5 @@ CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
+
+
