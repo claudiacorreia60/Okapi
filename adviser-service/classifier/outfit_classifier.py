@@ -21,10 +21,12 @@ class OutfitSugestor:
         self.db = Database()
 
 
-    def sugest_outfit(self, user_id: int):
-
+    def sugest_outfit(self, user_id: int, upper:int, cover:int, bottom:int, feet:int):
+        
         print("Starting sugestion")
-        search_space = self.build_search_space(user_id)
+        search_space = self.build_search_space(user_id, upper, cover, bottom, feet)
+        if search_space == None:
+            return "User not found."
         outfits = self.build_outfits(search_space, 10)
         scores = self.evaluate_outfits(outfits)
         best_outfit = self.choose_best_outfit(outfits, scores)
@@ -82,7 +84,7 @@ class OutfitSugestor:
 
         return score[0][0]
 
-    def build_search_space(self, user_id: int) -> ClothList:
+    def build_search_space(self, user_id: int, upper:int, cover:int, bottom:int, feet:int) -> ClothList:
         # TODO
         # Procurar peças semelhantes aos gostos do utilizador
         #  e retornar essas peças ao invés do atual        
@@ -93,6 +95,8 @@ class OutfitSugestor:
 
         print(user_id)
         user = self.db.get_user(user_id=user_id)
+        if user == None:
+            return None
         
         likes_upper = user['likes']['upper']
         likes_cover = user['likes']['cover']
@@ -118,6 +122,15 @@ class OutfitSugestor:
         search_space['bottom'].extend(random.sample(catalogue_bottom, catalogue_num))
         search_space['feet'].extend(random.sample(catalogue_feet, catalogue_num))
         
+        if upper != None:
+            search_space['upper'] = [self.db.get_item(upper)]
+        if cover != None:
+            search_space['cover'] = [self.db.get_item(cover)]
+        if bottom != None:
+            search_space['bottom'] = [self.db.get_item(bottom)]
+        if feet != None:
+            search_space['feet'] = [self.db.get_item(feet)]
+
         return search_space
 
     def build_outfits(self, search_space:ClothList, outfit_num: int = 10) -> list:
@@ -135,7 +148,7 @@ class OutfitSugestor:
             i += 1
 
         return outfits
-        
+         
     def evaluate_outfits (self, outfits: list) -> list:
         scores = []
 

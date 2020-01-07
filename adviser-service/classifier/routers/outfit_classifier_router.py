@@ -10,8 +10,8 @@ outfit_sugestor = OutfitSugestor()
 db = Database()
 
 @router.get('/sugest_outfit', response_model=Outfit)
-async def sugest_outfit(user_id: int) -> Outfit :
-    return JSONResponse(outfit_sugestor.sugest_outfit(user_id))
+async def sugest_outfit(user_id: int, upper:int = None, cover:int = None, bottom:int = None, feet:int = None) -> Outfit :
+    return JSONResponse(outfit_sugestor.sugest_outfit(user_id, upper, cover, bottom, feet))
 
 @router.post('/add_like')
 async def add_like(user_id: int, user_gender: str,new_like: Item):

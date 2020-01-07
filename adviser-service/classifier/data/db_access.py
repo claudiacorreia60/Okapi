@@ -32,12 +32,20 @@ class Database:
         return "Deleted!"
 
     def get_user(self, user_id:int):
-        return self.db.get_collection('likes').find_one(filter={'user_id':user_id}, projection= {'_id':0})
+        likes = self.db.get_collection('likes')
+        if not likes.find_one(filter={'user_id':user_id}, projection= {'_id':0}):
+            return None
+
+        return likes.find_one(filter={'user_id':user_id}, projection= {'_id':0})
     
     # Métodos na coleção do catálogo
     
     def get_item(self, item_id: int):
-        return self.db.get_collection('catalog').find_one(filter={'id':item_id}, projection={'_id':0})
+        catalog = self.db.get_collection('catalog')
+        if not catalog.find_one(filter={'id':item_id}, projection={'_id':0}):
+            return None
+
+        return catalog.find_one(filter={'id':item_id}, projection={'_id':0})
     
     def get_items(self, gender: str, body_part: str):
         return self.db.get_collection('catalog').find(filter={'gender':gender, 'body_part':body_part}, projection={'_id':0})
