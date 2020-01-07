@@ -10,25 +10,44 @@ import json
 
 class Database:
     def __init__(self):
-        self.client = MongoClient("mongo:27017", username='root', password='root')
+        self.client = MongoClient("localhost:27017", username='root', password='root')
         self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
 
-    def add_like(self, user_id: int, user_gender: str, new_like: Item):
+    def add_like(self, user_id: int, item_id: int):
         users_likes = self.db.get_collection(name='likes')
+        catalog = self.db.get_collection(name='catalog')
         
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id, "user_gender": user_gender,"likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
-            users_likes.insert_one(new_user)
+            return "User not found."
+
+        if not catalog.find_one(filter={'item_id':item_id}):
+            return "Item not found."
         
-        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
+        new_like = catalog.find_one(filter={'item_id':item_id})
+
+        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like['body_part'] : new_like}})
         return "Inserted!"
     
+    def add_user(self, user: dict):
+        likes = self.db.get_collection('likes')
+        new_user = {"user_id":user['id'], "user_gender": user['gender'],"likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
+        likes.insert_one(new_user)
+        return "Inserted"
+
         
-    def rm_like(self, user_id: int, item_id: int, body_part: str):
+    def rm_like(self, user_id: int, item_id: int):
         users_likes = self.db.get_collection(name='likes')
-        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'likes.'+body_part:{'id':item_id}} })
+        catalog = self.db.get_collection(name='catalog')
+
+        if not catalog.find_one(filter={'item_id':item_id}):
+            return "Item not found."
+
+        body_part = catalog.find_one(filter={'item_id':item_id})['body_part']
+
+
+        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'likes.'+body_part:{'item_id':item_id}} })
         return "Deleted!"
 
     def get_user(self, user_id:int):
