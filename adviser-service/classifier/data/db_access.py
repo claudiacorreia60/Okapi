@@ -61,10 +61,10 @@ class Database:
     
     def get_item(self, item_id: int):
         catalog = self.db.get_collection('catalog')
-        if not catalog.find_one(filter={'id':item_id}, projection={'_id':0}):
+        if not catalog.find_one(filter={'item_id':item_id}, projection={'_id':0}):
             return None
 
-        return catalog.find_one(filter={'id':item_id}, projection={'_id':0})
+        return catalog.find_one(filter={'item_id':item_id}, projection={'_id':0})
     
     def get_items(self, gender: str, body_part: str):
         return self.db.get_collection('catalog').find(filter={'gender':gender, 'body_part':body_part}, projection={'_id':0})
