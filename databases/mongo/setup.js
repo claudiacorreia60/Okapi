@@ -1,5 +1,5 @@
 let res =[
-    db.auth('root', '27remb3jZ5FKY31f'),
+    db.auth('root', 'root'),
     db = db.getSiblingDB('adviser'),
-    db.createCollection('users-likes')
+    db.createCollection('likes')
 ]

@@ -24,12 +24,10 @@ mydb = mysql.connector.connect(
   use_unicode=True
 )
 
-mongoClient = pymongo.MongoClient('localhost:27016', username='root',password='root')
+mongoClient = pymongo.MongoClient('localhost:27016', username='root', password='root')
 adviserdb = mongoClient.adviser 
 
 print(mongoClient.list_database_names())
-
-
 
 # Open file
 csvfile = open('./data.csv', 'w+',)
@@ -268,6 +266,26 @@ for product in products:
 
 print('Total items:', total_items)
 print('Used items:', total_parents)
+
+# ADD A USER, remove later
+def load_user():
+    new_like = { 
+        'user_id': 1,
+        'user_gender': 'M',
+        'likes': {
+            'upper': [],
+            'cover': [],
+            'bottom': [],
+            'feet': []
+        }
+    }
+        
+    likesColl = adviserdb['likes']
+
+    likesColl.insert_one(new_like)
+
+load_user()
+
 
 
 

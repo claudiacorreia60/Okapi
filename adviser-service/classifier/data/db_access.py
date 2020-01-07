@@ -10,7 +10,7 @@ import json
 
 class Database:
     def __init__(self):
-        self.client = MongoClient("mongo:27016", username='root', password='root')
+        self.client = MongoClient("mongo:27017", username='root', password='root')
         self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
@@ -19,7 +19,7 @@ class Database:
         users_likes = self.db.get_collection(name='likes')
         
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id, "user_gender": user_gender,"likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
+            new_user = {"user_id":user_id, "user_gender": user_gender,"likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
             users_likes.insert_one(new_user)
         
         users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
@@ -50,13 +50,13 @@ class Database:
     """     def add_likes(self, user_id:int, new_likes: ClothList):
         users_likes = self.db.get_collection(name='likes')
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id,"user_likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
+            new_user = {"user_id":user_id,"user_likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
             users_likes.insert_one(new_user)
 
         users_likes.update_one(filter={'user_id':user_id}, 
-                update={'$push':{'user_likes.upper_in' : {'$each': [ json.loads(like.json()) for like in new_likes.upper_in] }}})
+                update={'$push':{'user_likes.upper' : {'$each': [ json.loads(like.json()) for like in new_likes.upper] }}})
         users_likes.update_one(filter={'user_id':user_id}, 
-                update={'$push':{'user_likes.upper_out' : {'$each': [ json.loads(like.json()) for like in new_likes.upper_out] }}})
+                update={'$push':{'user_likes.cover' : {'$each': [ json.loads(like.json()) for like in new_likes.cover] }}})
         users_likes.update_one(filter={'user_id':user_id}, 
                 update={'$push':{'user_likes.bottom' : {'$each': [ json.loads(like.json()) for like in new_likes.bottom] }}})
         users_likes.update_one(filter={'user_id':user_id}, 
