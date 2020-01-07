@@ -885,6 +885,5 @@ Route.group(() => {
 
 
 Route.group(() => {
-  Route.get('/classify', 'Adviser/AdviserController')
-  Route.get('/advise', 'Adviser/AdviserController.advise')
-}).prefix('adivser')
+  Route.get('/suggest_outfit', 'Adviser/AdviserController.suggest')
+}).prefix('adviser')

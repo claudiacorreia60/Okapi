@@ -10,34 +10,61 @@ import json
 
 class Database:
     def __init__(self):
-        self.client = MongoClient("mongo:27016", username='root', password='root')
+        self.client = MongoClient("localhost:27017", username='root', password='root')
         self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
 
-    def add_like(self, user_id: int, user_gender: str, new_like: Item):
+    def add_like(self, user_id: int, item_id: int):
         users_likes = self.db.get_collection(name='likes')
+        catalog = self.db.get_collection(name='catalog')
         
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id, "user_gender": user_gender,"likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
-            users_likes.insert_one(new_user)
+            return "User not found."
+
+        if not catalog.find_one(filter={'item_id':item_id}):
+            return "Item not found."
         
-        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
+        new_like = catalog.find_one(filter={'item_id':item_id})
+
+        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like['body_part'] : new_like}})
         return "Inserted!"
     
+    def add_user(self, user: dict):
+        likes = self.db.get_collection('likes')
+        new_user = {"user_id":user['id'], "user_gender": user['gender'],"likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
+        likes.insert_one(new_user)
+        return "Inserted"
+
         
-    def rm_like(self, user_id: int, item_id: int, body_part: str):
+    def rm_like(self, user_id: int, item_id: int):
         users_likes = self.db.get_collection(name='likes')
-        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'likes.'+body_part:{'id':item_id}} })
+        catalog = self.db.get_collection(name='catalog')
+
+        if not catalog.find_one(filter={'item_id':item_id}):
+            return "Item not found."
+
+        body_part = catalog.find_one(filter={'item_id':item_id})['body_part']
+
+
+        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'likes.'+body_part:{'item_id':item_id}} })
         return "Deleted!"
 
     def get_user(self, user_id:int):
-        return self.db.get_collection('likes').find_one(filter={'user_id':user_id}, projection= {'_id':0})
+        likes = self.db.get_collection('likes')
+        if not likes.find_one(filter={'user_id':user_id}, projection= {'_id':0}):
+            return None
+
+        return likes.find_one(filter={'user_id':user_id}, projection= {'_id':0})
     
     # Métodos na coleção do catálogo
     
     def get_item(self, item_id: int):
-        return self.db.get_collection('catalog').find_one(filter={'id':item_id}, projection={'_id':0})
+        catalog = self.db.get_collection('catalog')
+        if not catalog.find_one(filter={'id':item_id}, projection={'_id':0}):
+            return None
+
+        return catalog.find_one(filter={'id':item_id}, projection={'_id':0})
     
     def get_items(self, gender: str, body_part: str):
         return self.db.get_collection('catalog').find(filter={'gender':gender, 'body_part':body_part}, projection={'_id':0})
@@ -50,13 +77,13 @@ class Database:
     """     def add_likes(self, user_id:int, new_likes: ClothList):
         users_likes = self.db.get_collection(name='likes')
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"user_id":user_id,"user_likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
+            new_user = {"user_id":user_id,"user_likes":{"upper":[],"cover":[],"bottom":[],"feet":[]}}
             users_likes.insert_one(new_user)
 
         users_likes.update_one(filter={'user_id':user_id}, 
-                update={'$push':{'user_likes.upper_in' : {'$each': [ json.loads(like.json()) for like in new_likes.upper_in] }}})
+                update={'$push':{'user_likes.upper' : {'$each': [ json.loads(like.json()) for like in new_likes.upper] }}})
         users_likes.update_one(filter={'user_id':user_id}, 
-                update={'$push':{'user_likes.upper_out' : {'$each': [ json.loads(like.json()) for like in new_likes.upper_out] }}})
+                update={'$push':{'user_likes.cover' : {'$each': [ json.loads(like.json()) for like in new_likes.cover] }}})
         users_likes.update_one(filter={'user_id':user_id}, 
                 update={'$push':{'user_likes.bottom' : {'$each': [ json.loads(like.json()) for like in new_likes.bottom] }}})
         users_likes.update_one(filter={'user_id':user_id}, 

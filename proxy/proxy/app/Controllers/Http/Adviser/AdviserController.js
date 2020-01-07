@@ -1,8 +1,13 @@
 'use strict'
 
+const axios = require('axios')
+const Env = use('Env')
+
 class AdviserController {
-    classify ({request, response}){
-        return axios.post(`${Env.get('ADVISER_MS')}/classify_outfit` , request.post())
+    suggest ({request, response}){
+        const params = request.get()
+
+        return axios.get(`${Env.get('ADVISER_MS')}/sugest_outfit` , {params})
             .then(data => {
                 return response.json(data.data)
             })
@@ -11,8 +16,22 @@ class AdviserController {
             })
     }
 
-    advise ({request, response, params: {user_id}}){
-        return axios.get(`${Env.get('ADVISER_MS')}/suggest_outfit/${user_id}` )
+    addLike ({request, response}){
+        const params = request.get()
+
+        return axios.get(`${Env.get('ADVISER_MS')}/sugest_outfit` , {params})
+            .then(data => {
+                return response.json(data.data)
+            })
+            .catch(err => {
+                return response.json(err)
+            })
+    }
+
+    addUser ({request, response}){
+        const params = request.get()
+
+        return axios.get(`${Env.get('ADVISER_MS')}/sugest_outfit` , {params})
             .then(data => {
                 return response.json(data.data)
             })
