@@ -14,7 +14,7 @@
         </div>
 
         <!-- Title -->
-        <h4>Welcome back!</h4>
+        <h4>Welcome!</h4>
         <p class="details">Please enter your details below</p>
 
         <!-- Form -->
@@ -153,6 +153,7 @@ export default {
         .then(r => {
                 console.log(r);
                 localStorage.setItem('user', JSON.stringify(r.data));
+                this.$root.$emit('sign-in', '');
                 this.$router.push('profiling');
             })
         .catch(err => console.log(err));
