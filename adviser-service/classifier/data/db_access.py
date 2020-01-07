@@ -10,7 +10,7 @@ import json
 
 class Database:
     def __init__(self):
-        self.client = MongoClient("localhost:27017", username='root', password='root')
+        self.client = MongoClient("mongo:27017", username='root', password='root')
         self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
