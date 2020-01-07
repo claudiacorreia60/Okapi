@@ -38,7 +38,9 @@ class LikeController {
         return axios.post(`${Env.get('USER_MS')}/likes/${user_id}/${item_id}`, request.post())
                     .then(res => {
 
-                        return response.json(res.data)
+
+
+                        return axios.post(`${Env.get('ADVISER_MS')}/add_like/${user_id}/${item_id}`, request.post())
 
                     })
                     .catch(err => {
