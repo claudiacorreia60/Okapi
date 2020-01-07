@@ -62,7 +62,9 @@ export default {
                 this.man_clothes.push(r[9]);
                 this.man_clothes.push(r[17]);
                 this.man_clothes.push(r[19]);
-                this.man_clothes.push(r[4]);})
+                this.man_clothes.push(r[4]);
+                this.$forceUpdate();
+                })
     .catch(err => console.log(err));
 
     fetch("http://localhost:3333/catalog/man?type[]=calçado", {
@@ -73,7 +75,9 @@ export default {
     })
     .then(r => r.json())
     .then(r => {this.man_clothes.push(r[1]);
-                this.man_clothes.push(r[5]);})
+                this.man_clothes.push(r[5]);
+                this.$forceUpdate();
+                })
     .catch(err => console.log(err));
   },
 };

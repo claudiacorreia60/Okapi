@@ -3,12 +3,12 @@ services:
   proxy:
     build: ./proxy/proxy
     ports:
-    - "3334:3334"
+    - "3333:3334"
     links:
     - catalog 
     - virtual_closet
     - users
-    - adviser
+#    - adviser
 
   catalog:
     build: ./catalog_management_service
