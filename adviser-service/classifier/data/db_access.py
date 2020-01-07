@@ -11,7 +11,7 @@ import json
 class Database:
     def __init__(self):
         self.client = MongoClient("mongodb+srv://admin:27remb3jZ5FKY31f@okapi-adviser-cluster-vcqku.gcp.mongodb.net/test?retryWrites=true&w=majority")
-        self.db = self.client.get_database(name='adviser-db')
+        self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
 
@@ -19,20 +19,20 @@ class Database:
         users_likes = self.db.get_collection(name='users-likes')
         
         if not users_likes.find_one(filter={'user_id':user_id}):
-            new_user = {"id":user_id, "gender": user_gender,"likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
+            new_user = {"user_id":user_id, "gender": user_gender,"likes":{"upper_in":[],"upper_out":[],"bottom":[],"feet":[]}}
             users_likes.insert_one(new_user)
         
-        users_likes.update_one(filter={'id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
+        users_likes.update_one(filter={'user_id':user_id}, update={'$push':{'likes.'+new_like.body_part : json.loads(new_like.json())}})
         return "Inserted!"
     
         
     def rm_like(self, user_id: int, item_id: int, body_part: str):
         users_likes = self.db.get_collection(name='users-likes')
-        users_likes.update_one(filter={'id':user_id}, update= {'$pull': {'likes.'+body_part:{'item_id':item_id}} })
+        users_likes.update_one(filter={'user_id':user_id}, update= {'$pull': {'likes.'+body_part:{'item_id':item_id}} })
         return "Deleted!"
 
     def get_user(self, user_id:int):
-        return self.db.get_collection('users-likes').find_one(filter={'id':user_id}, projection= {'_id':0})
+        return self.db.get_collection('users-likes').find_one(filter={'user_id':user_id}, projection= {'_id':0})
     
     # Métodos na coleção do catálogo
     
