@@ -55,6 +55,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `okapi_catalog`.`item` (
   `item_id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
   `brand_id` INT NOT NULL,
   `color_id` INT NULL,
   `type_id` INT NOT NULL,
