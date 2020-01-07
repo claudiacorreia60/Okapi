@@ -18,6 +18,12 @@ export default {
     UserNavBar,
   },
   mounted() {
+      if (localStorage.getItem('user') == null) {
+          this.loggedIn = false;
+      } else {
+          this.loggedIn = true;
+      }
+
       this.$root.$on('sign-in', () => {
         if (localStorage.getItem('user') == null) {
             this.loggedIn = false;

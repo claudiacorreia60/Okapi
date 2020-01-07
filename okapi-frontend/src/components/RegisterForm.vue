@@ -134,7 +134,6 @@ export default {
   },
   methods: {
     register() {
-        console.log(this.form.birthday);
         fetch("http://localhost:3333/users/", {
             headers: {
               'Content-Type': 'application/json',

@@ -643,6 +643,7 @@ export default {
   },
   data() {
     return {
+      user_id: null,
       hover: false,
       id_item: 0,
       step: 0,
@@ -670,41 +671,26 @@ export default {
   mounted() {
     this.advise();
 
-    fetch("http://localhost:3333/catalog/man?color[]=verde", {
+    this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
+
+    fetch("http://localhost:3333/closet/" + this.user_id, {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
     })
     .then(r => r.json())
-    .then(r => {this.closet.push(r[1]);
-                this.closet.push(r[2]);
-                this.closet.push(r[9]);
-                this.closet.push(r[17]);
-                this.closet.push(r[19]);
-                this.closet.push(r[4]);
-                this.fetch_calcado()})
+    .then(r => {this.closet = r;
+                this.upper_closet_all = this.closet.filter(x => x.type.body_part === 'upper');
+                this.coat_closet_all = this.closet.filter(x => x.type.body_part === 'cover');
+                this.lower_closet_all = this.closet.filter(x => x.type.body_part === 'bottom');
+                this.shoes_closet_all = this.closet.filter(x => x.type.body_part === 'feet');
+                this.$forceUpdate();
+                })
     .catch(err => console.log(err));
+
   },
   methods: {
-      fetch_calcado() {
-        fetch("http://localhost:3333/catalog/man?type[]=calçado", {
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
-            }
-        })
-        .then(r => r.json())
-        .then(r => {this.closet.push(r[1]);
-                    this.closet.push(r[5]);
-                    this.upper_closet_all = this.closet.filter(x => x.type.body_part === 'upper');
-                    this.coat_closet_all = this.closet.filter(x => x.type.body_part === 'cover');
-                    this.lower_closet_all = this.closet.filter(x => x.type.body_part === 'bottom');
-                    this.shoes_closet_all = this.closet.filter(x => x.type.body_part === 'feet');
-                    this.$forceUpdate();
-                    })
-        .catch(err => console.log(err));
-      },
       showModal(type) {
         if (type == "upper") {
             this.$refs['upper-modal'].show()
