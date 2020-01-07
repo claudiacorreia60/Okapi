@@ -12,18 +12,18 @@
             :alt="item.reference"
             class="text-center mb-2 like"
             :id="item.item_id"
-            @click="like(item.item_id)"
+            @click="dislike(item.item_id)"
           >
             <div class="middle">
               <unicon name="heart" class="like-icon" fill="white"></unicon>
-              LIKE
+              LIKED
             </div>
           </b-card>
           <b-card
             v-else
             class="text-center mb-2 dislike"
             :id="item.item_id"
-            @click="dislike(item.item_id)"
+            @click="like(item.item_id)"
           >
             <b-card-img :src="item.photo" :alt="item.reference"></b-card-img>
             <div class="middle">
@@ -64,13 +64,9 @@ export default {
     })
     .then(r => r.json())
     .then(r => { this.items = r.slice(0,6);
+                  this.$forceUpdate();
                   this.fetch2();})
     .catch(err => console.log(err));
-    
-    this.items_like = this.items.reduce((acc, cur) => {
-      acc[cur.item_id] = false;
-      return acc;
-    }, {});
   },
   methods: {
     like(id) {
@@ -82,7 +78,7 @@ export default {
       console.log('dislike');
     },
     fetch2() {
-      fetch("http://localhost:3333/catalog/man?color[=Amarelo]", {
+      fetch("http://localhost:3333/catalog/man?color[]=Amarelo", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -90,11 +86,12 @@ export default {
       })
       .then(r => r.json())
       .then(r => { this.items = this.items.concat(r.slice(0,6));
-                   fetch3();})
+                   this.$forceUpdate();
+                   this.fetch3();})
       .catch(err => console.log(err));
     },
     fetch3() {
-      fetch("http://localhost:3333/catalog/man?color=Vermelho&type[=calças e calçoes]", {
+      fetch("http://localhost:3333/catalog/man?color[]=Vermelho&type[]=calças e calçoes", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -102,18 +99,24 @@ export default {
       })
       .then(r => r.json())
       .then(r => { this.items = this.items.concat(r.slice(0,6));
-                    fetch4();})
+                   this.$forceUpdate();
+                   this.fetch4();})
       .catch(err => console.log(err));
     },
     fetch4() {
-      fetch("http://localhost:3333/catalog/man?color=Castanho&type[=calçado]", {
+      fetch("http://localhost:3333/catalog/man?color[]=Castanho&type[]=calçado", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
           }
       })
       .then(r => r.json())
-      .then(r => { this.items = this.items.concat(r.slice(0,6)); this.$forceUpdate(); })
+      .then(r => { this.items = this.items.concat(r.slice(0,6));
+                    this.$forceUpdate();
+                    this.items_like = this.items.reduce((acc, cur) => {
+                    acc[cur.item_id] = false;
+                    return acc;
+                  }, {});})
       .catch(err => console.log(err));
     }
   },
