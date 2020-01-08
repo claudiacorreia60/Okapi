@@ -22,7 +22,6 @@ class ItemController {
                                     params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'M')
-                                .orderBy('price', sort)
                                 .forPage(page, perpage)
                                 .fetch()
         
@@ -48,7 +47,6 @@ class ItemController {
                                     params.type ? builder.where('name', 'in', params.type) : true
                                 }, '>', 0)
                                 .where('gender', 'W')
-                                .orderBy('price', sort)
                                 .forPage(page, perpage)
                                 .fetch()
         
