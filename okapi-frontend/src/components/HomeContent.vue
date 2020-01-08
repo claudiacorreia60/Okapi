@@ -15,17 +15,17 @@
     <b-container fluid>
       <b-row align-v="center" id="actions" class="text-center">
         <b-col sm="12" md="4" id="women" align-self="center">
-            <router-link class="router ml-auto mr-auto mt-5" to="/women">
+            <router-link class="router ml-auto mr-auto mt-5" to="/catalog/woman">
               <h1 class="category">WOMEN</h1>
             </router-link>
         </b-col>
         <b-col sm="12" md="4" id="outfit" align-self="center">
-            <router-link class="router ml-auto mr-auto mt-5" to="/createOutfit">
+            <router-link class="router ml-auto mr-auto mt-5" to="/adviser">
             <h1 class="category-o">OUTFITS</h1>
             </router-link>
         </b-col>
         <b-col sm="12" md="4" id="men" align-self="center">
-            <router-link class="router ml-auto mr-auto mt-5" to="/men">
+            <router-link class="router ml-auto mr-auto mt-5" to="/catalog/man">
             <h1 class="category">MEN</h1>
             </router-link>
         </b-col>

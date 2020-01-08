@@ -19,7 +19,6 @@
     <b-row align-v="center" align-h="center" class="text-center">
       <router-link class="about-r" to="/about">
       About us
-      </router-link>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
       <router-link class="about-r" to="/partnerships">
@@ -27,24 +26,24 @@
       </router-link>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
-      <router-link class="about-r" to="/insights">
+      <span class="about-r">
       Insights
-      </router-link>
+      </span>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
-      <router-link class="about-r" to="/termsOfUse">
+      <span class="about-r">
     Terms of use
-      </router-link>
+      </span>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
-      <router-link class="about-r" to="/privacyPolice">
+      <span class="about-r">
     Privacy policy of use
-      </router-link>
+      </span>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center mb-5">
-      <router-link class="about-r" to="/contacts">
+      <span class="about-r">
       Contacts
-      </router-link>
+      </span>
     </b-row>
   </b-container>
 </template>

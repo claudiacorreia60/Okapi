@@ -66,7 +66,7 @@
 
           <!-- Buttons -->
           <div>
-            <b-button class="signin-button" type="submit">Sign in</b-button>
+            <b-button @click="login()" class="signin-button" type="submit">Sign in</b-button>
           </div>
         </b-form>
 
@@ -96,8 +96,32 @@ export default {
     };
   },
   methods: {
+    login() {
+        fetch("http://localhost:3333/users", {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+            method: "GET"
+        })
+        .then(r => r.json())
+        .then(r => {
+                let user = r.filter(x => x.username == this.form.email.slice(0,6));
+                if (user.length > 0) {
+                    user = user[0];
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.$root.$emit('sign-in', '');
+                    let gender = "man"
+                    if (user.gender == "f") {
+                       gender = "woman" 
+                    }
+                    this.$router.push('catalog/' + gender)
+                }
+            })
+        .catch(err => console.log(err));
+    },
     onSubmit() {
-      alert(JSON.stringify(this.form));
+      //alert(JSON.stringify(this.form));
     },
   },
 };
