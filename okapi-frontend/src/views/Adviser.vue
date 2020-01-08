@@ -779,7 +779,12 @@ export default {
 
     this.advise();
 
-    this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    this.user_id = user.user_id;
+    if (user.gender == "f") {
+        this.gender = "woman";
+    }
 
     fetch("http://localhost:3333/closet/" + this.user_id, {
         headers: {
@@ -799,6 +804,20 @@ export default {
 
   },
   methods: {
+      catalog_selection(x) {
+        if (x.body_part == "upper") {
+            this.selectUpper('upper_catalog', x.item);
+        }
+        if (x.body_part == "coat") {
+            this.selectCoat('coat_catalog', x.item);
+        }
+        if (x.body_part == "lower") {
+            this.selectLower('lower_catalog', x.item);
+        }
+        if (x.body_part == "shoes") {
+            this.selectShoes('shoes_catalog', x.item);
+        }
+      },
       showModal(type) {
         if (type == "upper") {
             this.$refs['upper-modal'].show()

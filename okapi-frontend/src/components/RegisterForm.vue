@@ -127,8 +127,8 @@ export default {
         birthday: new Date(),
       },
       options: [
-        { text: 'Male', value: 'male' },
-        { text: 'Female', value: 'female' },
+        { text: 'Male', value: 'm' },
+        { text: 'Female', value: 'f' },
       ],
     };
   },
@@ -145,7 +145,7 @@ export default {
                 username: this.form.email.slice(0,6),
                 gender: this.form.gender,
                 birthday: this.form.birthday,
-                photo: ''
+                photo: " "
             })
         })
         .then(r => r.json())
