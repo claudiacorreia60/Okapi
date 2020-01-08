@@ -1,12 +1,12 @@
 <template>
   <b-jumbotron fluid>
     <div class="title">YOUR PROFILE</div>
-    <b-row align-v="center" align-h="center" class="mt-5 bottom">
+    <b-row align-v="center" align-h="center" class="mt-3 bottom">
         <b-col cols="12" class="personal">
             <b-card
                 :img-src="user.photo"
                 img-left
-                class="mb-5"
+                class="mb-4"
               >
                 <b-card-title>
                   <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>

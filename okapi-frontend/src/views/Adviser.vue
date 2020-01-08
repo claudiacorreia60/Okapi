@@ -113,8 +113,10 @@
                   :alt="closet_items_upper[0].reference"
                   class="mb-2 no-border">
                   <div class="description">
-                    {{closet_items_upper[0].brand.name.toUpperCase()}} - {{closet_items_upper[0].type.body_part.toUpperCase()}}
+                    {{closet_items_upper[0].brand.name.toUpperCase()}}
                   </div>
+                  <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+                  <div v-else class="price">Price not defined</div>
                 </b-card>
               <b-row align-h="center">
                 <div class="advise-button" v-if="closet_items_upper.length == 0">
@@ -158,8 +160,10 @@
                   :alt="closet_items_coat[0].reference"
                   class="mb-2 no-border">
                   <div class="description">
-                    {{closet_items_coat[0].brand.name.toUpperCase()}} - {{closet_items_coat[0].type.body_part.toUpperCase()}}
+                    {{closet_items_coat[0].brand.name.toUpperCase()}}
                   </div>
+                  <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+                  <div v-else class="price">Price not defined</div>
                 </b-card>
               <b-row align-h="center">
                 <div class="advise-button" v-if="closet_items_coat.length == 0">
@@ -203,8 +207,10 @@
                 :alt="closet_items_lower[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_lower[0].brand.name.toUpperCase()}} - {{closet_items_lower[0].type.body_part.toUpperCase()}}
+                  {{closet_items_lower[0].brand.name.toUpperCase()}}
                 </div>
+                <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+                <div v-else class="price">Price not defined</div>
               </b-card>
               <b-row align-h="center">
                 <div class="advise-button" v-if="closet_items_lower.length == 0">
@@ -248,8 +254,10 @@
                 :alt="closet_items_shoes[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_shoes[0].brand.name.toUpperCase()}} - {{closet_items_shoes[0].type.body_part.toUpperCase()}}
+                  {{closet_items_shoes[0].brand.name.toUpperCase()}}
                 </div>
+                <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+                <div v-else class="price">Price not defined</div>
               </b-card>
               <b-row align-h="center">
                 <div class="advise-button" v-if="closet_items_shoes.length == 0">
@@ -295,7 +303,7 @@
               >
                 <b-row align-h="center" align-v="center" class="advise-card">
                   <div class="body-part mb-3">UPPER BODY</div>
-                  <a @click="seeDetails(item)">
+                  <a @click="seeDetails(adviser_upper[0])">
                   <b-card
                     :img-src="adviser_upper[0].photo"
                     img-top
@@ -306,7 +314,7 @@
                     <div class="details" v-if="hover & id_item === adviser_upper[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_upper[0].brand.name.toUpperCase()}} - {{adviser_upper[0].type.body_part.toUpperCase()}}
+                        {{adviser_upper[0].brand.name.toUpperCase()}}
                       </div>
                       <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -345,7 +353,7 @@
               >
                 <b-row align-h="center" align-v="center" class="advise-card">
                   <div class="body-part mb-3">COAT</div>
-                  <a :href="adviser_coat[0].url">
+                  <a @click="seeDetails(adviser_coat[0])">
                   <b-card
                     :img-src="adviser_coat[0].photo"
                     img-top
@@ -356,7 +364,7 @@
                     <div class="details" v-if="hover & id_item === adviser_coat[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_coat[0].brand.name.toUpperCase()}} - {{adviser_coat[0].type.body_part.toUpperCase()}}
+                        {{adviser_coat[0].brand.name.toUpperCase()}}
                       </div>
                       <div v-if="adviser_coat[0].price > 0" class="price">{{adviser_coat[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -395,7 +403,7 @@
             >
               <b-row align-h="center" align-v="center" class="advise-card">
                 <div class="body-part mb-3">BOTTOM</div>
-                <a :href="adviser_lower[0].url">
+                <a @click="seeDetails(adviser_lower[0])">
                   <b-card
                     :img-src="adviser_lower[0].photo"
                     img-top
@@ -406,7 +414,7 @@
                     <div class="details" v-if="hover & id_item === adviser_lower[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_lower[0].brand.name.toUpperCase()}} - {{adviser_lower[0].type.body_part.toUpperCase()}}
+                        {{adviser_lower[0].brand.name.toUpperCase()}}
                       </div>
                       <div v-if="adviser_lower[0].price > 0" class="price">{{adviser_lower[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -445,7 +453,7 @@
             >
               <b-row align-h="center" align-v="center" class="advise-card">
                 <div class="body-part mb-3">FEET</div>
-                <a :href="adviser_shoes[0].url">
+                <a @click="seeDetails(adviser_shoes[0])">
                   <b-card
                     :img-src="adviser_shoes[0].photo"
                     img-top
@@ -456,7 +464,7 @@
                     <div class="details" v-if="hover & id_item === adviser_shoes[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_shoes[0].brand.name.toUpperCase()}} - {{adviser_shoes[0].type.body_part.toUpperCase()}}
+                        {{adviser_shoes[0].brand.name.toUpperCase()}}
                       </div>
                       <div v-if="adviser_shoes[0].price > 0" class="price">{{adviser_shoes[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -537,6 +545,8 @@
               <div class="description">
                 {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
+              <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+              <div v-else class="price">Price not defined</div>
             </b-card>
           </b-col>
         </b-card-group>
@@ -572,6 +582,8 @@
               <div class="description">
                 {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
+              <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+              <div v-else class="price">Price not defined</div>
             </b-card>
           </b-col>
         </b-card-group>
@@ -607,6 +619,8 @@
               <div class="description">
                 {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
+              <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+              <div v-else class="price">Price not defined</div>
             </b-card>
           </b-col>
         </b-card-group>
@@ -642,6 +656,8 @@
               <div class="description">
                 {{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}
               </div>
+              <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
+              <div v-else class="price">Price not defined</div>
             </b-card>
           </b-col>
         </b-card-group>
@@ -659,7 +675,7 @@
       <b-container fluid>
         <b-row align-v="start" align-h="center" class="mt-5">
             <b-col cols="3" id="filters">
-              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'" :type="['Camisas', 'Camisolas', 'Sweats', 'Túnicas e tops']"/>
             </b-col>
             <b-col cols="9">
               <AdviserCatalogContent :gender="gender" type="camisas" body_part="upper"/> 
@@ -679,7 +695,7 @@
       <b-container fluid>
         <b-row align-v="start" align-h="center" class="mt-5">
             <b-col cols="3" id="filters">
-              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'" :type="['Casacos', 'Blazers']"/>
             </b-col>
             <b-col cols="9">
               <AdviserCatalogContent :gender="gender" type="casacos" body_part="coat"/> 
@@ -699,7 +715,7 @@
       <b-container fluid>
         <b-row align-v="start" align-h="center" class="mt-5">
             <b-col cols="3" id="filters">
-              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'" :type="['Calças e calçoes', 'Saias']"/>
             </b-col>
             <b-col cols="9">
               <AdviserCatalogContent :gender="gender" type="calças e calçoes" body_part="lower"/> 
@@ -719,7 +735,7 @@
       <b-container fluid>
         <b-row align-v="start" align-h="center" class="mt-5">
             <b-col cols="3" id="filters">
-              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'" type="Calçado"/>
             </b-col>
             <b-col cols="9">
               <AdviserCatalogContent :gender="gender" type="calçado" body_part="shoes"/> 
@@ -971,6 +987,10 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  cursor: pointer;
+}
+
 .closet-item {
   cursor: pointer;
 }
