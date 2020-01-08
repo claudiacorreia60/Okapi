@@ -1,93 +1,112 @@
 <template>
-  <div class="about">
-    <UserNavBar v-if="loggedIn"/>
-    <HomeNavBar v-else/>
-    <b-jumbotron id="about" fluid>
-        <h1 style="text-align:center;color:white" >About Us!</h1>
-    </b-jumbotron>
-    <b-jumbotron id="text" fluid>
-        <h4 style="color:black;" >Okapi is an intelligent fashion adviser that helps you getting
-          ready and fashionable for every occasion of your day. </h4>
-        <h4 style="color:black;" > With Okapi you can search for any piece of clothing that you
+  <b-container class="about">
+    <div>
+      <br><br>
+      <h4>About Us!</h4>
+      </div>
+      <br><br>
+    <div id="text">
+        <h5>Okapi is an intelligent fashion adviser that helps you getting
+          ready and fashionable for every occasion of your day. </h5>
+        <h5> With Okapi you can search for any piece of clothing that you
           like and try to combine it with others in order to complete your dream outfit.
           You can also resort to our AI advisor to try to fill in the gaps of your outfit
           or to create an entire new one from scratch. You can also give feedback about an item or
-          save it in your personal closet for further outfit combining usage.</h4>
-    </b-jumbotron>
-    <b-jumbotron id="team1" fluid>
-      <h3 style="text-align:center;color:black">Meet our Team</h3>
-      <b-row class="image" align-h="center" align-v="center">
-        <img class="icon" alt="Okapi team" src="../assets/logoteam.png">
-        <img class="team" src="../assets/team.png" style="center">
-      </b-row>
-       </b-jumbotron>
+          save it in your personal closet for further outfit combining usage.</h5>
+    </div>
+    <br><br>
+    <div class="row mb-5">
+      <div class="column">
+    <img src="../assets/paulinha_1.jpg" style="width:100%">
+    <img src="../assets/pollard.jpg" style="width:100%">
   </div>
+  <div class="column">
+    <img src="../assets/saiyan.jpg" style="width:100%">
+    <img src="../assets/tippler.png" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="../assets/skits.jpg" style="width:100%">
+    <img src="../assets/bolt.jpg" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="../assets/slav.jpg" style="width:100%">
+    <img src="../assets/sabatico.jpg" style="width:100%">
+  </div>
+</div>
+  </b-container>
 </template>
 
-<script>
-// @ is an alias to /src
-import HomeNavBar from '@/components/HomeNavBar.vue';
-import UserNavBar from '@/components/UserNavBar.vue';
-
-export default {
-  name: 'about',
-  components: {
-    HomeNavBar,
-    UserNavBar,
-  },
-  data() {
-    return {
-      data: null,
-    };
-  },
-};
-</script>
-
+<script></script>
 <style lang="scss">
-#about {
-  background: linear-gradient(to top, #521706 0%, #c44409 100%);
-  background-size: cover;
-  background-position: center;
+
+h4 {
+  text-align: center;
+  color: #2B1E02;
+}
+
+h5 {
+  color: #2B1E02;
+}
+
+.about{
   background-color: white;
-  margin-bottom: 0px;
-  border: 1px solid rgb(211, 124, 11);
-  margin: auto;
-  padding: 25px
+  margin-top: -20px;
 }
 
 #text {
-  margin-bottom: 0;
   background-color: white;
-
-
+  margin-top: -20px;
 }
 
 #team1{
   background-color: white;
 }
 
-.image:hover .team{
-  display: inline;
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+  margin-top: -13px;
 }
 
-.icon{
-  width: 7cm;
-  height: 6cm
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
 }
 
-.image .team{
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 10;
-        z-index:99;
-    }
-
-.image{
-  margin-left: auto;
-  margin-right: auto;
-  width: 15%;
-  height: 150px;
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
 }
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each
+other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
 
 </style>

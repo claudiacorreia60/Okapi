@@ -23,7 +23,8 @@ Vue.config.productionTip = false;
 // Use BooststrapVue
 Vue.use(BootstrapVue);
 
-Unicon.add([uniSearch, uniFacebookF, uniInstagram, uniTwitter, uniGlobe, uniUser, uniTimes]);
+Unicon.add([uniSearch, uniFacebookF, uniInstagram, uniTwitter, uniGlobe, uniUser,
+  uniTimes]);
 Vue.use(Unicon);
 
 new Vue({
