@@ -2,22 +2,17 @@
   <b-container fluid>
     <b-row>
       <b-card-group>
-        <b-col md="4" sm="6" align-self="center" v-for="item in clothes" v-bind:key="item.item_id">
-          <a @click="seeDetails(item)">
+        <b-col md="6" sm="12" align-self="center" v-for="item in clothes" v-bind:key="item.item_id">
+          <a @click="selectItem(item)">
             <b-card
                 :img-src="item.photo"
                 img-top
                 :alt="item.reference"
                 class="mb-2"
                 :id="item.item_id"
-                @mouseover="hover = true; id_item = item.item_id"
-                @mouseleave="hover = false"
             >
-              <div class="details" v-if="hover & id_item === item.item_id">SEE DETAILS</div>
-              <div v-else>
+              <div>
                 <div class="description">{{item.brand.name.toUpperCase()}} - {{item.type.body_part.toUpperCase()}}</div>
-                <div v-if="item.price > 0" class="price">{{item.price}}€</div>
-                <div v-else class="price">Price not defined</div>
               </div>
             </b-card>
           </a>
@@ -51,7 +46,12 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: 'catalogContent',
+  name: 'adviserCatalogContent',
+  props: [
+    'gender',
+    'body_part',
+    'type',
+  ],
   components: {
   },
   data() {
@@ -64,46 +64,17 @@ export default {
       is_next: true,
       sort: '',
       types: [
-        'Casacos',
-        'Fatos',
-        'Blazers',
-        'Calças e calçoes',
-        'Vestidos',
-        'Saias',
-        'Camisolas',
-        'Sweats',
-        'Camisas',
-        'Túnicas e tops',
-        'Calçado',
       ],
       brands: [
-        'Ana Sousa',
-        'Decenio',
-        'Lion of Porches',
-        'Minga London',
       ],
       colors: [
-        'Azul',
-        'Castanho',
-        'Amarelo',
-        'Vermelho',
-        'Verde',
-        'Bordeaux',
-        'Rosa',
-        'Beje',
-        'Branco',
-        'Cinza',
-        'Telha',
-        'Camel',
-        'Preto',
-        'Salmão',
-        'Laranja',
-        'Pessego',
-        'Kaki',
       ],
+      query: 'type[]=',
     };
   },
   mounted() {
+    this.query = this.query + this.type;
+
     this.$root.$on('filter-price', a => {
         if (a == "price_low") {
             this.sort = 'asc';
@@ -134,9 +105,11 @@ export default {
     fetchClothes() {
         let query = "";
 
-        query = this.toString(this.$route.query, this.page);
+        query = this.toString(this.query, this.page);
 
-        fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
+        console.log("http://localhost:3333/catalog/" + this.gender+query);
+
+        fetch("http://localhost:3333/catalog/"+this.gender+query, {
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*'
@@ -172,25 +145,23 @@ export default {
         return true;
     },
     toString(obj, n_page) {
-        let r = "?page=" + n_page + '&perpage=18&';
+        let r = "?page=" + n_page + '&perpage=6&';
         if (this.sort.length > 0) r = r + "sort=" + this.sort + "&";
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-               r = r + key + "[]=" + obj[key] + "&" 
+        
+        r = r + obj + '&'; 
+        if (this.isEmpty(this.$route.query)) {
+          for(var i in this.types)
+              r = r + "type[]=" + this.types[i] + "&"
+          for(var i in this.colors)
+              r = r + "color[]=" + this.colors[i] + "&"
         }
 
-        if (this.isEmpty(this.$route.query)) {
-            for(var i in this.types)
-                r = r + "type[]=" + this.types[i] + "&"
-            for(var i in this.colors)
-                r = r + "color[]=" + this.colors[i] + "&"
-        }
         return r;
     },
     checkNext() {
       let query = "";
-      query = this.toString(this.$route.query, (this.page + 1));
-      fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
+      query = this.toString(this.query, (this.page + 1));
+      fetch("http://localhost:3333/catalog/"+this.gender+query, {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -215,9 +186,9 @@ export default {
       this.page = this.page - 1;
 
       let query = "";
-      query = this.toString(this.$route.query, this.page);
+      query = this.toString(this.query, this.page);
 
-      fetch("http://localhost:3333/catalog/"+this.$route.params.gender+query, {
+      fetch("http://localhost:3333/catalog/"+this.gender+query, {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
@@ -232,8 +203,8 @@ export default {
                   this.scrollToTop();})
       .catch(err => console.log(err));
     },
-    seeDetails(item){
-      this.$router.push({name: "details", params: {item: item}})
+    selectItem(item){
+      this.$root.$emit('adviser-content-selected', { item: item, body_part: this.body_part });
     }
   },
 };
@@ -295,6 +266,7 @@ export default {
 
 .card {
   border: none;
+  cursor: pointer;
 }
 
 a {
