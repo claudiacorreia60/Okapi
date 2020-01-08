@@ -576,7 +576,7 @@ Route.group(() => {
                 }]
         }
    */
-  Route.get('/women', 'Catalog/ItemController.indexWoman')
+  Route.get('/woman', 'Catalog/ItemController.indexWoman')
 
 /**
    * @api {get} /catalog/:item_id Show a specific item
