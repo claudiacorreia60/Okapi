@@ -20,7 +20,6 @@ import FilterCatalog from '@/components/FilterCatalog.vue';
 
 export default {
   name: 'catalog',
-  props: ['gender', 'type', 'color'],
   components: {
     CatalogContent,
     FilterCatalog,
