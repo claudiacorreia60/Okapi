@@ -20,7 +20,7 @@
                         Name
                       </div>
                       <div class="profile-elem">
-                        Email
+                        Username
                       </div>
                       <div class="profile-elem">
                         Gender
@@ -34,13 +34,13 @@
                         {{ user.name }}
                       </div>
                       <div class="profile-elem-val">
-                        {{ user.email }}
+                        {{ user.username }}
                       </div>
                       <div class="profile-elem-val">
-                        {{ user.gender }}
+                        {{ user.gender.toUpperCase() }}
                       </div>
                       <div class="profile-elem-val">
-                        {{ user.birthday }}
+                        {{ (new Date(user.birthday)).toLocaleDateString() }}
                       </div>
                       </b-col>
                     </b-row>
@@ -130,19 +130,34 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:3333/catalog/man", {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user.photo =
+    'https://www.evolutionsociety.org/userdata/news_picupload/pic_sid189-0-norm.jpg'
+
+    fetch("http://localhost:3333/likes/" + this.user.user_id, {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
     })
     .then(r => r.json())
-    .then(r => {this.saved.push(r[5]);
-                this.saved.push(r[10]);
-                this.saved.push(r[15]);
-                this.likes.push(r[14]);
-                this.likes.push(r[17]);
-                this.likes.push(r[7]);})
+    .then(r => { 
+        this.likes = r.slice(0, 3);
+        this.$forceUpdate();
+    })
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/saved/" + this.user.user_id, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => { 
+        this.saved = r.slice(0, 3);
+        this.$forceUpdate();
+    })
     .catch(err => console.log(err));
   },
 };

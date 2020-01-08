@@ -1,0 +1,4 @@
+*.ipynb_checkpoints
+classifier/__pycache__
+classifier/routers/__pycache__
+classifier/data/__pycache__

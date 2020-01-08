@@ -87,28 +87,96 @@ export default {
       liked: false,
       saved: false,
       closet: false,
+      user_id: null,
     };
   },
   mounted() {
+      this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
   },
   methods: {
     like() {
-      this.liked = true;
+      fetch("http://localhost:3333/likes/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "POST"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.liked = true;
+           })
+      .catch(err => console.log(err));
     },
     dislike() {
-      this.liked = false;
+      fetch("http://localhost:3333/likes/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.liked = false;
+           })
+      .catch(err => console.log(err));
     },
     save() {
-      this.saved = true;
+      fetch("http://localhost:3333/saved/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "POST"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.saved = true;
+           })
+      .catch(err => console.log(err));
     },
     unsave() {
-      this.saved = false;
+      fetch("http://localhost:3333/saved/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.saved = false;
+           })
+      .catch(err => console.log(err));
     },
     add_closet() {
-      this.closet = true;
+      fetch("http://localhost:3333/closet/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "POST"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.closet = true;
+           })
+      .catch(err => console.log(err));
     },
     remove_closet() {
-      this.closet = false;
+      fetch("http://localhost:3333/closet/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.closet = false;
+           })
+      .catch(err => console.log(err));
     },
     openTab(item) {
       window.open(item.url, '_blank');

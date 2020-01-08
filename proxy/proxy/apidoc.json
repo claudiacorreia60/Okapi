@@ -1,0 +1,6 @@
+{
+    "name": "Okapi API",
+    "version": "0.1.0",
+    "description": "The Okapi API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses and is fully protected with authentication.",
+    "title": "Okapi API Docs"
+  }

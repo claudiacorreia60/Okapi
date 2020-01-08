@@ -20,60 +20,29 @@ import FilterCatalog from '@/components/FilterCatalog.vue';
 
 export default {
   name: 'catalog',
-  props: ['gender', 'type', 'color'],
   components: {
     ClosetContent,
     FilterCatalog,
   },
   data() {
       return {
+        user_id: null,
         man_clothes: [],
       }
   },
   mounted() {
-    function isEmpty(obj) {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-                return false;
-        }
-        return true;
-    }
+    this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
 
-    function toString(obj) {
-        let r = "?"
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-               r = r + key + "=" + obj[key] + "&" 
-        }
-        return r;
-    }
-
-    let query = "";
-    if (!isEmpty(this.$route.query)) query = toString(this.$route.query);
-    fetch("http://localhost:3333/catalog/man?color[]=verde", {
+    fetch("http://localhost:3333/closet/" + this.user_id, {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         }
     })
     .then(r => r.json())
-    .then(r => {this.man_clothes.push(r[1]);
-                this.man_clothes.push(r[2]);
-                this.man_clothes.push(r[9]);
-                this.man_clothes.push(r[17]);
-                this.man_clothes.push(r[19]);
-                this.man_clothes.push(r[4]);})
-    .catch(err => console.log(err));
-
-    fetch("http://localhost:3333/catalog/man?type[]=calçado", {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
-    })
-    .then(r => r.json())
-    .then(r => {this.man_clothes.push(r[1]);
-                this.man_clothes.push(r[5]);})
+    .then(r => {this.man_clothes = r;
+                this.$forceUpdate();
+               })
     .catch(err => console.log(err));
   },
 };

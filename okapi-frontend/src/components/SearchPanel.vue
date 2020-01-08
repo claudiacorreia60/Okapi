@@ -17,8 +17,17 @@ export default {
   name: 'SearchPanel',
   data() {
     return {
+      gender: 'man',
       search: '',
     };
+  },
+  mounted() {
+    this.gender = JSON.parse(localStorage.getItem('user')).user_id.gender;
+    if (this.gender == 'm') {
+        this.gender = "man"
+    } else {
+        this.gender = "woman"
+    }
   },
   methods: {
       searchCatalog() {
@@ -29,14 +38,14 @@ export default {
           'saias', 'camisolas', 'sweats', 'camisas', 'túnicas e tops', 'calçado'];
 
           const words = this.search.split(" ");
-          const gender = this.getGender(words);
+          this.gender = this.getGender(words);
           this.search = words.filter(x => x != "homem" && x != "mulher").join(' ');
           if (colors.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?perpage=18&color[]="+this.search);
+            this.$router.push("catalog/" + this.gender + "?perpage=18&color[]="+this.search);
           } else if (types.indexOf(this.search.toLowerCase()) >= 0){
-            this.$router.push("catalog/" + gender + "?perpage=18&type[]="+this.search);
+            this.$router.push("catalog/" + this.gender + "?perpage=18&type[]="+this.search);
           } else {
-            this.$router.push("catalog/man?perpage=18");
+            this.$router.push("catalog/" + this.gender + "?perpage=18");
           }
       },
       getGender(words) {

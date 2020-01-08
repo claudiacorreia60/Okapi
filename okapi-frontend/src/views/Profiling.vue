@@ -68,23 +68,45 @@ export default {
         'calçado': [],
       },
       items_women: [],
+      user_id: null,
       items_like: {},
       items: [],
       keys: [],
     };
   },
   mounted() {
+    this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
 
     this.fetch_men_1();
   },
   methods: {
     like(id) {
-      this.items_like[id] = true;
-      console.log('like');
+      fetch("http://localhost:3333/likes/" + this.user_id + "/" + id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "POST"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.items_like[id] = true;
+           })
+      .catch(err => console.log(err));
     },
     dislike(id) {
-      this.items_like[id] = false;
-      console.log('dislike');
+      fetch("http://localhost:3333/likes/" + this.user_id + "/" + id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.items_like[id] = false;
+           })
+      .catch(err => console.log(err));
     },
     fetch_men_1() {
       fetch("http://localhost:3333/catalog/man?perpage=300&type[]=casacos", {
