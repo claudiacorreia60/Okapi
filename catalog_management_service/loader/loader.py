@@ -193,7 +193,7 @@ def load_to_mongo(item, item_id):
     if (item['category'] is not None):
     
         new_item = { 
-            'id': item_id ,
+            'item_id': item_id ,
             'body_part': db_bodyparts[item['category']],
             'gender': item['gender'], 
             'img_url': item['photo']
@@ -284,7 +284,7 @@ def load_user():
 
     likesColl.insert_one(new_like)
 
-load_user()
+#load_user()
 
 
 

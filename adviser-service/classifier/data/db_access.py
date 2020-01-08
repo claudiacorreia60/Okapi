@@ -10,7 +10,7 @@ import json
 
 class Database:
     def __init__(self):
-        self.client = MongoClient("localhost:27017", username='root', password='root')
+        self.client = MongoClient("mongo:27017", username='root', password='root')
         self.db = self.client.get_database(name='adviser')
 
     # Métodos na coleção de utilizadores
@@ -61,10 +61,10 @@ class Database:
     
     def get_item(self, item_id: int):
         catalog = self.db.get_collection('catalog')
-        if not catalog.find_one(filter={'id':item_id}, projection={'_id':0}):
+        if not catalog.find_one(filter={'item_id':item_id}, projection={'_id':0}):
             return None
 
-        return catalog.find_one(filter={'id':item_id}, projection={'_id':0})
+        return catalog.find_one(filter={'item_id':item_id}, projection={'_id':0})
     
     def get_items(self, gender: str, body_part: str):
         return self.db.get_collection('catalog').find(filter={'gender':gender, 'body_part':body_part}, projection={'_id':0})

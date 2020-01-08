@@ -66,7 +66,8 @@
     </b-card-text>
     <b-card-text class="mb-4">
       <div class="description">PRICE</div>
-      <div class="value">{{ item.price }}€</div>
+      <div v-if="item.price > 0" class="value">{{item.price}}€</div>
+      <div v-else class="value">Price not defined</div>
     </b-card-text>
     <div class="buy-button">
       <a :href="item.url" class="btn buy-btn">Buy item</a>

@@ -37,11 +37,10 @@ class LikeController {
     likeItem ({request, response, params: {user_id, item_id}}){
         return axios.post(`${Env.get('USER_MS')}/likes/${user_id}/${item_id}`, request.post())
                     .then(res => {
-
-
-
-                        return axios.post(`${Env.get('ADVISER_MS')}/add_like/${user_id}/${item_id}`, request.post())
-
+                        return axios.post(`${Env.get('ADVISER_MS')}/add_like?user_id=${user_id}&new_like=${item_id}`, request.post())
+                                    .then(res => {
+                                        return response.json(res.data)
+                                    })
                     })
                     .catch(err => {
 
@@ -57,7 +56,10 @@ class LikeController {
         return axios.delete(`${Env.get('USER_MS')}/likes/${user_id}/${item_id}`)
                     .then(res => {
 
-                        return response.json(res.data)
+                        return axios.delete(`${Env.get('ADVISER_MS')}/rm_like?user_id=${user_id}&item_id=${item_id}`)
+                        .then(res => {
+                            return response.json(res.data)
+                        })
 
                     })
                     .catch(err => {

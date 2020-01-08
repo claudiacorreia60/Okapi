@@ -90,7 +90,7 @@
         <b-tab id="tab2" active>
           <template v-slot:title>
             ① 
-            <span style="padding-left: 10px;">Add clothes from your closet</span>
+            <span style="padding-left: 10px;">Add clothes to your outfit</span>
           </template>
             <b-row align-h="center" align-v="center" class="elements">
               <b-card
@@ -113,19 +113,24 @@
                   :alt="closet_items_upper[0].reference"
                   class="mb-2 no-border">
                   <div class="description">
-                    {{closet_items_upper[0].brand.name.toUpperCase()}} - {{closet_items_upper[0].type.body_part}}
+                    {{closet_items_upper[0].brand.name.toUpperCase()}} - {{closet_items_upper[0].type.body_part.toUpperCase()}}
                   </div>
                 </b-card>
               <b-row align-h="center">
-                <div class="advise-button">
+                <div class="advise-button" v-if="closet_items_upper.length == 0">
                   <b-button
                     @click="showModal('upper')"
-                    v-if="closet_items_upper.length == 0"
                     class="mt-3 advise-btn">
-                    Select item
+                    Virtual Closet
                   </b-button>
                   <b-button
-                    v-else
+                    @click="showModal('upper_catalog')"
+                    class="mt-3 advise-btn">
+                    Catalog
+                  </b-button>
+                </div>
+                <div class="advise-button" v-else>
+                  <b-button
                     @click="clear('upper')"
                     class="mt-3 advise-btn">
                     Clear
@@ -153,19 +158,24 @@
                   :alt="closet_items_coat[0].reference"
                   class="mb-2 no-border">
                   <div class="description">
-                    {{closet_items_coat[0].brand.name.toUpperCase()}} - {{closet_items_coat[0].type.body_part}}
+                    {{closet_items_coat[0].brand.name.toUpperCase()}} - {{closet_items_coat[0].type.body_part.toUpperCase()}}
                   </div>
                 </b-card>
               <b-row align-h="center">
-                <div class="advise-button">
+                <div class="advise-button" v-if="closet_items_coat.length == 0">
                   <b-button
                     @click="showModal('coat')"
-                    v-if="closet_items_coat.length == 0"
                     class="mt-3 advise-btn">
-                    Select item
+                    Virtual Closet
                   </b-button>
                   <b-button
-                    v-else
+                    @click="showModal('coat_catalog')"
+                    class="mt-3 advise-btn">
+                    Catalog
+                  </b-button>
+                </div>
+                <div class="advise-button" v-else>
+                  <b-button
                     @click="clear('coat')"
                     class="mt-3 advise-btn">
                     Clear
@@ -193,19 +203,24 @@
                 :alt="closet_items_lower[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_lower[0].brand.name.toUpperCase()}} - {{closet_items_lower[0].type.body_part}}
+                  {{closet_items_lower[0].brand.name.toUpperCase()}} - {{closet_items_lower[0].type.body_part.toUpperCase()}}
                 </div>
               </b-card>
               <b-row align-h="center">
-                <div class="advise-button">
+                <div class="advise-button" v-if="closet_items_lower.length == 0">
                   <b-button
                     @click="showModal('lower')"
-                    v-if="closet_items_lower.length == 0"
                     class="mt-3 advise-btn">
-                    Select item
+                    Virtual Closet
                   </b-button>
                   <b-button
-                    v-else
+                    @click="showModal('lower_catalog')"
+                    class="mt-3 advise-btn">
+                    Catalog
+                  </b-button>
+                </div>
+                <div class="advise-button" v-else>
+                  <b-button
                     @click="clear('lower')"
                     class="mt-3 advise-btn">
                     Clear
@@ -233,19 +248,24 @@
                 :alt="closet_items_shoes[0].reference"
                 class="mb-2 no-border">
                 <div class="description">
-                  {{closet_items_shoes[0].brand.name.toUpperCase()}} - {{closet_items_shoes[0].type.body_part}}
+                  {{closet_items_shoes[0].brand.name.toUpperCase()}} - {{closet_items_shoes[0].type.body_part.toUpperCase()}}
                 </div>
               </b-card>
               <b-row align-h="center">
-                <div class="advise-button">
+                <div class="advise-button" v-if="closet_items_shoes.length == 0">
                   <b-button
                     @click="showModal('shoes')"
-                    v-if="closet_items_shoes.length == 0"
                     class="mt-3 advise-btn">
-                    Select item
+                    Virtual Closet
                   </b-button>
                   <b-button
-                    v-else
+                    @click="showModal('shoes_catalog')"
+                    class="mt-3 advise-btn">
+                    Catalog
+                  </b-button>
+                </div>
+                <div class="advise-button" v-else>
+                  <b-button
                     @click="clear('shoes')"
                     class="mt-3 advise-btn">
                     Clear
@@ -266,7 +286,7 @@
         <b-tab id="tab3" lazy>
             <template v-slot:title>
               ② 
-              <span style="padding-left: 10px;">Choose your outfit</span>
+              <span style="padding-left: 10px;">Ask for advice</span>
             </template>
             <b-row align-h="center" align-v="center" class="elements tab3">
               <b-card
@@ -286,7 +306,7 @@
                     <div class="details" v-if="hover & id_item === adviser_upper[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_upper[0].brand.name.toUpperCase()}} - {{adviser_upper[0].type.body_part}}
+                        {{adviser_upper[0].brand.name.toUpperCase()}} - {{adviser_upper[0].type.body_part.toUpperCase()}}
                       </div>
                       <div v-if="adviser_upper[0].price > 0" class="price">{{adviser_upper[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -336,7 +356,7 @@
                     <div class="details" v-if="hover & id_item === adviser_coat[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_coat[0].brand.name.toUpperCase()}} - {{adviser_coat[0].type.body_part}}
+                        {{adviser_coat[0].brand.name.toUpperCase()}} - {{adviser_coat[0].type.body_part.toUpperCase()}}
                       </div>
                       <div v-if="adviser_coat[0].price > 0" class="price">{{adviser_coat[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -386,7 +406,7 @@
                     <div class="details" v-if="hover & id_item === adviser_lower[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_lower[0].brand.name.toUpperCase()}} - {{adviser_lower[0].type.body_part}}
+                        {{adviser_lower[0].brand.name.toUpperCase()}} - {{adviser_lower[0].type.body_part.toUpperCase()}}
                       </div>
                       <div v-if="adviser_lower[0].price > 0" class="price">{{adviser_lower[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -436,7 +456,7 @@
                     <div class="details" v-if="hover & id_item === adviser_shoes[0].item_id">SEE DETAILS</div>
                     <div v-else>
                       <div class="description">
-                        {{adviser_shoes[0].brand.name.toUpperCase()}} - {{adviser_shoes[0].type.body_part}}
+                        {{adviser_shoes[0].brand.name.toUpperCase()}} - {{adviser_shoes[0].type.body_part.toUpperCase()}}
                       </div>
                       <div v-if="adviser_shoes[0].price > 0" class="price">{{adviser_shoes[0].price}}€</div>
                       <div v-else class="price">Price not defined</div>
@@ -534,7 +554,7 @@
       <b-container fluid>
         <b-card-group>
           <div v-if="coat_closet_all.length == 0">
-            There are no upper body items in your closet.
+            There are no coats in your closet.
           </div>
           <b-col
             v-else
@@ -569,7 +589,7 @@
       <b-container fluid>
         <b-card-group>
           <div v-if="lower_closet_all.length == 0">
-            There are no upper body items in your closet.
+            There are no bottoms items in your closet.
           </div>
           <b-col
             v-else
@@ -604,7 +624,7 @@
       <b-container fluid>
         <b-card-group>
           <div v-if="shoes_closet_all.length == 0">
-            There are no upper body items in your closet.
+            There are no shoes in your closet.
           </div>
           <b-col
             v-else
@@ -630,16 +650,101 @@
         <b-button class="mt-5 advise-btn" block @click="hideModal('shoes')">Cancel</b-button>
       </b-row>
     </b-modal>
+
+    <b-modal
+      ref="upper-catalog-modal"
+      hide-footer
+      title="Catalog - Upper body items"
+      size="xl">
+      <b-container fluid>
+        <b-row align-v="start" align-h="center" class="mt-5">
+            <b-col cols="3" id="filters">
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+            </b-col>
+            <b-col cols="9">
+              <AdviserCatalogContent :gender="gender" type="camisas" body_part="upper"/> 
+            </b-col>
+        </b-row>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('upper_catalog')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="coat-catalog-modal"
+      hide-footer
+      title="Catalog - Coats"
+      size="xl">
+      <b-container fluid>
+        <b-row align-v="start" align-h="center" class="mt-5">
+            <b-col cols="3" id="filters">
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+            </b-col>
+            <b-col cols="9">
+              <AdviserCatalogContent :gender="gender" type="casacos" body_part="coat"/> 
+            </b-col>
+        </b-row>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('coat_catalog')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="lower-catalog-modal"
+      hide-footer
+      title="Catalog - Bottom items"
+      size="xl">
+      <b-container fluid>
+        <b-row align-v="start" align-h="center" class="mt-5">
+            <b-col cols="3" id="filters">
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+            </b-col>
+            <b-col cols="9">
+              <AdviserCatalogContent :gender="gender" type="calças e calçoes" body_part="lower"/> 
+            </b-col>
+        </b-row>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('lower_catalog')">Cancel</b-button>
+      </b-row>
+    </b-modal>
+
+    <b-modal
+      ref="shoes-catalog-modal"
+      hide-footer
+      title="Catalog - Shoes"
+      size="xl">
+      <b-container fluid>
+        <b-row align-v="start" align-h="center" class="mt-5">
+            <b-col cols="3" id="filters">
+              <FilterCatalog :title="gender.toUpperCase() + '\'S CATALOG'"/>
+            </b-col>
+            <b-col cols="9">
+              <AdviserCatalogContent :gender="gender" type="calçado" body_part="shoes"/> 
+            </b-col>
+        </b-row>
+      </b-container>
+      <b-row align-h="center" class="advise-button">
+        <b-button class="mt-5 advise-btn" block @click="hideModal('shoes_catalog')">Cancel</b-button>
+      </b-row>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import AdviserCatalogContent from '@/components/AdviserCatalogContent.vue';
+import FilterCatalog from '@/components/FilterCatalog.vue';
+
 // @ is an alias to /src
 const cloths = require('../assets/cloths.json'); // with path
 
 export default {
   name: 'adviser',
   components: {
+    AdviserCatalogContent,
+    FilterCatalog,
   },
   data() {
     return {
@@ -666,9 +771,12 @@ export default {
       lower_closet_all: [],
       shoes_closet_all: [],
       closet: [],
+      gender: "man",
     };
   },
   mounted() {
+    this.$root.$on('adviser-content-selected', this.catalog_selection)
+
     this.advise();
 
     this.user_id = JSON.parse(localStorage.getItem('user')).user_id;
@@ -704,6 +812,18 @@ export default {
         if (type == "shoes") {
             this.$refs['shoes-modal'].show()
         }
+        if (type == "upper_catalog") {
+            this.$refs['upper-catalog-modal'].show()
+        }
+        if (type == "coat_catalog") {
+            this.$refs['coat-catalog-modal'].show()
+        }
+        if (type == "lower_catalog") {
+            this.$refs['lower-catalog-modal'].show()
+        }
+        if (type == "shoes_catalog") {
+            this.$refs['shoes-catalog-modal'].show()
+        }
       },
       hideModal(type) {
         if (type == "upper") {
@@ -718,25 +838,41 @@ export default {
         if (type == "shoes") {
             this.$refs['shoes-modal'].hide()
         }
+        if (type == "upper_catalog") {
+            this.$refs['upper-catalog-modal'].hide()
+        }
+        if (type == "coat_catalog") {
+            this.$refs['coat-catalog-modal'].hide()
+        }
+        if (type == "lower_catalog") {
+            this.$refs['lower-catalog-modal'].hide()
+        }
+        if (type == "shoes_catalog") {
+            this.$refs['shoes-catalog-modal'].hide()
+        }
       },
       selectUpper(id_modal, item) {
         this.adviser_upper = [item];
         this.closet_items_upper = [item];
+        this.lock_upper = true;
         this.hideModal(id_modal);
       },
       selectLower(id_modal, item) {
         this.adviser_lower = [item];
         this.closet_items_lower = [item];
+        this.lock_lower = true;
         this.hideModal(id_modal);
       },
       selectShoes(id_modal, item) {
         this.adviser_shoes = [item];
         this.closet_items_shoes = [item];
+        this.lock_shoes = true;
         this.hideModal(id_modal);
       },
       selectCoat(id_modal, item) {
         this.adviser_coat = [item];
         this.closet_items_coat = [item];
+        this.lock_coat = true;
         this.hideModal(id_modal);
       },
       refresh(type) {
@@ -778,16 +914,20 @@ export default {
       },
       clear(type) {
           if (type == "upper") {
-              this.closet_items_upper = []
+              this.closet_items_upper = [];
+              this.lock_upper = false;
           }
           if (type == "coat") {
-              this.closet_items_coat = []
+              this.closet_items_coat = [];
+              this.lock_coat = false;
           }
           if (type == "lower") {
-              this.closet_items_lower = []
+              this.closet_items_lower = [];
+              this.lock_lower = false;
           }
           if (type == "shoes") {
-              this.closet_items_shoes = []
+              this.closet_items_shoes = [];
+              this.lock_shoes = false;
           }
       },
       advise() {
@@ -823,11 +963,9 @@ export default {
 .question {
   font-size: 100px;
   color: #2B1E02;
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 15px;
-  border: solid 2px #2B1E02;
+  //  border: solid 2px #2B1E02;
   border-radius: 50%;
+  text-align: center;
 }
 
 .nav-tabs .nav-link {
@@ -835,8 +973,8 @@ export default {
   border: none;
   font-size: 16px;
   margin-top: 4%;
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .nav-tabs .nav-link.active {
@@ -866,6 +1004,10 @@ export default {
 .buttons {
   margin-left: 16%;
   margin-right: 16%;
+}
+
+.advise-button {
+  text-align: center;
 }
 
 .advise-button .btn {
