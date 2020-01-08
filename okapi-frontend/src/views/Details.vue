@@ -26,7 +26,7 @@
       </span>
       <span class="feature-value">Like</span>
     </b-card-text>
-    <b-card-text>
+    <b-card-text class="save">
       <span class="feature">
         <b-button
           v-if="!saved"
@@ -70,7 +70,7 @@
       <div v-else class="value">Price not defined</div>
     </b-card-text>
     <div class="buy-button">
-      <a :href="item.url" class="btn buy-btn">Buy item</a>
+      <a @click="openTab(item)" class="btn buy-btn">Buy item</a>
     </div>
   </b-card>
 </template>
@@ -110,6 +110,9 @@ export default {
     remove_closet() {
       this.closet = false;
     },
+    openTab(item) {
+      window.open(item.url, '_blank');
+    }
   }
 };
 </script>
@@ -202,6 +205,11 @@ export default {
 
 .like {
   margin-top: 6%;
+  margin-bottom: 0;
+}
+
+.save {
+  margin-bottom: 0;
 }
 
 .closet {

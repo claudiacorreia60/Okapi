@@ -295,6 +295,7 @@ export default {
 
 .card {
   border: none;
+  cursor: pointer;
 }
 
 a {

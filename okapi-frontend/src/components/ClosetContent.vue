@@ -56,6 +56,7 @@ export default {
 <style scoped lang="scss">
 .card {
   border: none;
+  cursor: pointer;
 }
 
 a {

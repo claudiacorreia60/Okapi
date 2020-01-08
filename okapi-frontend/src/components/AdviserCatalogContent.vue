@@ -73,7 +73,8 @@ export default {
     };
   },
   mounted() {
-    this.query = this.query + this.type;
+    this.types = [this.type];
+    this.query = this.query;
 
     this.$root.$on('filter-price', a => {
         if (a == "price_low") {
@@ -106,8 +107,6 @@ export default {
         let query = "";
 
         query = this.toString(this.query, this.page);
-
-        console.log("http://localhost:3333/catalog/" + this.gender+query);
 
         fetch("http://localhost:3333/catalog/"+this.gender+query, {
             headers: {

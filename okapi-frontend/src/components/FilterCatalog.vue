@@ -190,7 +190,7 @@ export default {
   components: {
     VueSlider
   },
-  props: ['title'],
+  props: ['title', 'type'],
   data() {
     return {
       sort_by: 'price_low',
@@ -321,6 +321,14 @@ export default {
       }
     },
   },
+  mounted() {
+    if(this.type != undefined) {
+      this.clothing_types = this.type;
+    }
+    else {
+      this.types = [];
+    }
+  }
 };
 </script>
 

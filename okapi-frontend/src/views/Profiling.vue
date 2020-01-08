@@ -3,35 +3,42 @@
     <b-row align-v="center" align-h="center" class="margin-side">
         <div class="title mb-5 mt-3">TELL US WHAT YOU LIKE!</div>
         <b-card-group>
-        <b-col md="2" sm="6" align-self="center" class="mt-5" v-for="item in items"
-        v-bind:key="item.item_id">
-          <b-card
-            v-if="items_like[item.item_id]"
-            :img-src="item.photo"
-            img-top
-            :alt="item.reference"
-            class="text-center mb-2 like"
-            :id="item.item_id"
-            @click="dislike(item.item_id)"
-          >
-            <div class="middle">
-              <unicon name="heart" class="like-icon" fill="white"></unicon>
-              LIKED
-            </div>
-          </b-card>
-          <b-card
-            v-else
-            class="text-center mb-2 dislike"
-            :id="item.item_id"
-            @click="like(item.item_id)"
-          >
-            <b-card-img :src="item.photo" :alt="item.reference"></b-card-img>
-            <div class="middle">
-              <unicon name="heart" class="like-icon" fill="white"></unicon>
-              LIKE
-            </div>
-          </b-card>
-        </b-col>
+        <div v-for="key in this.keys" :key="key">
+          <div class="key">
+            {{ key.toUpperCase() }}
+          </div>
+          <b-row>
+          <b-col md="3" sm="6" align-self="center" class="mt-5" v-for="item in items_men[key]"
+          v-bind:key="item.item_id">
+            <b-card
+              v-if="items_like[item.item_id]"
+              :img-src="item.photo"
+              img-top
+              :alt="item.reference"
+              class="text-center mb-2 like"
+              :id="item.item_id"
+              @click="dislike(item.item_id)"
+            >
+              <div class="middle">
+                <unicon name="heart" class="like-icon" fill="white"></unicon>
+                LIKED
+              </div>
+            </b-card>
+            <b-card
+              v-else
+              class="text-center mb-2 dislike"
+              :id="item.item_id"
+              @click="like(item.item_id)"
+            >
+              <b-card-img :src="item.photo" :alt="item.reference"></b-card-img>
+              <div class="middle">
+                <unicon name="heart" class="like-icon" fill="white"></unicon>
+                LIKE
+              </div>
+            </b-card>
+          </b-col>
+          </b-row>
+        </div>
         </b-card-group>
     </b-row>
     <b-row align-v="center" align-h="center" class="mt-5">
@@ -50,23 +57,25 @@ export default {
   },
   data() {
     return {
-      items: [],
+      items_men: {
+        'casacos': [],
+        'fatos': [],
+        'blazers': [],
+        'camisolas': [],
+        'sweats': [],
+        'camisas': [],
+        'calças e calçoes': [],
+        'calçado': [],
+      },
+      items_women: [],
       items_like: {},
+      items: [],
+      keys: [],
     };
   },
   mounted() {
 
-    fetch("http://localhost:3333/catalog/man", {
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        }
-    })
-    .then(r => r.json())
-    .then(r => { this.items = r.slice(0,6);
-                  this.$forceUpdate();
-                  this.fetch2();})
-    .catch(err => console.log(err));
+    this.fetch_men_1();
   },
   methods: {
     like(id) {
@@ -77,45 +86,194 @@ export default {
       this.items_like[id] = false;
       console.log('dislike');
     },
-    fetch2() {
-      fetch("http://localhost:3333/catalog/man?color[]=Amarelo", {
+    fetch_men_1() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=casacos", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
           }
       })
       .then(r => r.json())
-      .then(r => { this.items = this.items.concat(r.slice(0,6));
-                   this.$forceUpdate();
-                   this.fetch3();})
+      .then(r => {let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['casacos'].includes(elem)){
+                      this.items_men['casacos'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                  this.$forceUpdate();
+                  this.fetch_men_2();})
       .catch(err => console.log(err));
     },
-    fetch3() {
-      fetch("http://localhost:3333/catalog/man?color[]=Vermelho&type[]=calças e calçoes", {
+    fetch_men_2() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=fatos", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
           }
       })
       .then(r => r.json())
-      .then(r => { this.items = this.items.concat(r.slice(0,6));
+      .then(r => { let n = 0;
+
+                    while(n < 4){
+                      let elem = r[Math.floor(Math.random() * r.length)];
+                      if(!this.items_men['fatos'].includes(elem)){
+                        this.items_men['fatos'].push(elem);
+                        this.items.push(elem);
+                        n = n + 1;
+                      }                   
+                    }
                    this.$forceUpdate();
-                   this.fetch4();})
+                   this.fetch_men_3();})
       .catch(err => console.log(err));
     },
-    fetch4() {
-      fetch("http://localhost:3333/catalog/man?color[]=Castanho&type[]=calçado", {
+    fetch_men_3() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=blazers", {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
           }
       })
       .then(r => r.json())
-      .then(r => { this.items = this.items.concat(r.slice(0,6));
-                    this.$forceUpdate();
-                    this.items_like = this.items.reduce((acc, cur) => {
-                    acc[cur.item_id] = false;
-                    return acc;
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['blazers'].includes(elem)){
+                      this.items_men['blazers'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                   this.$forceUpdate();
+                   this.fetch_men_4();})
+      .catch(err => console.log(err));
+    },
+    fetch_men_4() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=camisolas", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+      })
+      .then(r => r.json())
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['camisolas'].includes(elem)){
+                      this.items_men['camisolas'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                   this.$forceUpdate();
+                   this.fetch_men_5();})
+      .catch(err => console.log(err));
+    },
+    fetch_men_5() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=sweats", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+      })
+      .then(r => r.json())
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['sweats'].includes(elem)){
+                      this.items_men['sweats'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                   this.$forceUpdate();
+                   this.fetch_men_6();})
+      .catch(err => console.log(err));
+    },
+    fetch_men_6() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=camisas", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+      })
+      .then(r => r.json())
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['camisas'].includes(elem)){
+                      this.items_men['camisas'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                   this.$forceUpdate();
+                   this.fetch_men_7();})
+      .catch(err => console.log(err));
+    },
+    fetch_men_7() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=calças e calçoes", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+      })
+      .then(r => r.json())
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['calças e calçoes'].includes(elem)){
+                      this.items_men['calças e calçoes'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }                   
+                  }
+                   this.$forceUpdate();
+                   this.fetch_men_8();})
+      .catch(err => console.log(err));
+    },
+    fetch_men_8() {
+      fetch("http://localhost:3333/catalog/man?perpage=300&type[]=calçado", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+      })
+      .then(r => r.json())
+      .then(r => { let n = 0;
+
+                  while(n < 4){
+                    let elem = r[Math.floor(Math.random() * r.length)];
+                    if(!this.items_men['calçado'].includes(elem)){
+                      this.items_men['calçado'].push(elem);
+                      this.items.push(elem);
+                      n = n + 1;
+                    }
+                  }
+                   this.$forceUpdate();
+
+                  this.keys = [
+                    'camisas',
+                    'sweats',
+                    'camisolas',
+                    'blazers',
+                    'casacos',
+                    'fatos',
+                    'calças e calçoes',
+                    'calçado',
+                  ]
+
+                   this.items_like = this.items.reduce((acc, cur) => {
+                   acc[cur.item_id] = false;
+                   return acc;
                   }, {});})
       .catch(err => console.log(err));
     }
@@ -124,7 +282,10 @@ export default {
 </script>
 
 <style lang="scss">
-.like-icon {
+.key {
+  color: #2B1E02;
+  font-size: 18px;
+  border-bottom: solid 2px #6D3C1D;
 }
 
 .middle {
