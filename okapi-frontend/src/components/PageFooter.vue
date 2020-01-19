@@ -17,9 +17,9 @@
       <h3> About Okapi </h3>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
-      <span class="about-r">
+      <router-link class="about-r" to="/about">
       About us
-      </span>
+      </router-link>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center">
       <router-link class="about-r" to="/partnerships">
@@ -42,9 +42,9 @@
       </span>
     </b-row>
     <b-row align-v="center" align-h="center" class="text-center mb-5">
-      <span class="about-r">
+      <router-link class="about-r" to="/contacts">
       Contacts
-      </span>
+      </router-link>
     </b-row>
   </b-container>
 </template>

@@ -10,7 +10,7 @@
         <h2 class="ml-5 mb-3">1. Search for your dream item;</h2>
         <h2 class="ml-5 mb-3">2. Build an outfit around it;</h2>
         <h2 class="ml-5 mb-3">3. Ask your AI adivser to fill in the blanks;</h2>
-        <h2 class="ml-5 mb-3">3. Give feedback, and save it to your personal closer.</h2>
+        <h2 class="ml-5 mb-3">3. Give feedback, and save items to your personal closer.</h2>
     </b-jumbotron>
     <b-container fluid>
       <b-row align-v="center" id="actions" class="text-center">

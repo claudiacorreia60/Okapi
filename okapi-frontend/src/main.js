@@ -61,6 +61,8 @@ Unicon.add([
   uniHeart,
   uniBookmark,
   uniTagAlt,
+  uniUser,
+  uniTimes
 ]);
 Vue.use(Unicon);
 
