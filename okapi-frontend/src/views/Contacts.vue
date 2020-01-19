@@ -23,7 +23,7 @@
         <b-col sm="12" md="4" id="address" align-self="center">
           <img src="../assets/home-address.svg" class="addressimage">
           <div class="addressoverlay">
-          <h4 class="textaddress">Minho University</h4>
+          <h4 class="textaddress">University of Minho</h4>
           </div>
         </b-col>
       </b-row>
