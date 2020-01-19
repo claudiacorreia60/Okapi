@@ -103,8 +103,8 @@
                 </div>
                 <div
                   v-if="closet_items_upper.length == 0"
-                  class="mt-5 mb-5 question">
-                  ?
+                  class="mt-5 mb-5 img-center">
+                  <img src="../assets/shirt.svg" alt="Shirt" class="img-item"/>
                 </div>
                 <b-card
                   v-else
@@ -150,8 +150,8 @@
                 </div>
                 <div
                   v-if="closet_items_coat.length == 0"
-                  class="mt-5 mb-5 question">
-                  ?
+                  class="mt-5 mb-5 img-center">
+                  <img src="../assets/coat.svg" alt="Coat" class="img-item"/>
                 </div>
                 <b-card
                   v-else
@@ -197,8 +197,8 @@
               </div>
               <div
                 v-if="closet_items_lower.length == 0"
-                class="mt-5 mb-5 question">
-                ?
+                class="mt-5 mb-5 img-center">
+                <img src="../assets/pants.svg" alt="Pants" class="img-item"/>
               </div>
               <b-card
                 v-else
@@ -244,8 +244,8 @@
               </div>
               <div
                 v-if="closet_items_shoes.length == 0"
-                class="mt-5 mb-5 question">
-                ?
+                class="mt-5 mb-5 img-center">
+                <img src="../assets/shoes.svg" alt="Shoes" class="img-shoes"/>
               </div>
               <b-card
               v-else
@@ -1005,6 +1005,20 @@ a {
   //  border: solid 2px #2B1E02;
   border-radius: 50%;
   text-align: center;
+}
+
+.img-center {
+  text-align: center;
+}
+
+.img-item {
+  width: 80%;
+}
+
+.img-shoes {
+  width: 60%;
+  margin-top: 8%;
+  margin-bottom: 7%;
 }
 
 .nav-tabs .nav-link {
