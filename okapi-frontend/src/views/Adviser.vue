@@ -324,7 +324,7 @@
                 <b-row>
                   <b-button
                     v-if="!lock_upper"
-                    @click="lock('upper')"
+                    @click="lock('upper', adviser_upper[0])"
                     id="upperb"
                     class="mr-5 mt-3"
                     title="lock item">
@@ -332,7 +332,7 @@
                   </b-button>
                   <b-button
                     v-else
-                    @click="lock('upper')"
+                    @click="lock('upper', adviser_upper[0])"
                     id="upperb"
                     class="mr-5 mt-3"
                     title="unlock item">
@@ -374,7 +374,7 @@
                 <b-row>
                   <b-button
                     v-if="!lock_coat"
-                    @click="lock('coat')"
+                    @click="lock('coat', adviser_coat[0])"
                     id="coatb"
                     class="mr-5 mt-3"
                     title="lock item">
@@ -382,7 +382,7 @@
                   </b-button>
                   <b-button 
                     v-else
-                    @click="lock('coat')"
+                    @click="lock('coat', adviser_coat[0])"
                     id="coatb"
                     class="mr-5 mt-3"
                     title="unlock item">
@@ -424,7 +424,7 @@
                 <b-row>
                   <b-button
                     v-if="!lock_lower"
-                    @click="lock('lower')"
+                    @click="lock('lower', adviser_lower[0])"
                     id="lowerb"
                     class="mr-5 mt-3"
                     title="lock item">
@@ -432,7 +432,7 @@
                   </b-button>
                   <b-button
                     v-else
-                    @click="lock('lower')"
+                    @click="lock('lower', adviser_lower[0])"
                     id="lower"
                     class="mr-5 mt-3"
                     title="unlock item">
@@ -474,7 +474,7 @@
                 <b-row>
                   <b-button
                     v-if="!lock_shoes"
-                    @click="lock('shoes')"
+                    @click="lock('shoes', adviser_shoes[0])"
                     id="shoesb"
                     class="mr-5 mt-3"
                     title="lock item">
@@ -482,7 +482,7 @@
                   </b-button>
                   <b-button
                     v-else
-                    @click="lock('shoes')"
+                    @click="lock('shoes', adviser_shoes[0])"
                     id="shoes"
                     class="mr-5 mt-3"
                     title="unlock item">
@@ -770,6 +770,39 @@ export default {
       step: 0,
       slide: 0,
       slidiging: null,
+      dummy_item: {
+        "item_id": 393,
+        "title": "Camisola com carcela ",
+        "brand_id": 1,
+        "color_id": 1,
+        "type_id": 7,
+        "price": 0,
+        "gender": "M",
+        "description": "Camisola de inspiração náutica, com carcela e riscas na zona do abdómen. Logótipo da marca ao peito.",
+        "url": "dummy_url",
+        "reference": "5604205796734",
+        "photo": "https://www.publicdomainpictures.net/pictures/30000/nahled/plain-white-background.jpg",
+        "composition": "100%ALGODÃO",
+        "catalog": 1,
+        "color": {
+            "color_id": 1,
+            "name": "Azul",
+            "rgb_red": 0,
+            "rgb_green": 0,
+            "rgb_blue": 255,
+            "hexadecimal": "#0000FF"
+        },
+        "type": {
+            "type_id": 7,
+            "name": "Camisolas",
+            "body_part": "upper"
+        },
+        "brand": {
+            "brand_id": 1,
+            "name": "Lion of Porches",
+            "website": "https://www.lionofporches.pt/"
+        }
+    },
       adviser_upper: [],
       adviser_lower: [],
       adviser_shoes: [],
@@ -779,9 +812,13 @@ export default {
       closet_items_lower: [],
       closet_items_shoes: [],
       lock_upper: false,
+      lock_upper_item: false,
       lock_coat: false,
+      lock_coat_item: false,
       lock_lower: false,
+      lock_lower_item: false,
       lock_shoes: false,
+      lock_shoes_item: false,
       upper_closet_all: [],
       coat_closet_all: [],
       lower_closet_all: [],
@@ -791,16 +828,20 @@ export default {
     };
   },
   mounted() {
+    this.adviser_upper = [this.dummy_item]
+    this.adviser_lower = [this.dummy_item]
+    this.adviser_coat = [this.dummy_item]
+    this.adviser_shoes = [this.dummy_item]
     this.$root.$on('adviser-content-selected', this.catalog_selection)
-
-    this.advise();
 
     const user = JSON.parse(localStorage.getItem('user'));
 
     this.user_id = user.user_id;
-    if (user.gender == "f") {
+    if (user.gender == "W") {
         this.gender = "woman";
     }
+
+    //this.advise();
 
     fetch("http://localhost:3333/closet/" + this.user_id, {
         headers: {
@@ -890,61 +931,101 @@ export default {
         this.adviser_upper = [item];
         this.closet_items_upper = [item];
         this.lock_upper = true;
+        this.lock_upper_item = item.item_id;
         this.hideModal(id_modal);
       },
       selectLower(id_modal, item) {
         this.adviser_lower = [item];
         this.closet_items_lower = [item];
         this.lock_lower = true;
+        this.lock_lower_item = item.item_id;
         this.hideModal(id_modal);
       },
       selectShoes(id_modal, item) {
         this.adviser_shoes = [item];
         this.closet_items_shoes = [item];
         this.lock_shoes = true;
+        this.lock_shoes_item = item.item_id;
         this.hideModal(id_modal);
       },
       selectCoat(id_modal, item) {
         this.adviser_coat = [item];
         this.closet_items_coat = [item];
         this.lock_coat = true;
+        this.lock_coat_item = item.item_id;
         this.hideModal(id_modal);
       },
-      refresh(type) {
-          if (type == "upper") {
-             const upper_clothes = cloths.cloths.filter(x => x.type.body_part == "Upper body");
-             this.adviser_upper =
-             [upper_clothes[Math.floor(Math.random()*upper_clothes.length)]]
+      toString(obj) {
+          let r = "?user_id=" + this.user_id + "&"
+          for(var key in obj) {
+              if(obj.hasOwnProperty(key)) {
+                console.log(key)
+                console.log(this.lock_upper_item)
+                 if (key == "upper") {
+                     r = r + "upper=" + this.lock_upper_item + "&"
+                 }
+                 if (key == "coat") {
+                     r = r + "cover=" + this.lock_coat_item + "&"
+                 }
+                 if (key == "lower") {
+                     r = r + "bottom=" + this.lock_lower_item + "&"
+                 }
+                 if (key == "shoes") {
+                     r = r + "feet=" + this.lock_shoes_item + "&"
+                 }
+              }
           }
-          if (type == "coat") {
-             const coat_clothes = cloths.cloths.filter(x => x.type.body_part == "Upper body");
-             this.adviser_coat =
-             [coat_clothes[Math.floor(Math.random()*coat_clothes.length)]]
-          }
-          if (type == "lower") {
-             const lower_clothes = cloths.cloths.filter(x => x.type.body_part == "Lower body");
-             this.adviser_lower =
-             [lower_clothes[Math.floor(Math.random()*lower_clothes.length)]]
-          }
-          if (type == "shoes") {
-             const shoes_clothes = cloths.cloths.filter(x => x.type.body_part == "Shoes");
-             this.adviser_shoes =
-             [shoes_clothes[Math.floor(Math.random()*shoes_clothes.length)]]
-          }
+          r = r.slice(0, -1)
+          return r;
       },
-      lock(type) {
+      refresh(obj) {
+        let query = ""
+
+        query = this.toString(obj)
+        console.log(query)
+
+        fetch("http://localhost:3333/adviser/suggest_outfit" + query, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              }
+          })
+          .then(r => r.json())
+          .then(r => {
+            console.log(r)
+            r.forEach((item) => {
+              if (item.type.body_part == "upper") {
+                this.adviser_upper = [item]
+              } else if (item.type.body_part == "bottom") {
+                this.adviser_lower = [item]
+              } else if (item.type.body_part == "cover") {
+                this.adviser_coat = [item]
+              } else if (item.type.body_part == "feet") {
+                this.adviser_shoes = [item]
+              }
+              //this.$forceUpdate()
+            }) 
+          })
+          .catch(err => console.log(err));
+
+      },
+      lock(type, item) {
           const el = document.getElementById(type);
           if (type == "upper") {
               this.lock_upper = !this.lock_upper
+              this.lock_upper_item = item.item_id
           }
           if (type == "coat") {
               this.lock_coat = !this.lock_coat
+              this.lock_coat_item = item.item_id;
           }
           if (type == "lower") {
               this.lock_lower = !this.lock_lower
+              this.lock_lower_item = item.item_id
           }
           if (type == "shoes") {
               this.lock_shoes = !this.lock_shoes
+              this.lock_shoes_item = item.item_id
           }
       },
       clear(type) {
@@ -966,18 +1047,20 @@ export default {
           }
       },
       advise() {
-          if (!this.lock_upper) {
-            this.refresh("upper");
+        let obj = {}
+          if (this.lock_upper) {
+            obj.upper = this.lock_upper_item;
           }
-          if (!this.lock_coat) {
-            this.refresh("coat");
+          if (this.lock_coat) {
+            obj.coat = this.lock_coat_item
           }
-          if (!this.lock_lower) {
-            this.refresh("lower");
+          if (this.lock_lower) {
+            obj.lower = this.lock_lower_item
           }
-          if (!this.lock_shoes) {
-            this.refresh("shoes");
+          if (this.lock_shoes) {
+            obj.shoes = this.lock_shoes_item
           }
+          this.refresh(obj)
       },
       seeDetails(item){
         this.$router.push({name: "details", params: {item: item}})

@@ -44,10 +44,9 @@ class UserController {
                         request.post()['id'] = res.data.data['user_id']
                         console.log(request.post())
 
-                        return axios.post(`${Env.get('ADVISER_MS')}/add_user`, request.post())
-                        .then(res => {
-                            return response.json(res.data)
-                        })
+                        axios.post(`${Env.get('ADVISER_MS')}/add_user`, request.post())
+
+                        return response.json(res.data)
 
                     })
                     .catch(err => {

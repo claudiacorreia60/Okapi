@@ -127,8 +127,8 @@ export default {
         birthday: new Date(),
       },
       options: [
-        { text: 'Male', value: 'm' },
-        { text: 'Female', value: 'f' },
+        { text: 'Male', value: 'M' },
+        { text: 'Female', value: 'W' },
       ],
     };
   },

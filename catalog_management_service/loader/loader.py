@@ -226,13 +226,13 @@ def load_item(item):
         sql = f"INSERT INTO item VALUES (NULL, '{title}', '{brand}' , '{color}', '{type}', '{price}', '{gender}', '{description}', 'dummy_url', '{reference}', '{photo}', '{composition}',1)"
         mycursor.execute(sql)
 
-    mydb.commit()
+        mydb.commit()
 
-    item_id = mycursor.lastrowid
+        item_id = mycursor.lastrowid
+
+        load_to_mongo(item, item_id)
 
     mycursor.close()
-
-    load_to_mongo(item, item_id)
 
 # Start parsing
 root = etree.parse(filename)

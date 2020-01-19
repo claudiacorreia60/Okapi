@@ -112,7 +112,7 @@ export default {
                     localStorage.setItem('user', JSON.stringify(user));
                     this.$root.$emit('sign-in', '');
                     let gender = "man"
-                    if (user.gender == "f") {
+                    if (user.gender == "W") {
                        gender = "woman" 
                     }
                     this.$router.push('catalog/' + gender)

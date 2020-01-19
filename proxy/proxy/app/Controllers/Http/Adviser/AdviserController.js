@@ -8,8 +8,22 @@ class AdviserController {
         const params = request.get()
 
         return axios.get(`${Env.get('ADVISER_MS')}/sugest_outfit` , {params})
-            .then(data => {
-                return response.json(data.data)
+            .then(res => {
+                var promises = []
+
+                delete res.data.score 
+                
+                Object.values(res.data).forEach(async item => {
+                    promises.push(axios.get(`${Env.get('CATALOG_MS')}/catalog/${item.item_id}`))
+                });
+
+                return axios.all(promises)
+                            .then(data => {
+                                var data_final = data.map(x => {
+                                    return x.data
+                                })
+                                return response.json(data_final)
+                            })
             })
             .catch(err => {
                 return response.json(err)

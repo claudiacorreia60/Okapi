@@ -123,7 +123,7 @@ export default {
         email: 'rui_fernandes@email.pt',
         gender: 'Male',
         birthday: '1990-06-15',
-        photo: 'https://www.evolutionsociety.org/userdata/news_picupload/pic_sid189-0-norm.jpg',
+        photo: 'https://www.dts.edu/wp-content/uploads/sites/6/2018/04/Blank-Profile-Picture.jpg',
       },
       likes: [],
       saved: [],
@@ -132,7 +132,7 @@ export default {
   mounted() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.user.photo =
-    'https://www.evolutionsociety.org/userdata/news_picupload/pic_sid189-0-norm.jpg'
+    'https://www.dts.edu/wp-content/uploads/sites/6/2018/04/Blank-Profile-Picture.jpg'
 
     fetch("http://localhost:3333/likes/" + this.user.user_id, {
         headers: {

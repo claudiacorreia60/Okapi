@@ -23,7 +23,7 @@ export default {
   },
   mounted() {
     this.gender = JSON.parse(localStorage.getItem('user')).user_id.gender;
-    if (this.gender == 'm') {
+    if (this.gender == 'M') {
         this.gender = "man"
     } else {
         this.gender = "woman"
