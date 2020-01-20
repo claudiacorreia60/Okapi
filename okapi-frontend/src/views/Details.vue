@@ -282,6 +282,7 @@ export default {
 
 .closet {
   margin-bottom: 6%;
+  max-width: 100%;
 }
 
 .card img {
