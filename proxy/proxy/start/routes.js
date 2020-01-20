@@ -886,4 +886,5 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/suggest_outfit', 'Adviser/AdviserController.suggest')
+  Route.post('rate_outfit', 'Adviser/AdviserController.rate')
 }).prefix('adviser')

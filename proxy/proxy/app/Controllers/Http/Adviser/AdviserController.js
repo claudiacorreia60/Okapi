@@ -29,6 +29,18 @@ class AdviserController {
                 return response.json(err)
             })
     }
+
+    rate ({request, response}){
+        const body = request.post()
+
+        return axios.post(`${Env.get('ADVISER_MS')}/rate_outfit` , body)
+            .then(res => {
+                return response.json(res)
+            })
+            .catch(err => {
+                return response.json(err)
+            })
+    }
 }
 
 module.exports = AdviserController
