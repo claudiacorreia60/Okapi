@@ -1,58 +1,53 @@
 <template>
   <b-jumbotron fluid>
     <div class="title">YOUR PROFILE</div>
-    <b-row align-v="center" align-h="center" class="mt-3 bottom">
-        <b-col cols="12" class="personal">
-            <b-card
-                :img-src="user.photo"
-                img-left
-                class="mb-4"
-              >
-                <b-card-title>
-                  <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
-                  PERSONAL DETAILS
-                </b-card-title>
-                <b-container>
-                  <b-card-text>
-                    <b-row align-h="start">
-                      <b-col cols="2">
-                      <div class="profile-elem">
-                        Name
-                      </div>
-                      <div class="profile-elem">
-                        Username
-                      </div>
-                      <div class="profile-elem">
-                        Gender
-                      </div>
-                      <div class="profile-elem">
-                        Birthday
-                      </div>
-                      </b-col>
-                      <b-col cols="10">
-                        <div class="profile-elem-val">
-                        {{ user.name }}
-                      </div>
-                      <div class="profile-elem-val">
-                        {{ user.username }}
-                      </div>
-                      <div class="profile-elem-val">
-                        {{ user.gender.toUpperCase() }}
-                      </div>
-                      <div class="profile-elem-val">
-                        {{ (new Date(user.birthday)).toLocaleDateString() }}
-                      </div>
-                      </b-col>
-                    </b-row>
-                  </b-card-text>
-                  <b-row align-h="center" align-v="end" class="mt-4">
-                    <div class="edit-button">
-                      <b-button class="edit-btn">Edit</b-button>
-                    </div>
-                  </b-row>
-                </b-container>
-              </b-card>
+    <b-row align-v="center" align-h="center" class="mt-3">
+        <b-col cols="2" class="mt-4">
+          <img class="user-img" src="../assets/user.jpg"/>
         </b-col>
+        <b-col cols="8" class="mt-4">
+          <h4>
+          <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
+            PERSONAL DETAILS
+          </h4>
+            <b-row align-h="start">
+              <b-col cols="2">
+              <div class="profile-elem">
+                Name
+              </div>
+              <div class="profile-elem">
+                Username
+              </div>
+              <div class="profile-elem">
+                Gender
+              </div>
+              <div class="profile-elem">
+                Birthday
+              </div>
+              </b-col>
+              <b-col cols="10">
+                <div class="profile-elem-val">
+                {{ user.name }}
+              </div>
+              <div class="profile-elem-val">
+                {{ user.username }}
+              </div>
+              <div class="profile-elem-val">
+                {{ user.gender.toUpperCase() }}
+              </div>
+              <div class="profile-elem-val">
+                {{ (new Date(user.birthday)).toLocaleDateString() }}
+              </div>
+              </b-col>
+            </b-row>
+        </b-col>
+    </b-row>
+    <b-row align-v="center" align-h="center" class="mt-3 bottom">
+      <div class="edit-button">
+        <b-button class="edit-btn mb-4 mt-3">Edit</b-button>
+      </div>
+    </b-row>
+    <b-row align-v="center" align-h="center" class="bottom">
         <b-col cols="6" class="liked-its">
             <b-card>
               <b-container>
@@ -123,7 +118,7 @@ export default {
         email: 'rui_fernandes@email.pt',
         gender: 'Male',
         birthday: '1990-06-15',
-        photo: 'https://www.dts.edu/wp-content/uploads/sites/6/2018/04/Blank-Profile-Picture.jpg',
+        photo: 'https://www.didomenico.ch/wp-content/uploads/2019/03/user.jpg',
       },
       likes: [],
       saved: [],
@@ -132,7 +127,7 @@ export default {
   mounted() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.user.photo =
-    'https://www.dts.edu/wp-content/uploads/sites/6/2018/04/Blank-Profile-Picture.jpg'
+    'https://www.didomenico.ch/wp-content/uploads/2019/03/user.jpg'
 
     fetch("http://localhost:3333/likes/" + this.user.user_id, {
         headers: {
@@ -164,6 +159,15 @@ export default {
 </script>
 
 <style lang="scss">
+.align-center {
+  align-content: center;
+}
+
+.user-img {
+  width: 90%;
+  height: 90%;
+}
+
 .bottom {
   border-bottom: solid 2px #6D3C1D;
   border-left: none;
@@ -215,6 +219,11 @@ export default {
 }
 
 .card-title {
+  color: #2B1E02;
+  font-size: 17px;
+}
+
+h4 {
   color: #2B1E02;
   font-size: 17px;
 }
