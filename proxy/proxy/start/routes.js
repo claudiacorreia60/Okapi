@@ -804,7 +804,48 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/:user_id', 'VirtualCloset/OutfitController.indexByUser')
+
+  /**
+   * @api {post} /outfi]/user_id Add a new outfit to the saved outfits list
+   * @apiName SaveOutfit
+   * @apiGroup Oufits
+   * 
+   * @apiDescription Add a new outfit to the list of saved outfits of the given user
+   * 
+   * @apiParam {String} user_id User's ID 
+   * @apiParam {List} items List of item_ids that make the outfit (body)
+   * 
+   * @apiSuccessExample Example success response: 
+   *    {
+   *      "message": "Outfit successfully saved."
+   *    }
+   */ 
   Route.post('/:user_id', 'VirtualCloset/OutfitController.addOutfit')
+
+  /**
+   * @api {delete} /outfit/:user_id/:outfit_id Delete outfit from the saved outfits
+   * @apiName UnsaveOutfit
+   * @apiGroup Outfits
+   * 
+   * @apiDescription Deletes an outfit from the list of saved outfits of the given user.
+   * 
+   * @apiParam {Integer} user_id User's ID 
+   * @apiParam {Integer} outfit_id Outfit's ID 
+   * 
+   * @apiError OutfitNotFound Requested item not found.
+   * 
+   * @apiErrorExample OutfitNotFound example response
+   *     404 OutfitNotFound
+   *     {
+   *        "message": "Outfit not found.",
+   *        "id": "40"
+   *     }
+   * 
+   * @apiSuccessExample Example success response: 
+   *    {
+   *      "message": "Outfit successfully removed."
+   *    }
+   */
   Route.delete('/:user_id/:outfit_id', 'VirtualCloset/OutfitController.removeOutfit')
 }).prefix('outfit')
   .middleware([/*'tokenVerify',*/ 'userExists'])
