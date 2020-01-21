@@ -73,6 +73,12 @@ class Database:
         self.db.get_collection('catalog').insert_one(dict(item))
         return 'Done'
 
+    # Métods na coleção dos outfits 
+
+    def add_rating(self, outfit: dict):
+        self.db.get_collection('outfits').insert_one(outfit)
+        return 'Rated'
+
 
     """     def add_likes(self, user_id:int, new_likes: ClothList):
         users_likes = self.db.get_collection(name='likes')

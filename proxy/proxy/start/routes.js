@@ -927,4 +927,20 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/suggest_outfit', 'Adviser/AdviserController.suggest')
+    /**
+   * @api {delete} /adviser/rate_outfit Rate a given outfit
+   * @apiName rateOutfit
+   * @apiGroup Adviser
+   * 
+   * @apiDescription Deletes an item from the list of saved items of the given user.
+   * 
+   * @apiParam {List} items List of item_ids that make the outfit (body)
+   * @apiParam {Integer} rating Rating for the outfit (body)
+   * 
+   * @apiSuccessExample Example success response: 
+   *    {
+   *      "message": "Rated"
+   *    }
+   */
+  Route.post('rate_outfit', 'Adviser/AdviserController.rate')
 }).prefix('adviser')
