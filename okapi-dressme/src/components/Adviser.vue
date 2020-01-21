@@ -40,7 +40,7 @@
               </b-card>
             </div>
           </b-row>
-          <b-row align-h="center">
+          <b-row v-if="!loading" align-h="center">
             <b-button
               v-if="!lock_upper"
               @click="lock('upper', adviser_upper[0])"
@@ -108,7 +108,7 @@
               </b-card>
             </div>
           </b-row>
-          <b-row align-h="center">
+          <b-row v-if="!loading" align-h="center">
             <b-button
               v-if="!lock_coat"
               @click="lock('coat', adviser_coat[0])"
@@ -176,7 +176,7 @@
               </b-card>
             </div>
           </b-row>
-          <b-row align-h="center">
+          <b-row v-if="!loading" align-h="center">
             <b-button
               v-if="!lock_lower"
               @click="lock('lower', adviser_lower[0])"
@@ -245,7 +245,7 @@
               </b-card>
             </div>
           </b-row>
-          <b-row align-h="center">
+          <b-row v-if="!loading" align-h="center">
             <b-button
               v-if="!lock_shoes"
               @click="lock('shoes', adviser_shoes[0])"
@@ -507,12 +507,7 @@ export default {
           break;
       }
 
-      this.advise(this.user_id);
-
-      this.lock_coat = lock_coat_aux;
-      this.lock_upper = lock_upper_aux;
-      this.lock_lower = lock_lower_aux;
-      this.lock_shoes = lock_shoes_aux;
+      this.advise2(this.user_id, lock_coat_aux, lock_upper_aux, lock_lower_aux, lock_shoes_aux);
     },
     refresh(obj, id) {
       this.loading = true;
@@ -551,6 +546,59 @@ export default {
           this.feedback = "";
           this.loading = false;
           this.advised = true;
+        })
+        .catch(err => {
+          console.log(err);
+          this.reviewed = false;
+          this.feedback = "";
+          this.loading = false;
+          this.advised = false;
+          this.error = true;
+        });
+    },
+    refresh2(obj, id, lock_coat_aux, lock_upper_aux, lock_lower_aux, lock_shoes_aux) {
+      this.loading = true;
+      this.error = false;
+
+      if (id != undefined) {
+        this.user_id = id;
+      }
+
+      let query = "";
+
+      query = this.toString(obj, this.user_id);
+
+      fetch("http://localhost:3333/adviser/suggest_outfit" + query, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
+        .then(r => r.json())
+        .then(r => {
+          console.log(r);
+          r.forEach(item => {
+            if (item.type.body_part == "upper") {
+              this.adviser_upper = [item];
+            } else if (item.type.body_part == "bottom") {
+              this.adviser_lower = [item];
+            } else if (item.type.body_part == "cover") {
+              this.adviser_coat = [item];
+            } else if (item.type.body_part == "feet") {
+              this.adviser_shoes = [item];
+            }
+          });
+
+          this.reviewed = false;
+          this.feedback = "";
+          this.loading = false;
+          this.advised = true;
+
+
+          this.lock_coat = lock_coat_aux;
+          this.lock_upper = lock_upper_aux;
+          this.lock_lower = lock_lower_aux;
+          this.lock_shoes = lock_shoes_aux;
         })
         .catch(err => {
           console.log(err);
@@ -612,6 +660,22 @@ export default {
         obj.shoes = this.lock_shoes_item;
       }
       this.refresh(obj, id);
+    },
+    advise2(id, lock_coat_aux, lock_upper_aux, lock_lower_aux, lock_shoes_aux) {
+      let obj = {};
+      if (this.lock_upper) {
+        obj.upper = this.lock_upper_item;
+      }
+      if (this.lock_coat) {
+        obj.coat = this.lock_coat_item;
+      }
+      if (this.lock_lower) {
+        obj.lower = this.lock_lower_item;
+      }
+      if (this.lock_shoes) {
+        obj.shoes = this.lock_shoes_item;
+      }
+      this.refresh2(obj, id, lock_coat_aux, lock_upper_aux, lock_lower_aux, lock_shoes_aux);
     }
   }
 };
