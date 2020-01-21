@@ -795,14 +795,15 @@ a:hover img {
 }
 @keyframes hollow-dots-spinner-animation {
       0% {
-        opacity: 0.3;
+        opacity: 1;
+        scale: 1
       }
       50% {
         transform: scale(0.8);
-        opacity: 1;
+        opacity: 0.3;
       }
       100% {
-        opacity: 0.3;
+        opacity: 1;
       }
     }
 
