@@ -806,9 +806,9 @@ Route.group(() => {
   Route.get('/:user_id', 'VirtualCloset/OutfitController.indexByUser')
 
   /**
-   * @api {post} /outfi]/user_id Add a new outfit to the saved outfits list
+   * @api {post} /outfit/:user_id Add a new outfit to the saved outfits list
    * @apiName SaveOutfit
-   * @apiGroup Oufits
+   * @apiGroup Outfits
    * 
    * @apiDescription Add a new outfit to the list of saved outfits of the given user
    * 
