@@ -101,6 +101,34 @@
             </b-card>
         </b-col>
     </b-row>
+    <b-row align-v="center" align-h="center" class="bottom">
+      <b-col cols="12" class="saved-its">
+            <b-card>
+              <b-container>
+                <b-card-title>
+                  <unicon name="star" fill="#2B1E02" class="icon"></unicon>
+                  SAVED OUTFITS
+                </b-card-title>
+                <b-row align-h="center" align-v="center" class="mt-5">
+                  <b-col
+                    v-for="item in saved"
+                    v-bind:key="item.item_id"
+                    style="text-align: center;">
+                    <div
+                      class="mb-2 no-border">
+                      <img class="item-img" :src="item.photo" :alt="item.reference"/>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row align-h="center" align-v="end">
+                  <div class="edit-button mt-5">
+                    <b-button class="edit-btn">See more</b-button>
+                  </div>
+                </b-row>
+              </b-container>
+            </b-card>
+        </b-col>
+    </b-row>
   </b-jumbotron>
 </template>
 
