@@ -9,21 +9,25 @@ services:
     - virtual_closet
     - users
     - adviser
+    restart: always
 
   catalog:
     build: ./catalog_management_service
     links:
-    - mysql 
+    - mysql
+    restart: always
 
   virtual_closet:
     build: ./virtual_closet_management_service
     links:
     - mysql 
+    restart: always
 
   users: 
     build: ./user_management_service
     links:
     - mysql 
+    restart: always
 
   adviser:
     build: ./adviser-service/classifier
@@ -31,14 +35,17 @@ services:
     - "3335:3335"
     links:
     - mongo
+    restart: always
 
   mysql: 
     build: ./databases/mysql
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4
     ports: 
     - "3301:3306"
+    restart: always
 
   mongo: 
     build: ./databases/mongo 
     ports: 
     - "27016:27017"
+    restart: always
