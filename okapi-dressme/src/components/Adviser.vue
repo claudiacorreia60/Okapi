@@ -2,28 +2,28 @@
   <b-container fluid>
     <b-row align-h="center" align-v="center" class="elements tab3">
       <b-col col cols="12" sm="12" md="6" lg="3" align-self="center">
-      <b-card class="adviser separator" :id="adviser_upper[0].item_id">
+        <b-card class="adviser separator" :id="adviser_upper[0].item_id">
           <b-row align-h="center">
-          <div class="body-part mb-3">UPPER BODY</div>
+            <div class="body-part mb-3">UPPER BODY</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-          <a @click="goToStore(adviser_upper[0].url)">
-            <b-card
-              :img-src="adviser_upper[0].photo"
-              img-top
-              :alt="adviser_upper[0].reference"
-              class="mb-2 no-border"
-              @mouseover="
-                hover = true;
-                id_item = adviser_upper[0].item_id;
-              "
-              @mouseleave="hover = false"
-            >
-              <div class="description">
+            <a @click="goToStore(adviser_upper[0].url)">
+              <b-card
+                :img-src="adviser_upper[0].photo"
+                img-top
+                :alt="adviser_upper[0].reference"
+                class="mb-2 no-border"
+                @mouseover="
+                  hover = true;
+                  id_item = adviser_upper[0].item_id;
+                "
+                @mouseleave="hover = false"
+              >
+                <div class="description">
                   {{ adviser_upper[0].brand.name.toUpperCase() }}
-              </div>
-            </b-card>
-          </a>
+                </div>
+              </b-card>
+            </a>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -52,31 +52,31 @@
               <unicon name="sync" fill="#999999"></unicon>
             </b-button>
           </b-row>
-      </b-card>
+        </b-card>
       </b-col>
       <b-col col cols="12" sm="12" md="6" lg="3" align-self="center">
-      <b-card class="adviser separator" :id="adviser_coat[0].item_id">
+        <b-card class="adviser separator" :id="adviser_coat[0].item_id">
           <b-row align-h="center">
-          <div class="body-part mb-3">COAT</div>
+            <div class="body-part mb-3">COAT</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-          <a @click="goToStore(adviser_coat[0].url)">
-            <b-card
-              :img-src="adviser_coat[0].photo"
-              img-top
-              :alt="adviser_coat[0].reference"
-              class="mb-2 no-border"
-              @mouseover="
-                hover = true;
-                id_item = adviser_coat[0].item_id;
-              "
-              @mouseleave="hover = false"
-            >
+            <a @click="goToStore(adviser_coat[0].url)">
+              <b-card
+                :img-src="adviser_coat[0].photo"
+                img-top
+                :alt="adviser_coat[0].reference"
+                class="mb-2 no-border"
+                @mouseover="
+                  hover = true;
+                  id_item = adviser_coat[0].item_id;
+                "
+                @mouseleave="hover = false"
+              >
                 <div class="description">
                   {{ adviser_coat[0].brand.name.toUpperCase() }}
                 </div>
-            </b-card>
-          </a>
+              </b-card>
+            </a>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -105,31 +105,31 @@
               <unicon name="sync" class="" fill="#999999"></unicon>
             </b-button>
           </b-row>
-      </b-card>
+        </b-card>
       </b-col>
       <b-col col cols="12" sm="12" md="6" lg="3" align-self="center">
-      <b-card class="adviser separator" :id="adviser_lower[0].item_id">
+        <b-card class="adviser separator" :id="adviser_lower[0].item_id">
           <b-row align-h="center">
-          <div class="body-part mb-3">BOTTOM</div>
+            <div class="body-part mb-3">BOTTOM</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-          <a @click="goToStore(adviser_lower[0].url)">
-            <b-card
-              :img-src="adviser_lower[0].photo"
-              img-top
-              :alt="adviser_lower[0].reference"
-              class="mb-2 no-border"
-              @mouseover="
-                hover = true;
-                id_item = adviser_lower[0].item_id;
-              "
-              @mouseleave="hover = false"
-            >
+            <a @click="goToStore(adviser_lower[0].url)">
+              <b-card
+                :img-src="adviser_lower[0].photo"
+                img-top
+                :alt="adviser_lower[0].reference"
+                class="mb-2 no-border"
+                @mouseover="
+                  hover = true;
+                  id_item = adviser_lower[0].item_id;
+                "
+                @mouseleave="hover = false"
+              >
                 <div class="description">
                   {{ adviser_lower[0].brand.name.toUpperCase() }}
                 </div>
-            </b-card>
-          </a>
+              </b-card>
+            </a>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -158,31 +158,31 @@
               <unicon name="sync" class="" fill="#999999"></unicon>
             </b-button>
           </b-row>
-      </b-card>
+        </b-card>
       </b-col>
       <b-col col cols="12" sm="12" md="6" lg="3" align-self="center">
-      <b-card class="adviser separator" :id="adviser_shoes[0].item_id">
+        <b-card class="adviser separator" :id="adviser_shoes[0].item_id">
           <b-row align-h="center">
-          <div class="body-part mb-3">FEET</div>
+            <div class="body-part mb-3">FEET</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-          <a @click="goToStore(adviser_shoes[0].url)">
-            <b-card
-              :img-src="adviser_shoes[0].photo"
-              img-top
-              :alt="adviser_shoes[0].reference"
-              class="mb-2 no-border"
-              @mouseover="
-                hover = true;
-                id_item = adviser_shoes[0].item_id;
-              "
-              @mouseleave="hover = false"
-            >
+            <a @click="goToStore(adviser_shoes[0].url)">
+              <b-card
+                :img-src="adviser_shoes[0].photo"
+                img-top
+                :alt="adviser_shoes[0].reference"
+                class="mb-2 no-border"
+                @mouseover="
+                  hover = true;
+                  id_item = adviser_shoes[0].item_id;
+                "
+                @mouseleave="hover = false"
+              >
                 <div class="description">
                   {{ adviser_shoes[0].brand.name.toUpperCase() }}
                 </div>
-            </b-card>
-          </a>
+              </b-card>
+            </a>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -211,31 +211,35 @@
               <unicon name="sync" fill="#999999"></unicon>
             </b-button>
           </b-row>
-      </b-card>
+        </b-card>
       </b-col>
     </b-row>
     <b-row class="mt-5 mb-4" align-h="center">
-    <div v-if="!reviewed && advised" @click="review()">
-    <VueFeedbackReaction
-      v-model="feedback"
-      :labels="Array.from(['Eww!', 'Nope!', 'Meh..', 'Nice!', 'Okapi!'])"
-    />
-    </div>
-    <h4 v-else>
-      {{ feedbackMessage() }}
-    </h4>
+      <div v-if="!reviewed && advised" @click="review()">
+        <VueFeedbackReaction
+          v-model="feedback"
+          :labels="Array.from(['Eww!', 'Nope!', 'Meh..', 'Nice!', 'Okapi!'])"
+        />
+      </div>
+      <h4 v-else>
+        {{ feedbackMessage() }}
+      </h4>
     </b-row>
     <b-row class="buttons mb-3" align-h="center">
-     <div v-if="!loading" class="advise-button">
-       <b-button class="ml-3 advise-btn" @click="advise(-1)">For men <i class="fa fa-mars"></i></b-button>
-       <b-button class="ml-3 advise-btn" @click="advise(0)">For women <i class="fa fa-venus"></i></b-button>
-     </div>
-     <div v-else class="loading-button">
-       <b-button class="ml-3 loading-btn" >
-           <b-spinner small></b-spinner>
-           Advising...
-       </b-button>
-     </div>
+      <div v-if="!loading" class="advise-button">
+        <b-button class="ml-3 advise-btn" @click="advise(-1)"
+          >For men <i class="fa fa-mars"></i
+        ></b-button>
+        <b-button class="ml-3 advise-btn" @click="advise(0)"
+          >For women <i class="fa fa-venus"></i
+        ></b-button>
+      </div>
+      <div v-else class="loading-button">
+        <b-button class="ml-3 loading-btn">
+          <b-spinner small></b-spinner>
+          Advising...
+        </b-button>
+      </div>
     </b-row>
   </b-container>
 </template>
@@ -253,41 +257,37 @@ export default {
       advised: false,
       reviewed: false,
       loading: false,
-      feedback: '',
+      feedback: "",
       user_id: null,
       hover: false,
       id_item: 0,
       dummy_item_coat: {
         url: "dummy_url",
         brand: {
-          name: ''
+          name: ""
         },
-        photo:
-          require("../assets/coat.svg"),
+        photo: require("../assets/coat.svg")
       },
       dummy_item_shirt: {
         url: "dummy_url",
         brand: {
-          name: ''
+          name: ""
         },
-        photo:
-          require("../assets/shirt.svg"),
+        photo: require("../assets/shirt.svg")
       },
       dummy_item_pants: {
         url: "dummy_url",
         brand: {
-          name: ''
+          name: ""
         },
-        photo:
-          require("../assets/pants.svg"),
+        photo: require("../assets/pants.svg")
       },
       dummy_item_shoes: {
         url: "dummy_url",
         brand: {
-          name: ''
+          name: ""
         },
-        photo:
-          require("../assets/shoes.svg"),
+        photo: require("../assets/shoes.svg")
       },
       adviser_upper: [],
       adviser_lower: [],
@@ -321,50 +321,53 @@ export default {
   },
   methods: {
     review() {
-      this.reviewed = false;
+      this.reviewed = true;
       fetch("http://localhost:3333/adviser/rate_outfit", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*"
         },
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({
-          rating: parseInt(this.feedback/5),
-          items: [this.adviser_upper[0], this.adviser_lower[0], this.adviser_coat[0],
-          this.adviser_shoes[0]]
+          rating: parseInt(this.feedback / 5),
+          items: [
+            this.adviser_upper[0],
+            this.adviser_lower[0],
+            this.adviser_coat[0],
+            this.adviser_shoes[0]
+          ]
         })
-      })
-      .catch(err => {
+      }).catch(err => {
         this.feedback = "";
         console.log(err);
-        });
+      });
     },
     goToStore(url) {
       window.location = url;
     },
     feedbackMessage() {
-      let msg = ""
+      let msg = "";
       switch (this.feedback) {
         case "":
-          msg = "Please ask for a suggestion!"
+          msg = "Please ask for a suggestion!";
           break;
         case "1":
-          msg = "Give me another chance!"
+          msg = "Give me another chance!";
           break;
         case "2":
-          msg = "Oopsi.. maybe try another one!"
+          msg = "Oopsi.. maybe try another one!";
           break;
         case "3":
-          msg = "I'll do better next time!"
+          msg = "I'll do better next time!";
           break;
         case "4":
-          msg = "I liked this one too!"
+          msg = "I liked this one too!";
           break;
         case "5":
-          msg = "Okapi approves! Thank you for your feedback!"
+          msg = "Okapi approves! Thank you for your feedback!";
           break;
       }
-      return msg
+      return msg;
     },
     toString(obj, id) {
       let r = "?user_id=" + id + "&";
@@ -414,6 +417,7 @@ export default {
             }
           });
           this.reviewed = false;
+          this.feedback = "";
           this.loading = false;
           this.advised = true;
         })
@@ -713,7 +717,7 @@ a:hover img {
   max-width: 100px;
 }
 
-.card{
+.card {
   min-width: 100%;
 }
 
