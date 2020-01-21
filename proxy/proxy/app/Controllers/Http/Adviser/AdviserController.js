@@ -33,7 +33,7 @@ class AdviserController {
     rate ({request, response}){
         const body = request.post()
 
-        return axios.post(`${Env.get('ADVISER_MS')}/rate_outfit` , body)
+        return axios.post(`${Env.get('ADVISER_MS')}/rate` , body)
             .then(res => {
                 return response.json(res)
             })
