@@ -7,7 +7,7 @@
             <div class="body-part mb-3">UPPER BODY</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a @click="goToStore(adviser_upper[0].url)">
+            <a v-if="!loading" @click="goToStore(adviser_upper[0].url)">
               <b-card
                 :img-src="adviser_upper[0].photo"
                 img-top
@@ -24,6 +24,16 @@
                 </div>
               </b-card>
             </a>
+            <div v-else class="hollow-dots-spinner">
+              <b-card
+                :img-src="require('../assets/shirt.svg')"
+                img-top
+                class="mb-2 no-border dot dot1"
+              >
+                <div class="description">
+                </div>
+              </b-card>
+            </div>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -60,7 +70,7 @@
             <div class="body-part mb-3">COAT</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a @click="goToStore(adviser_coat[0].url)">
+            <a v-if="!loading" @click="goToStore(adviser_coat[0].url)">
               <b-card
                 :img-src="adviser_coat[0].photo"
                 img-top
@@ -77,6 +87,16 @@
                 </div>
               </b-card>
             </a>
+            <div v-else class="hollow-dots-spinner">
+              <b-card
+                :img-src="require('../assets/coat.svg')"
+                img-top
+                class="mb-2 no-border dot dot2"
+              >
+                <div class="description">
+                </div>
+              </b-card>
+            </div>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -113,7 +133,7 @@
             <div class="body-part mb-3">BOTTOM</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a @click="goToStore(adviser_lower[0].url)">
+            <a v-if="!loading" @click="goToStore(adviser_lower[0].url)">
               <b-card
                 :img-src="adviser_lower[0].photo"
                 img-top
@@ -130,6 +150,16 @@
                 </div>
               </b-card>
             </a>
+            <div v-else class="hollow-dots-spinner">
+              <b-card
+                :img-src="require('../assets/pants.svg')"
+                img-top
+                class="mb-2 no-border dot dot3"
+              >
+                <div class="description">
+                </div>
+              </b-card>
+            </div>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -166,7 +196,7 @@
             <div class="body-part mb-3">FEET</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a @click="goToStore(adviser_shoes[0].url)">
+            <a v-if="!loading" @click="goToStore(adviser_shoes[0].url)">
               <b-card
                 :img-src="adviser_shoes[0].photo"
                 img-top
@@ -183,6 +213,17 @@
                 </div>
               </b-card>
             </a>
+            <div v-else class="hollow-dots-spinner">
+              <b-card
+                :img-src="require('../assets/shoes.svg')"
+                img-top
+                alt=""
+                class="mb-2 no-border dot dot4"
+              >
+                <div class="description">
+                </div>
+              </b-card>
+            </div>
           </b-row>
           <b-row align-h="center">
             <b-button
@@ -227,7 +268,7 @@
     </b-row>
     <b-row class="buttons mb-3" align-h="center">
       <div v-if="!loading" class="advise-button">
-        <b-button class="ml-3 advise-btn" @click="advise(-1)"
+        <b-button class="advise-btn" @click="advise(-1)"
           >For men <i class="fa fa-mars"></i
         ></b-button>
         <b-button class="ml-3 advise-btn" @click="advise(0)"
@@ -665,6 +706,10 @@ a {
   border: none;
 }
 
+.advise-card {
+  min-height: 100%;
+}
+
 .advise-card a {
   color: #2b1e02;
   text-decoration: none;
@@ -725,4 +770,40 @@ a:hover img {
   max-width: 15%;
   max-height: 15%;
 }
+
+.hollow-dots-spinner, .hollow-dots-spinner * {
+  box-sizing: border-box;
+}
+.hollow-dots-spinner {
+}
+.hollow-dots-spinner .dot {
+  float: left;
+  transform: scale(1);
+  animation: hollow-dots-spinner-animation 4000ms ease infinite 0ms;
+}
+.hollow-dots-spinner .dot1 {
+  animation-delay: calc(500ms * 1);
+}
+.hollow-dots-spinner .dot2 {
+  animation-delay: calc(500ms * 2);
+}
+.hollow-dots-spinner .dot3 {
+  animation-delay: calc(500ms * 3);
+}
+.hollow-dots-spinner .dot4 {
+  animation-delay: calc(500ms * 4);
+}
+@keyframes hollow-dots-spinner-animation {
+      0% {
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+
 </style>
