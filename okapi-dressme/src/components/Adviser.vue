@@ -334,7 +334,10 @@ export default {
           this.adviser_shoes[0]]
         })
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.feedback = "";
+        console.log(err);
+        });
     },
     goToStore(url) {
       window.location = url;
