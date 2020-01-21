@@ -25,6 +25,10 @@ async def add_like(user_id: int, new_like: int):
 async def rm_like(user_id: int, item_id: int):
     return JSONResponse( db.rm_like(user_id, item_id))
 
+@router.post('/rate')
+async def rate_like(outfit: dict):
+    return JSONResponse( db.add_rating(outfit))
+
 
 # @router.post('/classify_outfit', response_model = float)
 # def classify_outfit(outfit: Outfit):
