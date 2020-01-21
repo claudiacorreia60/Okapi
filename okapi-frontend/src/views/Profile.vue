@@ -1,15 +1,17 @@
 <template>
   <b-jumbotron fluid>
     <div class="title">YOUR PROFILE</div>
+    <b-row class="mt-4 ml-5">
+      <h4>
+        <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
+        PERSONAL DETAILS
+      </h4>
+    </b-row>
     <b-row align-v="center" align-h="center" class="mt-3">
         <b-col cols="2" class="mt-4">
           <img class="user-img" src="../assets/user.jpg"/>
         </b-col>
         <b-col cols="8" class="mt-4">
-          <h4>
-          <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
-            PERSONAL DETAILS
-          </h4>
             <b-row align-h="start">
               <b-col cols="2">
               <div class="profile-elem">
@@ -78,7 +80,7 @@
             <b-card>
               <b-container>
                 <b-card-title>
-                  <unicon name="heart" fill="#2B1E02" class="icon"></unicon>
+                  <unicon name="bookmark" fill="#2B1E02" class="icon"></unicon>
                   SAVED ITEMS
                 </b-card-title>
                 <b-row align-h="center" align-v="center" class="mt-5">
