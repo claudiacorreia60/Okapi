@@ -7,7 +7,10 @@
             <div class="body-part mb-3">UPPER BODY</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a v-if="!loading" @click="goToStore(adviser_upper[0].url)">
+            <a
+              v-if="!loading || lock_upper"
+              @click="goToStore(adviser_upper[0].url)"
+            >
               <b-card
                 :img-src="adviser_upper[0].photo"
                 img-top
@@ -19,8 +22,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div class="description">
+                <div v-if="!hover" class="description">
                   {{ adviser_upper[0].brand.name.toUpperCase() }}
+                </div>
+                <div v-else class="description">
+                  Go to store
                 </div>
               </b-card>
             </a>
@@ -30,8 +36,7 @@
                 img-top
                 class="mb-2 no-border dot dot1"
               >
-                <div class="description">
-                </div>
+                <div class="description"></div>
               </b-card>
             </div>
           </b-row>
@@ -55,7 +60,7 @@
               <unicon name="lock-alt" fill="#2B1E02"></unicon>
             </b-button>
             <b-button
-              @click="refresh('upper')"
+              @click="refreshItem('upper')"
               class="ml-5 mt-3"
               title="refresh item"
             >
@@ -70,7 +75,10 @@
             <div class="body-part mb-3">COAT</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a v-if="!loading" @click="goToStore(adviser_coat[0].url)">
+            <a
+              v-if="!loading || lock_coat"
+              @click="goToStore(adviser_coat[0].url)"
+            >
               <b-card
                 :img-src="adviser_coat[0].photo"
                 img-top
@@ -82,8 +90,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div class="description">
+                <div v-if="!hover" class="description">
                   {{ adviser_coat[0].brand.name.toUpperCase() }}
+                </div>
+                <div v-else class="description">
+                  Go to store
                 </div>
               </b-card>
             </a>
@@ -93,8 +104,7 @@
                 img-top
                 class="mb-2 no-border dot dot2"
               >
-                <div class="description">
-                </div>
+                <div class="description"></div>
               </b-card>
             </div>
           </b-row>
@@ -118,7 +128,7 @@
               <unicon name="lock-alt" fill="#2B1E02"></unicon>
             </b-button>
             <b-button
-              @click="refresh('coat')"
+              @click="refreshItem('coat')"
               class="ml-5 mt-3"
               title="refresh item"
             >
@@ -133,7 +143,10 @@
             <div class="body-part mb-3">BOTTOM</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a v-if="!loading" @click="goToStore(adviser_lower[0].url)">
+            <a
+              v-if="!loading || lock_lower"
+              @click="goToStore(adviser_lower[0].url)"
+            >
               <b-card
                 :img-src="adviser_lower[0].photo"
                 img-top
@@ -145,8 +158,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div class="description">
+                <div v-if="!hover" class="description">
                   {{ adviser_lower[0].brand.name.toUpperCase() }}
+                </div>
+                <div v-else class="description">
+                  Go to store
                 </div>
               </b-card>
             </a>
@@ -156,8 +172,7 @@
                 img-top
                 class="mb-2 no-border dot dot3"
               >
-                <div class="description">
-                </div>
+                <div class="description"></div>
               </b-card>
             </div>
           </b-row>
@@ -181,7 +196,7 @@
               <unicon name="lock-alt" fill="#2B1E02"></unicon>
             </b-button>
             <b-button
-              @click="refresh('lower')"
+              @click="refreshItem('lower')"
               class="ml-5 mt-3"
               title="refresh item"
             >
@@ -196,7 +211,10 @@
             <div class="body-part mb-3">FEET</div>
           </b-row>
           <b-row align-h="center" class="advise-card">
-            <a v-if="!loading" @click="goToStore(adviser_shoes[0].url)">
+            <a
+              v-if="!loading || lock_shoes"
+              @click="goToStore(adviser_shoes[0].url)"
+            >
               <b-card
                 :img-src="adviser_shoes[0].photo"
                 img-top
@@ -208,8 +226,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div class="description">
+                <div v-if="!hover" class="description">
                   {{ adviser_shoes[0].brand.name.toUpperCase() }}
+                </div>
+                <div v-else class="description">
+                  Go to store
                 </div>
               </b-card>
             </a>
@@ -220,8 +241,7 @@
                 alt=""
                 class="mb-2 no-border dot dot4"
               >
-                <div class="description">
-                </div>
+                <div class="description"></div>
               </b-card>
             </div>
           </b-row>
@@ -245,7 +265,7 @@
               <unicon name="lock-alt" fill="#2B1E02"></unicon>
             </b-button>
             <b-button
-              @click="refresh('shoes')"
+              @click="refreshItem('shoes')"
               class="ml-5 mt-3"
               title="refresh item"
             >
@@ -263,7 +283,11 @@
         />
       </div>
       <h4 v-else>
-        {{ feedbackMessage() }}
+        {{
+          loading
+            ? "Please wait a moment while we are working on your outfit!"
+            : feedbackMessage()
+        }}
       </h4>
     </b-row>
     <b-row class="buttons mb-3" align-h="center">
@@ -295,6 +319,7 @@ export default {
   },
   data() {
     return {
+      error: false,
       advised: false,
       reviewed: false,
       loading: false,
@@ -355,6 +380,7 @@ export default {
     };
   },
   mounted() {
+    this.user_id = -1;
     this.adviser_upper = [this.dummy_item_shirt];
     this.adviser_lower = [this.dummy_item_pants];
     this.adviser_coat = [this.dummy_item_coat];
@@ -362,6 +388,7 @@ export default {
   },
   methods: {
     review() {
+      this.error = false;
       this.reviewed = true;
       fetch("http://localhost:3333/adviser/rate_outfit", {
         headers: {
@@ -380,6 +407,7 @@ export default {
         })
       }).catch(err => {
         this.feedback = "";
+        this.error = true;
         console.log(err);
       });
     },
@@ -388,25 +416,29 @@ export default {
     },
     feedbackMessage() {
       let msg = "";
-      switch (this.feedback) {
-        case "":
-          msg = "Please ask for a suggestion!";
-          break;
-        case "1":
-          msg = "Give me another chance!";
-          break;
-        case "2":
-          msg = "Oopsi.. maybe try another one!";
-          break;
-        case "3":
-          msg = "I'll do better next time!";
-          break;
-        case "4":
-          msg = "I liked this one too!";
-          break;
-        case "5":
-          msg = "Okapi approves! Thank you for your feedback!";
-          break;
+      if (!this.error) {
+        switch (this.feedback) {
+          case "":
+            msg = "Please ask for a suggestion!";
+            break;
+          case "1":
+            msg = "Give me another chance!";
+            break;
+          case "2":
+            msg = "Oopsi.. maybe try another one!";
+            break;
+          case "3":
+            msg = "I'll do better next time!";
+            break;
+          case "4":
+            msg = "I liked this one too!";
+            break;
+          case "5":
+            msg = "Okapi approves! Thank you for your feedback!";
+            break;
+        }
+      } else {
+        msg = "Something went wrong...";
       }
       return msg;
     },
@@ -431,11 +463,68 @@ export default {
       r = r.slice(0, -1);
       return r;
     },
+    refreshItem(type) {
+      this.loading = true;
+      this.error = false;
+
+      let lock_coat_aux = this.lock_coat;
+      let lock_upper_aux = this.lock_upper;
+      let lock_lower_aux = this.lock_lower;
+      let lock_shoes_aux = this.lock_shoes;
+
+      switch (type) {
+        case "upper":
+          this.lock_coat = true;
+          this.lock_coat_item = this.adviser_coat[0].item_id;
+          this.lock_lower = true;
+          this.lock_lower_item = this.adviser_lower[0].item_id;
+          this.lock_shoes = true;
+          this.lock_shoes_item = this.adviser_shoes[0].item_id;
+          break;
+        case "coat":
+          this.lock_upper = true;
+          this.lock_upper_item = this.adviser_upper[0].item_id;
+          this.lock_lower = true;
+          this.lock_lower_item = this.adviser_lower[0].item_id;
+          this.lock_shoes = true;
+          this.lock_shoes_item = this.adviser_shoes[0].item_id;
+          break;
+        case "lower":
+          this.lock_upper = true;
+          this.lock_upper_item = this.adviser_upper[0].item_id;
+          this.lock_coat = true;
+          this.lock_coat_item = this.adviser_coat[0].item_id;
+          this.lock_shoes = true;
+          this.lock_shoes_item = this.adviser_shoes[0].item_id;
+          break;
+        case "shoes":
+          this.lock_upper = true;
+          this.lock_upper_item = this.adviser_upper[0].item_id;
+          this.lock_coat = true;
+          this.lock_coat_item = this.adviser_coat[0].item_id;
+          this.lock_lower = true;
+          this.lock_lower_item = this.adviser_lower[0].item_id;
+          break;
+      }
+
+      this.advise(this.user_id);
+
+      this.lock_coat = lock_coat_aux;
+      this.lock_upper = lock_upper_aux;
+      this.lock_lower = lock_lower_aux;
+      this.lock_shoes = lock_shoes_aux;
+    },
     refresh(obj, id) {
       this.loading = true;
+      this.error = false;
+
+      if (id != undefined) {
+        this.user_id = id;
+      }
+
       let query = "";
 
-      query = this.toString(obj, id);
+      query = this.toString(obj, this.user_id);
 
       fetch("http://localhost:3333/adviser/suggest_outfit" + query, {
         headers: {
@@ -457,12 +546,20 @@ export default {
               this.adviser_shoes = [item];
             }
           });
+
           this.reviewed = false;
           this.feedback = "";
           this.loading = false;
           this.advised = true;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          this.reviewed = false;
+          this.feedback = "";
+          this.loading = false;
+          this.advised = false;
+          this.error = true;
+        });
     },
     lock(type, item) {
       if (type == "upper") {
@@ -771,7 +868,8 @@ a:hover img {
   max-height: 15%;
 }
 
-.hollow-dots-spinner, .hollow-dots-spinner * {
+.hollow-dots-spinner,
+.hollow-dots-spinner * {
   box-sizing: border-box;
 }
 .hollow-dots-spinner {
@@ -794,16 +892,15 @@ a:hover img {
   animation-delay: calc(500ms * 4);
 }
 @keyframes hollow-dots-spinner-animation {
-      0% {
-        opacity: 0.3;
-      }
-      50% {
-        transform: scale(0.8);
-        opacity: 1;
-      }
-      100% {
-        opacity: 0.3;
-      }
-    }
-
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 </style>

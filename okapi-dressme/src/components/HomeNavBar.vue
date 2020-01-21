@@ -1,28 +1,18 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" class="top-bar white-background">
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    <b-navbar class="top-bar white-background">
       <!-- Brand -->
       <b-navbar-brand class="ml-5" title="go to home page"> </b-navbar-brand>
 
-      <b-collapse id="nav-collapse" is-nav>
-        <!-- Centered nav items -->
-        <b-navbar-nav class="ml-auto mr-auto">
-          <a @click="goToOkapi()" href="">
-            <img alt="Okapi logo" src="../assets/logo.svg" class="logo-image" />
-          </a>
-        </b-navbar-nav>
+      <!-- Centered nav items -->
+      <b-navbar-nav class="ml-auto mr-auto">
+        <a @click="goToOkapi()" href="">
+          <img alt="Okapi logo" src="../assets/logo.svg" class="logo-image" />
+        </a>
+      </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="mr-5">
-          <b-nav-item title="go to sign in page">
-            <a @click="goToOkapiSignIn()" href="" class="nav-right ml-2">
-              <unicon name="user" fill="#2B1E02"></unicon>
-              <span class="ml-2">Sign in</span>
-            </a>
-          </b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="mr-5"> </b-navbar-nav>
     </b-navbar>
   </div>
 </template>
