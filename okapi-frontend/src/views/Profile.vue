@@ -1,15 +1,17 @@
 <template>
   <b-jumbotron fluid>
     <div class="title">YOUR PROFILE</div>
+    <b-row class="mt-4 ml-5">
+      <h4>
+        <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
+        PERSONAL DETAILS
+      </h4>
+    </b-row>
     <b-row align-v="center" align-h="center" class="mt-3">
         <b-col cols="2" class="mt-4">
           <img class="user-img" src="../assets/user.jpg"/>
         </b-col>
         <b-col cols="8" class="mt-4">
-          <h4>
-          <unicon name="user-circle" fill="#2B1E02" class="icon"></unicon>
-            PERSONAL DETAILS
-          </h4>
             <b-row align-h="start">
               <b-col cols="2">
               <div class="profile-elem">
@@ -78,8 +80,36 @@
             <b-card>
               <b-container>
                 <b-card-title>
-                  <unicon name="heart" fill="#2B1E02" class="icon"></unicon>
+                  <unicon name="bookmark" fill="#2B1E02" class="icon"></unicon>
                   SAVED ITEMS
+                </b-card-title>
+                <b-row align-h="center" align-v="center" class="mt-5">
+                  <b-col
+                    v-for="item in saved"
+                    v-bind:key="item.item_id"
+                    style="text-align: center;">
+                    <div
+                      class="mb-2 no-border">
+                      <img class="item-img" :src="item.photo" :alt="item.reference"/>
+                    </div>
+                  </b-col>
+                </b-row>
+                <b-row align-h="center" align-v="end">
+                  <div class="edit-button mt-5">
+                    <b-button class="edit-btn">See more</b-button>
+                  </div>
+                </b-row>
+              </b-container>
+            </b-card>
+        </b-col>
+    </b-row>
+    <b-row align-v="center" align-h="center" class="bottom">
+      <b-col cols="12" class="saved-its">
+            <b-card>
+              <b-container>
+                <b-card-title>
+                  <unicon name="star" fill="#2B1E02" class="icon"></unicon>
+                  SAVED OUTFITS
                 </b-card-title>
                 <b-row align-h="center" align-v="center" class="mt-5">
                   <b-col

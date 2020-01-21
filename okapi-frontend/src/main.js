@@ -27,6 +27,7 @@ import {
   uniHeart,
   uniBookmark,
   uniTagAlt,
+  uniStar
 } from 'vue-unicons/src/icons';
 
 import App from './App.vue';
@@ -62,7 +63,8 @@ Unicon.add([
   uniBookmark,
   uniTagAlt,
   uniUser,
-  uniTimes
+  uniTimes,
+  uniStar
 ]);
 Vue.use(Unicon);
 

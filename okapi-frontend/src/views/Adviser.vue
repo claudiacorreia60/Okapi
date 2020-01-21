@@ -499,7 +499,7 @@
             </b-card>
           </b-row>
           <b-row class="buttons mt-5">
-            <b-col cols="5" align-self="end">
+            <b-col cols="2" align-self="end">
               <div class="back-button">
                 <b-button @click="step=0">
                   <unicon name="angle-double-left" class="back-icon" fill="#2B1E02"></unicon>
@@ -507,12 +507,28 @@
                 </b-button>
               </div>
             </b-col>
-            <b-col cols="2" align-self="center">
+            <b-col cols="8" align-self="center">
               <div class="advise-button">
                 <b-button class="ml-3 advise-btn" @click="advise()">Advise</b-button>
               </div>
             </b-col>
-            <b-col cols="5" align-self="start">
+            <b-col cols="2">
+              <span class="feature">
+                <b-button
+                  v-if="!saved"
+                  @click="save()">
+                  <unicon name="star" fill="#2B1E02" style="margin-right: 10px;"></unicon>
+                  Save outfit
+                </b-button>
+              </span>
+              <span class="selected-feature">
+                <b-button
+                  v-if="saved"
+                  @click="unsave()">
+                  <unicon name="uniFavoriteMonochrome" fill="#2B1E02" style="margin-right: 10px;"></unicon>
+                  Unsave outfit
+                </b-button>
+              </span>
             </b-col>
           </b-row>
         </b-tab>
@@ -1066,10 +1082,105 @@ export default {
         this.$router.push({name: "details", params: {item: item}})
       }
   },
+  methods: {
+    // TODO: Save e unsave outfit
+    save() {
+      fetch("http://localhost:3333/saved/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "POST"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.saved = true;
+           })
+      .catch(err => console.log(err));
+    },
+    unsave() {
+      fetch("http://localhost:3333/saved/" + this.user_id + "/" + this.item.item_id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          method: "DELETE"
+      })
+      .then(r => r.json())
+      .then(r => { 
+              this.saved = false;
+           })
+      .catch(err => console.log(err));
+    },
+  }
 };
 </script>
 
 <style lang="scss">
+.feature-value {
+  margin-left: 10px;
+  font-size: 17px;
+  color: #2B1E02;
+}
+
+.selected-feature .btn {
+  background-color: white;
+  border-left: solid 2px #2B1E02;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0;
+  color: #2B1E02;
+}
+
+.selected-feature .btn:hover {
+  background-color: rgb(226, 226, 226);
+  border: none;
+  border-radius: 7%;
+}
+
+.selected-feature:hover {
+  color: #6D3C1D;
+}
+
+.feature .btn {
+  background-color: white;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: -2%;
+  color: #2B1E02;
+}
+
+.feature .btn:hover {
+  background-color: rgb(226, 226, 226);
+}
+
+.feature .btn-secondary.disabled, .btn-secondary:disabled {
+  color: #fff;
+  background-color: rgb(226, 226, 226);;
+  border: none;
+}
+
+.feature .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: rgb(226, 226, 226);;
+  border: none;
+}
+
+.feature .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.feature .btn-secondary:focus, .btn-secondary.focus {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 a {
   cursor: pointer;
 }
