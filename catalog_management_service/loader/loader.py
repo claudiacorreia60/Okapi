@@ -4,6 +4,9 @@ import csv
 import mysql.connector
 import pymongo
 import configparser
+from PIL import Image
+import requests
+from io import BytesIO
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -234,6 +237,34 @@ def load_item(item):
 
     mycursor.close()
 
+# Is flat
+def isFlat(url):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+
+    pix_val = list(img.getdata())
+
+    return pix_val[0] == (255,255,255)
+
+# Get flat
+def getFlatPhoto(product):
+    i = 1 
+    photo = product.find('image_url_1')
+    url = photo.text
+
+    while(photo != None):
+        if(isFlat(photo.text)):
+            url = photo.text 
+            print(url)
+            break
+        
+        i = i + 1
+        photo = product.find('image_url_' + str(i))
+        print(photo)
+
+    print(url)
+    return url
+
 # Start parsing
 root = etree.parse(filename)
 
@@ -258,7 +289,7 @@ for product in products:
         obj['color'] = product.find('color').text
         composition = product.find('composition')
         obj['composition'] =  composition.text if composition is not None else ''
-        obj['photo'] = product.find('image_url_1').text
+        obj['photo'] = getFlatPhoto(product)
 
         if (obj['gender'] is not None):
             write_to_csv(csvfile, obj)
