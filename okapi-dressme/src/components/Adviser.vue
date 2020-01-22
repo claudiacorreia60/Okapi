@@ -22,12 +22,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div v-if="!hover" class="description">
+              <div class="details" v-if="hover && id_item === adviser_upper[0].item_id &&
+              id_item > -1">SEE DETAILS</div>
+              <div v-else class="description">
                   {{ adviser_upper[0].brand.name.toUpperCase() }}
-                </div>
-                <div v-else class="description">
-                  Go to store
-                </div>
+              </div>
               </b-card>
             </a>
             <div v-else class="hollow-dots-spinner">
@@ -90,12 +89,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div v-if="!hover" class="description">
+              <div class="details" v-if="hover && id_item === adviser_coat[0].item_id &&
+              id_item > -1">SEE DETAILS</div>
+              <div v-else class="description">
                   {{ adviser_coat[0].brand.name.toUpperCase() }}
-                </div>
-                <div v-else class="description">
-                  Go to store
-                </div>
+              </div>
               </b-card>
             </a>
             <div v-else class="hollow-dots-spinner">
@@ -158,12 +156,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div v-if="!hover" class="description">
+              <div class="details" v-if="hover && id_item === adviser_lower[0].item_id &&
+              id_item > -1">SEE DETAILS</div>
+              <div v-else class="description">
                   {{ adviser_lower[0].brand.name.toUpperCase() }}
-                </div>
-                <div v-else class="description">
-                  Go to store
-                </div>
+              </div>
               </b-card>
             </a>
             <div v-else class="hollow-dots-spinner">
@@ -226,12 +223,11 @@
                 "
                 @mouseleave="hover = false"
               >
-                <div v-if="!hover" class="description">
+              <div class="details" v-if="hover && id_item === adviser_shoes[0].item_id &&
+              id_item > -1">SEE DETAILS</div>
+              <div v-else class="description">
                   {{ adviser_shoes[0].brand.name.toUpperCase() }}
-                </div>
-                <div v-else class="description">
-                  Go to store
-                </div>
+              </div>
               </b-card>
             </a>
             <div v-else class="hollow-dots-spinner">
@@ -331,7 +327,7 @@ export default {
       feedback: "",
       user_id: null,
       hover: false,
-      id_item: 0,
+      id_item: -1,
       dummy_item_coat: {
         url: "dummy_url",
         brand: {
@@ -935,6 +931,10 @@ a:hover img {
 
 .card {
   min-width: 100%;
+}
+
+.card-body {
+  min-height: 88px;
 }
 
 .adviser {
