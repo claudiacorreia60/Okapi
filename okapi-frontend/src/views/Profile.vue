@@ -113,7 +113,7 @@
                 </b-card-title>
                 <b-row align-h="center" align-v="center" class="mt-5">
                   <b-col
-                    v-for="item in saved"
+                    v-for="item in outfits"
                     v-bind:key="item.item_id"
                     style="text-align: center;">
                     <div
@@ -152,6 +152,7 @@ export default {
       },
       likes: [],
       saved: [],
+      outfits: [],
     };
   },
   mounted() {
@@ -181,6 +182,19 @@ export default {
     .then(r => r.json())
     .then(r => { 
         this.saved = r.slice(0, 3);
+        this.$forceUpdate();
+    })
+    .catch(err => console.log(err));
+
+    fetch("http://localhost:3333/outfit/" + this.user.user_id, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    })
+    .then(r => r.json())
+    .then(r => { 
+        this.outfits = r[1];
         this.$forceUpdate();
     })
     .catch(err => console.log(err));
