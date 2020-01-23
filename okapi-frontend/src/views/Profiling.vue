@@ -81,6 +81,8 @@ export default {
   },
   methods: {
     like(id) {
+      let aux = this.items_like[id];
+      this.items_like[id] = true;
       fetch("http://localhost:3333/likes/" + this.user_id + "/" + id, {
           headers: {
             'Content-Type': 'application/json',
@@ -90,11 +92,15 @@ export default {
       })
       .then(r => r.json())
       .then(r => { 
-              this.items_like[id] = true;
            })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        this.items_like[id] = aux;
+      });
     },
     dislike(id) {
+      let aux = this.items_like[id];
+      this.items_like[id] = false;
       fetch("http://localhost:3333/likes/" + this.user_id + "/" + id, {
           headers: {
             'Content-Type': 'application/json',
@@ -104,9 +110,11 @@ export default {
       })
       .then(r => r.json())
       .then(r => { 
-              this.items_like[id] = false;
            })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        this.items_like[id] = aux;
+      });
     },
     fetch_men_1() {
       fetch("http://localhost:3333/catalog/man?perpage=300&type[]=casacos", {
