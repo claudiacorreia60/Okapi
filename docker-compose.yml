@@ -1,4 +1,4 @@
-version: '0.1'
+version: '0.3'
 services:
   proxy:
     build: ./proxy/proxy
@@ -43,9 +43,13 @@ services:
     ports: 
     - "3301:3306"
     restart: always
+    volumes: 
+    - ":/var/lib/mysql"
 
   mongo: 
     build: ./databases/mongo 
     ports: 
     - "27016:27017"
     restart: always
+    volumes: 
+    - ":/data/db"

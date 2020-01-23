@@ -316,11 +316,3 @@ def load_user():
     likesColl.insert_one(new_like)
 
 #load_user()
-
-
-
-
-
-
-
-

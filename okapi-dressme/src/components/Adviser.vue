@@ -398,7 +398,7 @@ export default {
         },
         method: "POST",
         body: JSON.stringify({
-          rating: parseInt(this.feedback / 5),
+          rating: parseFloat(this.feedback) / 5,
           items: [
             this.adviser_upper[0],
             this.adviser_lower[0],
