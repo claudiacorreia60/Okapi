@@ -4,6 +4,16 @@ const Outfit = use('App/Models/Outfit')
 const OutfitItem = use('App/Models/OutfitItem')
 
 class OutfitController {
+    async show ({request, response, params: {user_id, outfit_id}}) {
+        const outfit = await Outfit.query()
+                                   .with('items')
+                                   .where('user_id', user_id)
+                                   .where('outfit_id', outfit_id)
+                                   .fetch()
+
+        return response.json(outfit)
+    }
+
     async indexByUser ({request, response, params: {user_id}}) {
         const outfit = await Outfit.query()
                                    .with('items')

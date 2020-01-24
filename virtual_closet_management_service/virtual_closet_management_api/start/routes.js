@@ -34,6 +34,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('/:user_id', 'OutfitController.indexByUser')
+  Route.get('/:user_id/:outfit_id', 'OutfitController.show')
   Route.post('/:user_id', 'OutfitController.addOutfit')
   Route.delete('/:user_id/:outfit_id', 'OutfitController.removeOutfit')
 }).prefix('outfit')

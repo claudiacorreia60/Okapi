@@ -5,29 +5,20 @@ const Env = use('Env')
 
 class OutfitController {
 
-
-    indexByUser ({request, response, params: {user_id}}){
-        return axios.get(`${Env.get('VIRTUAL_CLOSET_MS')}/outfit/${user_id}`)
+    show ({request, response, params: {user_id, outfit_id}}){
+        return axios.get(`${Env.get('VIRTUAL_CLOSET_MS')}/outfit/${user_id}/${outfit_id}`)
                     .then(async res => {
 
-                        var promises = {}
-                        var outfits = {}
+                        var promises = []
+                        var outfits = []
 
-                        res.data.forEach(async outfit => {
-                            promises[outfit.outfit_id] = []
-
-                            outfit.items.forEach(async item => {
-                                promises[outfit.outfit_id].push(axios.get(`${Env.get('CATALOG_MS')}/catalog/${item.item_id}`)
+                        res.data.forEach(async item => {
+                            promises.push(axios.get(`${Env.get('CATALOG_MS')}/catalog/${item.item_id}`)
                                                                      .then(data => data.data))
-                            })
-
-                        });
+                        })
 
 
-                        for (let i = 0; i < Object.keys(promises).length; i++) {
-                            let key = Object.keys(promises)[i]
-                            outfits[key] = await axios.all(promises[key])
-                        }
+                        outfits = await axios.all(promises)
 
                         return response.json(outfits)
 

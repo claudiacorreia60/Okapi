@@ -31,7 +31,7 @@ Route.group(() => {
    * @apiExample Example usage: 
    * curl -i http://localhost/users/243
    * 
-   * @apiSuccess {String} user_id User's ID
+   * @apiSuccess {Integer} user_id User's ID
    * @apiSuccess {String} name User's name
    * @apiSuccess {String} email User's email 
    * @apiSuccess {String} name User's name 
@@ -185,7 +185,7 @@ Route.group(() => {
    * @apiExample Example usage: 
    * curl -i http://localhost/bodymeasurement/1
    * 
-   * @apiSuccess {String} user_id User's ID
+   * @apiSuccess {Integer} user_id User's ID
    * @apiSuccess {String} chest User's chest measurement in centimeters 
    * @apiSuccess {String} waist User's waist measurement in centimeters 
    * @apiSuccess {String} hips User's hips measurement in centimeters 
@@ -226,7 +226,7 @@ Route.group(() => {
    * 
    * @apiDescription Creates user's body measurements given his/hers related data
    * 
-   * @apiParam {String} user_id User's ID (on path)
+   * @apiParam {Integer} user_id User's ID (on path)
    * @apiParam {String} chest User's chest measurement in centimeters 
    * @apiParam {String} waist User's waist measurement in centimeters 
    * @apiParam {String} hips User's hips measurement in centimeters 
@@ -249,7 +249,7 @@ Route.group(() => {
    *        "user_id": "3"
    *     }
    * 
-   * @apiSuccess {String} user_id User's ID
+   * @apiSuccess {Integer} user_id User's ID
    * @apiSuccess {String} chest User's chest measurement in centimeters 
    * @apiSuccess {String} waist User's waist measurement in centimeters 
    * @apiSuccess {String} hips User's hips measurement in centimeters 
@@ -269,7 +269,7 @@ Route.group(() => {
    * 
    * @apiDescription Updates user's body measurements given new related data
    * 
-   * @apiParam {String} user_id User's ID (path)
+   * @apiParam {Integer} user_id User's ID (path)
    * @apiParam {String} [chest] User's chest measurement in centimeters 
    * @apiParam {String} [waist] User's waist measurement in centimeters 
    * @apiParam {String} [hips] User's hips measurement in centimeters 
@@ -306,7 +306,7 @@ Route.group(() => {
    * 
    * @apiDescription Deletes user's body measurements
    * 
-   * @apiParam {String} user_id User's ID
+   * @apiParam {Integer} user_id User's ID
    * 
    * @apiError UserNotFound Requested user not found.
    * @apiError BodyMeasurementNotFound Requested body measurements not found.
@@ -348,7 +348,7 @@ Route.group(() => {
    * @apiExample Example usage: 
    * curl -i http://localhost/likes/1
    * 
-   * @apiSuccess {String} user_id User's ID
+   * @apiSuccess {Integer} user_id User's ID
    * @apiSuccess {Item[]} likes User's liked items
    *
    * @apiError UserNotFound Requested user not found.
@@ -374,7 +374,7 @@ Route.group(() => {
    * 
    * @apiDescription Creates new like given related data
    * 
-   * @apiParam {String} user_id User's ID
+   * @apiParam {Integer} user_id User's ID
    * @apiParam {String} item_id Item's ID 
    * 
    * @apiError UserNotFound Requested user not found.
@@ -415,7 +415,7 @@ Route.group(() => {
    * 
    * @apiDescription Deletes user like
    * 
-   * @apiParam {String} user_id User's ID
+   * @apiParam {Integer} user_id User's ID
    * @apiParam {String} item_id Item's ID
    * 
    * @apiError UserNotFound Requested user not found.
@@ -681,7 +681,7 @@ Route.group(() => {
    * 
    * @apiDescription Add a new item to the closet of the given user
    * 
-   * @apiParam {String} user_id User's ID
+   * @apiParam {Integer} user_id User's ID
    * @apiParam {String} item_id Item's ID
    * 
    * @apiError DuplicatedItem Duplicated item in the user's closet.
@@ -756,7 +756,7 @@ Route.group(() => {
    * 
    * @apiDescription Add a new item to the list of saved items of the given user
    * 
-   * @apiParam {String} user_id User's ID
+   * @apiParam {Integer} user_id User's ID
    * @apiParam {String} item_id Item's ID
    * 
    * @apiError DuplicatedItem Duplicated item in the user's list of saved items.
@@ -803,6 +803,47 @@ Route.group(() => {
   .middleware([/*'tokenVerify',*/ 'userExists'])
 
 Route.group(() => {
+
+    /**
+   * @api {get} /outfit/:user_id/:outfit_id Get a specific outfit of a given user
+   * @apiName GetOutfit
+   * @apiGroup Outfits
+   * 
+   * @apiDescription Get a specific outfit of a given user
+   * 
+   * @apiParam {Integer} user_id User's ID 
+   * @apiParam {Integer} outfit_id Outfit's ID 
+   * 
+   * @apiSuccessExample Example success response: 
+   *    [
+   *      {item_1}, 
+   *      {item_2},
+   *      {item_3}, 
+   *      {item_4}
+   *    ]
+   */ 
+  Route.get('/:user_id/:outfit_id', 'VirtualCloset/OutfitController.show')
+
+  /**
+   * @api {get} /outfit/:user_id Get list of outfits saved by a user
+   * @apiName GetUserOutfits
+   * @apiGroup Outfits
+   * 
+   * @apiDescription Get outfits saved by a given user
+   * 
+   * @apiParam {Integer} user_id User's ID 
+   * 
+   * @apiSuccessExample Example success response: 
+   *    {
+   *      "1": [
+   *          {item_1}, 
+   *          {item_2},
+   *          {item_3}, 
+   *          {item_4}
+   *      ],
+   *      ...
+   *    }
+   */ 
   Route.get('/:user_id', 'VirtualCloset/OutfitController.indexByUser')
 
   /**
@@ -812,7 +853,7 @@ Route.group(() => {
    * 
    * @apiDescription Add a new outfit to the list of saved outfits of the given user
    * 
-   * @apiParam {String} user_id User's ID 
+   * @apiParam {Integer} user_id User's ID 
    * @apiParam {List} items List of item_ids that make the outfit (body)
    * 
    * @apiSuccessExample Example success response: 
