@@ -430,16 +430,16 @@
             <b-col cols="2">
               <span class="feature">
                 <b-button
-                  v-if="!saved"
-                  @click="save()">
+                  v-if="!savedOutfit"
+                  @click="saveOutfit()">
                   <unicon name="star" fill="#2B1E02" style="margin-right: 10px;"></unicon>
                   Save outfit
                 </b-button>
               </span>
               <span class="selected-feature">
                 <b-button
-                  v-if="saved"
-                  @click="unsave()">
+                  v-if="savedOutfit"
+                  @click="unsaveOutfit()">
                   <unicon name="uniFavoriteMonochrome" fill="#2B1E02" style="margin-right: 10px;"></unicon>
                   Unsave outfit
                 </b-button>
@@ -701,6 +701,8 @@ export default {
       step: 0,
       slide: 0,
       slidiging: null,
+      saveOutfit: false,
+      this.outfit_id: -1,
       dummy_item: {
         "item_id": 393,
         "title": "Camisola com carcela ",
@@ -908,6 +910,45 @@ export default {
           }
           r = r.slice(0, -1)
           return r;
+      },
+      saveOutfit() {
+        this.savedOutfit = true;
+        fetch("http://localhost:3333/outfit/" + this.user_id, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
+              method: "POST",
+              body: JSON.stringify({
+                items: [this.adviser_coat[0], this.adviser_upper[0],
+                this.adviser_lower[0], this.adviser_shoes[0]]
+              })
+          })
+          .then(r => r.json())
+          .then(r => {
+            this.outfit_id = r.outfit_id
+          })
+          .catch(err => {
+            console.log(err)
+            this.savedOutfit = false;
+          });
+      },
+      unsaveOutfit() {
+        this.savedOutfit = false;
+        fetch("http://localhost:3333/outfit/" + this.user_id + "/" + this.outfit_id, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
+              method: "DELETE"
+          })
+          .then(r => r.json())
+          .then(r => {
+          }) 
+          .catch(err => {
+            console.log(err)
+            this.savedOutfit = true;
+          });
       },
       refresh(obj) {
         let query = ""
