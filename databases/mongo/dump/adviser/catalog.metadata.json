@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"adviser.catalog"}],"uuid":"1920bd9764be495797f61b6173e61d4b"}
