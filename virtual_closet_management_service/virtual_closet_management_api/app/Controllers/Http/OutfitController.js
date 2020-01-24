@@ -11,7 +11,7 @@ class OutfitController {
                                    .where('outfit_id', outfit_id)
                                    .fetch()
 
-        return response.json(outfit)
+        return response.json(outfit.rows[0])
     }
 
     async indexByUser ({request, response, params: {user_id}}) {
@@ -41,7 +41,7 @@ class OutfitController {
                         var outfit_id = outfit[0]['max(`outfit_id`)'] 
 
                         /* Parse string to list */
-                        var items = JSON.parse(request.post().items)
+                        var items = request.post().items
 
                         /* Add outfit items */
                         items.forEach(async (item_id) => {

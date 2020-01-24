@@ -701,8 +701,8 @@ export default {
       step: 0,
       slide: 0,
       slidiging: null,
-      saveOutfit: false,
-      this.outfit_id: -1,
+      savedOutfit: false,
+      outfit_id: -1,
       dummy_item: {
         "item_id": 393,
         "title": "Camisola com carcela ",
@@ -920,8 +920,8 @@ export default {
               },
               method: "POST",
               body: JSON.stringify({
-                items: [this.adviser_coat[0], this.adviser_upper[0],
-                this.adviser_lower[0], this.adviser_shoes[0]]
+                items: [this.adviser_coat[0].item_id, this.adviser_upper[0].item_id,
+                this.adviser_lower[0].item_id, this.adviser_shoes[0].item_id]
               })
           })
           .then(r => r.json())
