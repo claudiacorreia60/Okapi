@@ -995,9 +995,7 @@ export default {
       },
       seeDetails(item){
         this.$router.push({name: "details", params: {item: item}})
-      }
-  },
-  methods: {
+      },
     // TODO: Save e unsave outfit
     save() {
       fetch("http://localhost:3333/saved/" + this.user_id + "/" + this.item.item_id, {
