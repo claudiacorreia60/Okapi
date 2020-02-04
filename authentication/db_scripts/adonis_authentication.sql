@@ -1,0 +1,52 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2019-12-10 16:22
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Bernardo Mota
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `okapi_auth` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE IF NOT EXISTS `okapi_auth`.`tokens` (
+  `token` VARCHAR(255) NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  `is_revoked` TINYINT(4) NULL DEFAULT '0',
+  `user_id` INT(11) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  `id` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`token`),
+  UNIQUE INDEX `token_UNIQUE` (`token` ASC),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `iduser_idx` (`user_id` ASC),
+  CONSTRAINT `user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `okapi_auth`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `okapi_auth`.`users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(254) NOT NULL,
+  `password` VARCHAR(64) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  `username` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  UNIQUE INDEX `iduser_UNIQUE` (`id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
