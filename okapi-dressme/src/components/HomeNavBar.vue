@@ -7,7 +7,7 @@
       <!-- Centered nav items -->
       <b-navbar-nav class="ml-auto mr-auto">
         <a @click="goToOkapi()" href="">
-          <img alt="Okapi logo" src="../assets/logo.svg" class="logo-image" />
+          <img alt="Okapi logo" src="../assets/logo.png" class="logo-image" />
         </a>
       </b-navbar-nav>
 
@@ -120,8 +120,8 @@ export default {
 }
 
 .logo-image {
-  width: 130px;
-  height: 50px;
+  width: 200px;
+  height: auto;
 }
 
 .white-background {
